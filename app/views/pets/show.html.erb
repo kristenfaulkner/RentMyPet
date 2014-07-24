@@ -1,0 +1,71 @@
+<!-- <div style=background-color:#FFFFFF;><ul style="list-style: none;"> -->
+<ul style="list-style: none; ">
+    Image<br>
+    <li>
+      <img src= "<%= @pet.image_url %>" width="20%" height="20%">
+    </li>
+    <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %>>
+    <% if self.current_user.id == @pet.owner_id %>
+      <%=link_to "Edit your pet", edit_pet_url(@pet) %>
+    <% end %>
+    <% session[:pet_id] = @pet.id %>
+    <% session[:pet_img_url] = @pet.image_url %>
+    <% if self.current_user.id != @pet.owner_id %>
+    <h3><%= link_to "Click Here To Rent Me", new_pet_pet_rental_request_url(@pet) %></h3>
+    <% end %>
+    <li>
+      Name: <%=@pet.name%>
+    </li>
+    <li>
+      Owner: <%= User.find(@pet.owner_id).username %>
+    </li>
+    <form action="/pets/<%= @pet.id %>" method="post">
+    <br>
+      <% if self.current_user.id == @pet.owner_id %>
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete Your Pet">
+      <% end %>
+    </form>
+    <br>
+    <li>
+      Pet ID Number: <%=@pet.id%>
+    <li>
+      Age: <%=@pet.age%>
+    </li>
+    <li>
+      Color: <%=@pet.color%>
+    </li>
+    <li>
+      Gender: <%=@pet.gender%>
+    </li>
+    <li>
+      Bio: <%=@pet.bio%>
+    </li>
+</ul>
+<ul style="list-style: none;">
+  <% if @pet.pet_rental_requests%>
+    <% @pet.pet_rental_requests.each do |rental| %>
+      ------------------------<br>
+      <li>
+        Requester: <%= User.find(rental.requester_id).username %> - 
+        Start Date: <%= rental.start_date %>
+        -  End Date: <%= rental.end_date %> - Status: <%= rental.status %>
+        <% if self.current_user.id == @pet.owner_id%>
+        <form action = "/pet_rental_requests/<%= rental.id%>/respond" method = "post">
+          <% if rental.status == "Pending" %>
+            <input type = "submit" 
+                   name = "pet_rental_request[status]" 
+                   value = "Approve">
+            <input type = "submit" 
+                   name = "pet_rental_request[status]" 
+                   value = "Deny">
+          <% end %>
+        </form>
+        <%end%>
+    </li>
+  <% end %>
+  <%end%>
+</ul>
+<br>
+<%=link_to "<< Back to All Pets", pets_url%>
+<!-- </div> -->

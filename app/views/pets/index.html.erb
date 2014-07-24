@@ -1,0 +1,44 @@
+<h1>Welcome <%= @user.username %>!</h1>
+
+<h2>Choose From All Our Different Pets!</h2>
+
+
+<div id="cats">
+<% @pets.each do |pet| %>
+<div class="cat-box">
+<img src="<%=pet.image_url%>">
+<ul>
+  <li>Pet ID: <%=pet.id%></li>
+  <li>Name: <%=pet.name%></li>
+  <li>Age: <%=pet.age%> years old</li>
+  <li>Color: <%=pet.color%></li>
+  <li>Gender: <%=pet.gender%></li>
+  <li><%= link_to "#{pet.name} profile", pet_url(pet)%></li>
+  </ul>
+</div>
+<%end%>
+</div>
+
+<!--<table align="center">
+  <tr class="spaceUnder">
+    <th>Serial Number</th>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Color</th>
+    <th>Gender</th>
+    <th>Profile Page</th>
+  </tr>
+  <tr>
+  <% @pets.each do |pet| %>
+  <tr class="spaceUnder">
+    <td><%=pet.id%></td>
+    <td><%=pet.name%></td>
+    <td><%=pet.age%></td>
+    <td><%=pet.color%></td>
+    <td><%=pet.gender%></td>
+    <td><%= link_to "#{pet.name}'s profile", pet_url(pet)%></td>
+  </tr>
+  <%end%>
+</table>
+<br> -->
+<%= link_to "Post A New Pet!", new_pet_url %>

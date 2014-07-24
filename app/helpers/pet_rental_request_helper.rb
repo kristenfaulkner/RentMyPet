@@ -1,0 +1,2 @@
+module PetRentalRequestHelper
+end

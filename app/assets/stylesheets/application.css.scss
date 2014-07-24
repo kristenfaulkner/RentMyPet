@@ -1,0 +1,162 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_self 
+ *= require_tree .
+
+ */
+
+
+@import "bootstrap";
+@import "font-awesome";
+
+body {
+  padding-top: 50px;
+  font-family: "monaco"; 
+  background: fixed;        
+  background-image:url('http://www.hdwallpapers.in/walls/cute_kitten-wide.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  color: black;
+  -webkit-background-size: cover;
+}
+
+.user-drop-down {
+  margin-top: 8px;
+}
+
+.sign-in {
+  height: 250px;
+  width: 500px;
+  background-color: rgba(255,255,255,0.4);
+  border: thin light gray;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -325px;
+  margin-top: 20px;
+  padding: 30px;
+  font-size: x-large;
+}
+
+#sign-in-button {
+  position: absolute;
+  position: absolute;
+  left: 20%;
+  margin-right: 10px;
+  bottom: 20%;
+  width: 150px;
+  height: 50px;
+}
+
+#sign-in-guest-button {
+  position: absolute;
+  left: 50%;
+  margin-left: 10px;
+  bottom: 20%;
+  width: 150px;
+  height: 50px;
+}
+.cat-box > ul {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 25px;
+}
+
+h1 {
+  text-align: center;
+}
+
+img {
+  display: block;
+  width: 150px;
+  margin: 5px auto;
+  height: auto;
+  
+}
+
+
+#cat-container {
+  width: 200px;
+  margin: auto;
+  outline: burlywood 5px solid;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.cat-box {
+  width: 200px;
+  outline: thin solid black;
+  display: inline-block;
+  margin: 20px;
+}
+
+.myclass {
+          height: 30px;
+          position: absolute;
+          border: 2px solid #cdcdcd;
+          border-color: rgba(0,0,0,.14);
+          background-color: White;   ;
+          font-size: 14px;
+          height: 30px;
+          -moz-border-radius: 10px;
+          border-radius: 10px;
+          border:solid 1px gray;
+          padding:10px;
+          margin: 5px;
+          width: 250px;
+      }
+      
+.password {
+  -webkit-text-security: disc;
+}
+
+
+//About Page
+.meet-the-team {
+  display: block;
+  margin-top: 40px;
+}
+
+.meet-the-team.feature-photo {
+  height: 150px;
+  vertical-align: bottom;
+}
+
+    //  /*AliceBlue*/
+//  .advancedSearchTextbox {
+//      width: 526px;
+//      margin-right: -4px;
+//  }
+//
+//  * {
+//   font-size: 100%;
+//   font-family: monaco;
+//  }
+//
+//  ul
+//  {
+//      list-style: none;
+//  }
+//
+//  tr.spaceUnder > td
+//  {
+//    padding-top: 2em;
+//    padding-bottom: 2em;
+//  }
+//
+//  tr.horLines {
+//      border-bottom: 1px solid black;
+//      border-top: 1px solid black;
+//      border-collapse: collapse;
+//  }​

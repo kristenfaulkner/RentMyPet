@@ -1,0 +1,46 @@
+<form method="post" action= <%= pet_pet_rental_requests_url(@pet.id) %> >
+  <% if @pet_rental_request.persisted? %>
+    <input name="_method" type="hidden" value="patch">
+  <% end %>
+  
+  <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %>>
+  <input type="hidden" name="pet_rental_request[requester_id]" value=<%= self.current_user.id %>>
+       <input type="hidden" name="pet_rental_request[pet_id]" value=<%= session[:pet_id] %>>
+  <h3>Pet: <%= Pet.find(session[:pet_id]).name %></h3>
+  Start Date: 
+    <div class="well">
+      <div id="datetimepicker1" class="input-append date">
+        <input data-format="dd/MM/yyyy hh:mm:ss" 
+               type="text" 
+               name="pet_rental_request[start_date]"
+               value = <%= @pet_rental_request.start_date>>
+        </input>
+        <span class="add-on">
+          <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+        </span>
+      </div>
+    </div>
+    <script type="text/javascript">
+      $(function() {
+        $('#datetimepicker1').datetimepicker({
+          language: 'pt-BR'
+        });
+      });
+    </script>
+    
+  End Date: 
+      <div class="well">
+        <div id="datetimepicker1" class="input-append date">
+          <input data-format="dd/MM/yyyy hh:mm:ss" 
+                 type="text" 
+                 name="pet_rental_request[end_date]"
+                 value = <%= @pet_rental_request.start_date>>
+          </input>
+          <span class="add-on">
+            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+          </span>
+        </div>
+      </div>
+    <input type="submit" value="Save Rental Request">
+</form>
+<br>
