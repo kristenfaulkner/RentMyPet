@@ -21,8 +21,8 @@
         <i class= "glyphicon glyphicon-calendar"></i>
       </span>
     </input>
-    
-  End Date: 
+
+  End Date:
     <input name="pet_rental_request[end_date]" class="datepicker">
       <span class="add-on">
         <i class= "glyphicon glyphicon-calendar"></i>
@@ -30,20 +30,15 @@
     </input>
     
        <!-- script to run the calendar code-->
-           <script src="js/jquery-1.9.1.min.js"></script>
-           <script src="js/bootstrap-datepicker.js"></script>
            <script type="text/javascript">  
-        
-           //  $(function () {
-        //
-        //         $('.datepicker').datepicker({
-        //             format: "dd/mm/yyyy"
-        //         });
-        //         $('.datepicker').datepicker({
-        //             format: "dd/mm/yyyy"
-        //         });
-        //     });
-        // </script>
+
+            $(function () {
+
+                $('.datepicker').datepicker({
+                    format: "dd/mm/yyyy"
+                }); 
+            });
+        </script>
 
     <input type="submit" value="Submit Rental Request">
 </form>

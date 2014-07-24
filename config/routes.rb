@@ -4,10 +4,23 @@ Rails.application.routes.draw do
     
   resources :users
   resource :session, :only => [:create, :destroy, :new]
+  
+  
   resources :pets do
     resources :pet_rental_requests do
       member do
         post 'respond'
+      end
+    end
+  end
+    
+    
+  namespace :api, defaults: { format: :json } do
+    resources :pets do
+      resources :pet_rental_requests do
+        member do
+          post 'respond'
+        end
       end
     end
   end

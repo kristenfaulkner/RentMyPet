@@ -1,0 +1,11 @@
+<div class="pet-box">
+<img src="<%=pet.image_url%>">
+<ul>
+  <li>Pet ID: <%=pet.id%></li>
+  <li>Name: <%=pet.name%></li>
+  <li>Age: <%=pet.age%> years old</li>
+  <li>Color: <%=pet.color%></li>
+  <li>Gender: <%=pet.gender%></li>
+  <li><%= link_to "#{pet.name}'s profile", pet_url(pet)%></li>
+  </ul>
+</div>
