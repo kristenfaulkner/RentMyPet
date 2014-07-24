@@ -1,71 +1,124 @@
+
+<div class="show-page">
+  <div class="show-page-row row">
+  <div id="show-page-column1">
+  <img src= "<%= @pet.image_url %>" width="20%" height="20%" class="show-page-img">
+  <% if @user.id != @pet.owner_id %>
+    <h3><%= link_to "Click Here To Rent Me", new_pet_pet_rental_request_url(@pet.id)%></h3>
+  <% end %>
+</div>
+
+  <div class="col-xs-5" id="show-page-column2">
+    <br>
+    <% if current_user.id == @pet.owner_id %>
+      <%=link_to "Edit #{@pet.name}'s  Information", edit_pet_url(@pet) %>
+      <%else%>
+    <p><strong>Pet Information</stong></p>
+    <% end%>
+    <p>Name: <%=@pet.name%></p>
+    <p>Owner: <%= User.find(@pet.owner_id).username %></p>
+    <p>Pet ID: <%=@pet.id%></p>
+    <p>Age: <%=@pet.age%></p>
+    <p>Color: <%=@pet.color%></p>
+    <p>Gender: <%=@pet.gender%></p>
+    <p>Bio: <%=@pet.bio%></p>
+  </div>
+  
+  <div class="col-xs-5" id="rental-request-list">
+    <ul style="list-style: none;">
+      <% if current_user.id == @pet.owner_id %>
+      <% if @pet.pet_rental_requests%>
+        <% @pet.pet_rental_requests.each do |rental| %>
+          ------------------------<br>
+          <li>
+            Requester: <%= User.find(rental.requester_id).username %> - 
+            Start Date: <%= rental.start_date %>
+            -  End Date: <%= rental.end_date %> - Status: <%= rental.status %>
+            <form action="<%=pet_pet_rental_request_url(@pet.id, rental.id)%>" method = "post">
+                <input name="_method" type="hidden" value="patch">
+              <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %>>
+              <% if rental.status == "Pending" %>
+                <input type = "submit" 
+                       name = "pet_rental_request[status]" 
+                       value = "Approve">
+                <input type = "submit" 
+                       name = "pet_rental_request[status]" 
+                       value = "Deny">
+              <% end %>
+            </form>
+        </li>
+      <% end %>
+      <%end%>
+      <%end%>
+    </ul>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
 <!-- <div style=background-color:#FFFFFF;><ul style="list-style: none;"> -->
-<ul style="list-style: none; ">
-    Image<br>
+<!-- <ul style="list-style: none;">
     <li>
       <img src= "<%= @pet.image_url %>" width="20%" height="20%">
     </li>
-    <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %>>
-    <% if self.current_user.id == @pet.owner_id %>
-      <%=link_to "Edit your pet", edit_pet_url(@pet) %>
-    <% end %>
     <% session[:pet_id] = @pet.id %>
     <% session[:pet_img_url] = @pet.image_url %>
-    <% if self.current_user.id != @pet.owner_id %>
-    <h3><%= link_to "Click Here To Rent Me", new_pet_pet_rental_request_url(@pet) %></h3>
+    <% if @user.id != @pet.owner_id %>
+
+    <h3><%= link_to "Click Here To Rent Me", new_pet_pet_rental_request_url(@pet.id)%></h3>
     <% end %>
-    <li>
+    <p>
       Name: <%=@pet.name%>
-    </li>
-    <li>
+    </p>
+    <p>
       Owner: <%= User.find(@pet.owner_id).username %>
-    </li>
-    <form action="/pets/<%= @pet.id %>" method="post">
-    <br>
-      <% if self.current_user.id == @pet.owner_id %>
-        <input type="hidden" name="_method" value="delete">
-        <input type="submit" value="Delete Your Pet">
-      <% end %>
-    </form>
-    <br>
-    <li>
-      Pet ID Number: <%=@pet.id%>
-    <li>
+    </p>
+    <p>
+      Pet ID: <%=@pet.id%>
+    <p>
       Age: <%=@pet.age%>
-    </li>
-    <li>
+    </p>
+    <p>
       Color: <%=@pet.color%>
-    </li>
-    <li>
+    </p>
+    <p>
       Gender: <%=@pet.gender%>
-    </li>
-    <li>
+    </p>
+    <p>
       Bio: <%=@pet.bio%>
-    </li>
+    </p>
 </ul>
 <ul style="list-style: none;">
+  <% if current_user.id == @pet.owner_id %>
+    <%=link_to "Edit your pet", edit_pet_url(@pet) %>
   <% if @pet.pet_rental_requests%>
     <% @pet.pet_rental_requests.each do |rental| %>
       ------------------------<br>
       <li>
-        Requester: <%= User.find(rental.requester_id).username %> - 
+        Requester: <%= User.find(rental.requester_id).username %> -
         Start Date: <%= rental.start_date %>
         -  End Date: <%= rental.end_date %> - Status: <%= rental.status %>
-        <% if self.current_user.id == @pet.owner_id%>
-        <form action = "/pet_rental_requests/<%= rental.id%>/respond" method = "post">
+        <form action="<%=pet_pet_rental_request_url(@pet.id, rental.id)%>" method = "post">
+            <input name="_method" type="hidden" value="patch">
+          <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %>>
           <% if rental.status == "Pending" %>
-            <input type = "submit" 
-                   name = "pet_rental_request[status]" 
+            <input type = "submit"
+                   name = "pet_rental_request[status]"
                    value = "Approve">
-            <input type = "submit" 
-                   name = "pet_rental_request[status]" 
+            <input type = "submit"
+                   name = "pet_rental_request[status]"
                    value = "Deny">
           <% end %>
         </form>
-        <%end%>
     </li>
   <% end %>
+  <%end%>
   <%end%>
 </ul>
 <br>
 <%=link_to "<< Back to All Pets", pets_url%>
-<!-- </div> -->
+<!-- </div> --> -->

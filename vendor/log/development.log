@@ -38385,3 +38385,6 @@ Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-07-23 18:00:45
 
 
 Started GET "/assets/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2014-07-23 18:00:45 -0700
+  [1m[36mPet Load (0.3ms)[0m  [1mSELECT  "pets".* FROM "pets"  WHERE "pets"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35mPetRentalRequest Load (0.2ms)[0m  SELECT "pet_rental_requests".* FROM "pet_rental_requests"  WHERE "pet_rental_requests"."pet_id" = ?  [["pet_id", 5]]
+  [1m[36mPet Load (4.4ms)[0m  [1mSELECT "pets".* FROM "pets"[0m

@@ -29,6 +29,38 @@ class PetRentalRequestsController < ApplicationController
     
     def show
       @pet= Pet.find(params[:pet_id])
+      @pet_rental_request = PetRentalRequest.find(params[:id])
+      @current_user = self.current_user
+    end
+    
+    def edit
+      @pet= Pet.find(params[:pet_id])
+      @pet_rental_request = PetRentalRequest.find(params[:id])
+    end
+    
+    def update
+      @pet_rental_request = PetRentalRequest.find(params[:id])
+      
+      if params[:pet_rental_request][:status] == "Approve"
+        @pet_rental_request.update(:status => "Approved")
+      
+        @pet_rental_request.overlapping_pending_requests.each do |request|
+          request.update(:status => "Denied")
+        end
+      
+        flash[:notice] = "Rental Request Approved"
+        @pet = Pet.find(@pet_rental_request.pet_id)
+        session[:pet_id] = @pet.id
+        redirect_to pet_url(@pet)
+        #redirect_to pets_url(Pet.find(@pet_rental_request.pet_id))
+      elsif params[:pet_rental_request][:status] == "Deny"
+        @pet_rental_request.update(:status => "Denied")
+        flash[:notice] = "Rental Request Denied"
+        @pet = Pet.find(@pet_rental_request.pet_id)
+        session[:pet_id] = @pet.id
+        redirect_to pet_url(@pet)
+        #redirect_to pets_url(Pet.find(@pet_rental_request.pet_id))
+      end
     end
     
     def respond
@@ -44,14 +76,14 @@ class PetRentalRequestsController < ApplicationController
         flash[:notice] = "Rental Request Approved"
         @pet = Pet.find(@pet_rental_request.pet_id)
         session[:pet_id] = @pet.id
-        render '/pets/show'
+        redirect_to pet_url(@pet)
         #redirect_to pets_url(Pet.find(@pet_rental_request.pet_id))
       elsif params[:pet_rental_request][:status] == "Deny"
         @pet_rental_request.update(:status => "Denied")
         flash[:notice] = "Rental Request Denied"
         @pet = Pet.find(@pet_rental_request.pet_id)
         session[:pet_id] = @pet.id
-        render '/pets/show'
+        redirect_to pet_url(@pet)
         #redirect_to pets_url(Pet.find(@pet_rental_request.pet_id))
       end
     end

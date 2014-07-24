@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   resources :users
   resource :session, :only => [:create, :destroy, :new]
   resources :pets do
-    resources :pet_rental_requests
+    resources :pet_rental_requests do
+      member do
+        post 'respond'
+      end
+    end
   end
   
   get '/about', :to => 'static_pages#about', as: :about_page

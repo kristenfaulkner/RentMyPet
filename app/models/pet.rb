@@ -26,9 +26,5 @@ class Pet < ActiveRecord::Base
   through: :pet_rental_requests,
   source: :requester_id
   )
-  
-  def verify_owner
-    self.owner_id == current_user.id
-  end
 
 end

@@ -8,7 +8,7 @@ class PetsController < ApplicationController
   
     def create
       @pet = Pet.new(pet_params)
-      @pet.owner_id = self.current_user.id
+      @pet.owner_id = current_user.id
         
       if @pet.save
         flash[:notice] = "Pet Created!"
@@ -22,6 +22,7 @@ class PetsController < ApplicationController
     def show
       @pet = Pet.find(params[:id])
       @pet_rental_requests = PetRentalRequest.find_by_pet_id(@pet.id)
+      @user = current_user
       render :show
     end
     
@@ -33,6 +34,7 @@ class PetsController < ApplicationController
     end
     
     def edit
+      @pet = Pet.find(params[:id])
       if !verify_owner
         flash[:notice]= "Sorry, YOU do not own this pet."
         redirect_to pet_url(@pet)
@@ -42,7 +44,8 @@ class PetsController < ApplicationController
     end
   
     def update
-      if !@pet.verify_owner
+      @pet = Pet.find(params[:id])
+      if !verify_owner
         flash[:notice] = "Sorry you do not own this pet"
         redirect_to pet_url(@pet)
       else
@@ -61,6 +64,10 @@ class PetsController < ApplicationController
       @pet = Pet.find(params[:id])
       @pet.destroy
       redirect_to pets_url
+    end
+    
+    def verify_owner
+      @pet.owner_id == current_user.id
     end
   
     private

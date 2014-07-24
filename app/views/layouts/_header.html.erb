@@ -13,10 +13,9 @@
   <div class="collapse navbar-collapse pull-left" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav nav-pills nav-links">
       <li class="active"><a href="/"></i>Home</a></li>
-      <li><a href="#" id="contact-link">Contact</a></li>
-      <li><a href="#" id="about-us-link">About Us</a></li>
-      <li><a href="#" id="rent-a-cat-link">Rent a Cat</a></li>
-      <li><a href="#" id="browse-cats-link">Browse Cat Images</a></li>
+      <li><a href="/contact" id="contact-link">Contact</a></li>
+      <li><a href="/about" id="about-us-link">About Us</a></li>
+      <li><a href="/pets" id="rent-a-cat-link">Rent a Pet</a></li>
     </ul>
   </div>
   <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
@@ -29,7 +28,7 @@
       </button>
       <!-- items in the dropdown-->
       <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-        <li><a href="#" id="my-profile-link">
+        <li><a href="<%=user_url(current_user)%>" id="my-profile-link">
             <i class="glyphicon glyphicon-user"></i> My Profile</a>
         <li><%= link_to "Sign out", session_url, method: :delete %></li>
       </ul>
