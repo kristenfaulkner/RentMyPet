@@ -1,5 +1,6 @@
 RentMyKitty.Collections.Pets = Backbone.Collection.extend({
   model: RentMyKitty.Models.Pet,
+  
   url: "/api/pets",
 
   getOrFetch: function (id) {

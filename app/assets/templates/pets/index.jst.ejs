@@ -1,9 +1,10 @@
-<!-- <h1>Welcome <%= @user.username %>!</h1> -->
+
 
 <h2>Choose From All Our Different Pets!</h2>
 
 
 <div id="pets">
+  <% pets.each(function(pet) { %>
+      <%= pet.get('name') %>
+  <% }) %>
 </div>
-
-<!-- <%= link_to "Post A New Pet!", new_pet_url %> -->

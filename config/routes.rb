@@ -1,18 +1,18 @@
 Rails.application.routes.draw do
   
-  root :to => "sessions#new"
+  root :to => "static_pages#root"
     
-  resources :users
+  resources :users, :only => [:new]
   resource :session, :only => [:create, :destroy, :new]
   
   
-  resources :pets do
-    resources :pet_rental_requests do
-      member do
-        post 'respond'
-      end
-    end
-  end
+  # resources :pets do
+  #   resources :pet_rental_requests do
+  #     member do
+  #       post 'respond'
+  #     end
+  #   end
+  # end
     
     
   namespace :api, defaults: { format: :json } do

@@ -28,7 +28,7 @@
       </button>
       <!-- items in the dropdown-->
       <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-        <li><a href="<%=user_url(current_user)%>" id="my-profile-link">
+        <li><a href="<%# user_url(current_user)%>" id="my-profile-link">
             <i class="glyphicon glyphicon-user"></i> My Profile</a>
         <li><%= link_to "Sign out", session_url, method: :delete %></li>
       </ul>
