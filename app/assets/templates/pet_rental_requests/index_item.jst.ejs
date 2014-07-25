@@ -1,15 +1,21 @@
 
-<td><%= model.requester().name %></td>
-<td><%= model.start_date %></td>
-<td><%= model.end_date %></td>
+<td><%= model.escape('requester_id') %></td>
+<td><%= model.escape('start_date') %></td>
+<td><%= model.escape('end_date') %></td>
 
-<% if (model.status === "Pending") { %>
+<% if (model.escape('status') === "Pending") { %>
   <td>
-    <button type="submit" class="btn btn-success" role="button" id="approve-request-button">Approve</button>
-    <button type="submit" class="btn btn-danger" role="button" id="deny-request-button">Deny</button>
+    <form id="approve-request">
+      <input type="hidden" name="pet_rental_request[status]" value="Approve">
+      <button type="submit" class="btn btn-success" role="button" id="approve-request-button">Approve</button>
+    </form>
+    <form id="deny-request">
+      <input type="hidden" name="pet_rental_request[status]" value="Deny">
+      <button type="submit" class="btn btn-danger" role="button" id="deny-request-button">Deny</button>
+    </form>
   </td>
 <% } else { %>
-    <td><%= model.status %></td>
+    <td><%= model.escape('status') %></td>
 <% } %>
 
   

@@ -20,7 +20,7 @@ module Api
     end
     
     def index
-      @pets = Pet.all()
+      @pets = Pet.all
       user_token = session[:session_token]
       @user = current_user
       render json: @pets

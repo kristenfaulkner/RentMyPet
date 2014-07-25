@@ -1,12 +1,13 @@
-<!-- <div class="show-page">
+<a href="#">&lt&lt Back to All Pets</a>
+<div class="show-page"
   <div class="show-page-row row">
     <div id="show-page-column1">
-      <div> -->
+      <div>
         <img src="<%= pet.escape('image_url')%>" class="show-page-photo">
         <% if (window.current_user_id == pet.escape('owner_id')) { %>
           <a href="#/pets/<%= pet.escape('id')%>/edit">Edit Your Pet Information</a>
         <% } %>
-        <a href="#/">&lt&lt Back to All Pets</a>
+        
       <!-- </div> -->
       <!-- <div class="col-xs-5" id="show-page-column2"> -->
         <p><strong>Pet Information</stong></p>
@@ -28,4 +29,4 @@
     </div>
   
   <% } %>
-<!-- </div> -->
+</div> 

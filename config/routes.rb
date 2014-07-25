@@ -16,13 +16,8 @@ Rails.application.routes.draw do
     
     
   namespace :api, defaults: { format: :json } do
-    resources :pets do
-      resources :pet_rental_requests do
-        member do
-          post 'respond'
-        end
-      end
-    end
+    resources :pets 
+    resources :pet_rental_requests
   end
   
   get '/about', :to => 'static_pages#about', as: :about_page

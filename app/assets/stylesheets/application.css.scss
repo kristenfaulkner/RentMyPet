@@ -19,12 +19,14 @@
 @import "bootstrap";
 @import "font-awesome";
 
+///////////////////////////////////////////  Root Page  ///////////////////////////////////////// 
 body {
   padding-top: 50px;
   font-family: "LL Circular"; 
   background: fixed;        
   background-color: #F0F8FF;
   color: black;
+  margin-left: 20px;
 }
 
 body.homepage {
@@ -34,48 +36,40 @@ body.homepage {
   background-position: center center;
   -webkit-background-size: cover;
 }
-.jumbotron {
-  margin-top: 0;
-}
+
 .user-drop-down {
   margin-top: 8px;
+}
+
+.footer {
+  background-color: gray;
+  height: 150px;
+}
+
+h1 {
+  text-align: center;
+}
+
+
+h4 {
+  text-align: center;
+}
+
+///////////////////////////////////////// Pet Show Page ///////////////////////////////////////// 
+#approve-request, #deny-request {
+  display: inline-block;
+}
+
+
+/////////////////////////////////////////  Contact & About Us
+.jumbotron {
+  margin-top: 0;
 }
 
 .contact-row {
   margin-left: 10%;
 }
-.sign-in {
-  height: 250px;
-  width: 500px;
-  background-color: rgba(255,255,255,0.4);
-  border: thin light gray;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -325px;
-  margin-top: 20px;
-  padding: 30px;
-  font-size: x-large;
-}
 
-h4 {
-  position: absolute;
-  left: 25%;
-  right: 20%;
-  width: 50%;
-}
-
-body {
-  margin-left: 20px;
-}
-
-h3 {
-  text-align: center;
-}
-.footer {
-  background-color: gray;
-  height: 150px;
-}
 .contact-us {
   height: 600px;
   width: 70%;
@@ -93,6 +87,114 @@ h3 {
   height: 50px;
   margin-top: 80px;
 }
+
+.about-us-text {
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  display: block;
+}
+
+.meet-the-team {
+  display: block;
+}
+
+
+
+/////////////////////////////////////////  Sign In & Sign Up ///////////////////////////////////////// 
+.sign-in {
+  height: 250px;
+  width: 500px;
+  background-color: rgba(255,255,255,0.4);
+  border: thin light gray;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -325px;
+  margin-top: 20px;
+  padding: 30px;
+  font-size: x-large;
+}
+
+
+#sign-in-button {
+  position: absolute;
+  position: absolute;
+  left: 20%;
+  margin-right: 10px;
+  bottom: 20%;
+  width: 150px;
+  height: 50px;
+}
+
+.myclass {
+          height: 30px;
+          position: absolute;
+          border: 2px solid #cdcdcd;
+          border-color: rgba(0,0,0,.14);
+          background-color: White;   ;
+          font-size: 14px;
+          height: 30px;
+          -moz-border-radius: 10px;
+          border-radius: 10px;
+          border:solid 1px gray;
+          padding:10px;
+          margin: 5px;
+          width: 250px;
+}
+      
+.password {
+  -webkit-text-security: disc;
+}
+
+#sign-in-guest-button {
+  position: absolute;
+  left: 50%;
+  margin-left: 10px;
+  bottom: 20%;
+  width: 150px;
+  height: 50px;
+}
+
+///////////////////////////////////////// Pet Show Page ///////////////////////////////////////// 
+.show-page {
+  background: transparent;
+}
+
+#show-page-column2 {
+  width: 250px;
+  position: absolute;
+  top: 11%;
+  left: 20%;
+}
+
+#rental-request-list {
+  display: block;
+//  width: 500px;
+  position: absolute;
+  left: 30%;
+    margin-top: 400px;
+//  bottom: 10%;
+}
+
+.show-page {
+  text-align: center;
+}
+
+.show-page-image {
+  position: absolute;
+  left: 40%;
+  top: 10%;
+  height: 300px;
+  width: auto;
+}
+
+/////////////////////////////////////////  Edit Pet Page ///////////////////////////////////////// 
+
+#edit-form.my-class {
+  display: inline-block;
+}
+
 .edit-pet-form {
   height: 4000px;
   width: 500px;
@@ -134,64 +236,8 @@ h3 {
   height: 200px;
 }
 
-.show-page {
-  background: transparent;
-}
-#sign-in-button {
-  position: absolute;
-  position: absolute;
-  left: 20%;
-  margin-right: 10px;
-  bottom: 20%;
-  width: 150px;
-  height: 50px;
-}
+///////////////////////////////////////// Index Page //////////////////////////////////////
 
-.show-page-row {
-//  position: absolute;
-//  left: 20%;
-  display: inline-block;
-}
-
-p#name {
-  font-size: x-large;
-}
-#show-page-column2 {
-  width: 250px;
-  position: absolute;
-  top: 11%;
-  left: 20%;
-}
-
-#rental-request-list {
-  display: block;
-//  width: 500px;
-  position: absolute;
-  left: 30%;
-    margin-top: 400px;
-//  bottom: 10%;
-}
-
-#sign-in-guest-button {
-  position: absolute;
-  left: 50%;
-  margin-left: 10px;
-  bottom: 20%;
-  width: 150px;
-  height: 50px;
-}
-
-h1 {
-  text-align: center;
-}
-
-.show-page-image {
-  position: absolute;
-  left: 40%;
-  top: 10%;
-  height: 300px;
-  width: auto;
-}
 
 .wrapper img {
   display: block;
@@ -200,26 +246,15 @@ h1 {
   align: center;
 }
 
-#edit-form.my-class {
-  display: inline-block;
-}
-
-#pets {
-  width: 80%;
-  align: center;
-  position: absolute;
-  left: 15%;
-}
-
-h2 {
-  text-align: center;
-}
-
 .wrapper:hover {
-  width: 290px;
-  height: 385px;
-  position: relative;
-  margin: 15px;
+  background-color: seashell;
+  color: black;
+//  width: 290px;
+//  height: 385px;
+//  position: relative;
+//  margin: 15px;
+//  overflow: visible;
+//  z-index: 10;
 }
 
 .wrapper {
@@ -242,11 +277,8 @@ h2 {
     transition-duration: .2s;
     -webkit-transition-property: width height; /* Safari */
     -webkit-transition-duration: .2s; /* Safari */
-  }
-
-  #main {
-    width: 90%;
-  }
+}
+  
 .ribbon-wrapper-green {
   width: 85px;
   height: 88px;
@@ -298,6 +330,7 @@ h2 {
   bottom: -3px;
 }
 
+
 .ribbon-green:before {
   left: 0;
 }
@@ -309,37 +342,63 @@ h2 {
   font-weight: bold;
   font-size: medium;
   text-align: center;
-  color: gray;
+  color: black;
   font-weight: 200;
 }
 
-.myclass {
-          height: 30px;
-          position: absolute;
-          border: 2px solid #cdcdcd;
-          border-color: rgba(0,0,0,.14);
-          background-color: White;   ;
-          font-size: 14px;
-          height: 30px;
-          -moz-border-radius: 10px;
-          border-radius: 10px;
-          border:solid 1px gray;
-          padding:10px;
-          margin: 5px;
-          width: 250px;
-}
-      
-.password {
-  -webkit-text-security: disc;
+/////////////////////////////////////////  Unknown ///////////////////////////////////////// 
+h4 {
+  position: absolute;
+  left: 25%;
+  right: 20%;
+  width: 50%;
 }
 
-h4 {
+h3 {
   text-align: center;
 }
-//About Page
-.meet-the-team {
-  display: block;
+
+
+.show-page-row {
+//  position: absolute;
+//  left: 20%;
+  display: inline-block;
 }
+
+p#name {
+  font-size: x-large;
+}
+
+
+
+#pets {
+  width: 80%;
+  align: center;
+  position: absolute;
+  left: 15%;
+}
+
+h2 {
+  text-align: center;
+}
+
+
+
+  #main {
+    width: 90%;
+  }
+
+
+#rental-request {
+  text-align: center;
+}
+
+
+
+
+
+
+
 
 .feature-photo {
   max-height: 150px;
@@ -355,9 +414,3 @@ h4 {
   text-align: bottom;
 }
 
-.about-us-text {
-  position: absolute;
-  left: 20%;
-  right: 20%;
-  display: block;
-}

@@ -7,10 +7,31 @@ RentMyKitty.Views.PetRentalRequestItem = Backbone.CompositeView.extend({
     this.listenTo(this.model, "sync", this.render);
   },
 
+  events: {
+    "submit form#approve-request" : "approveRequest",
+    "submit form#deny-request" : "denyRequest"
+  },
+
+  approveRequest: function(event) {
+    event.preventDefault();
+    this.model.save({status: "Approved"}, {     
+      success: function () {
+        alert("Rental Approved");
+      }
+    });
+  },
+
+  denyRequest: function(event) {
+    event.preventDefault();
+    alert("Rental Denied");
+    this.model.destroy();
+
+  },
+  
   render: function () {
     var view = this;
     var renderedContent = view.template({
-      pet: view.model.pet()
+      model: view.model
     });
     view.$el.html(renderedContent);
     return view;

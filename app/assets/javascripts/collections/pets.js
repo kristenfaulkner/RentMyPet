@@ -3,10 +3,8 @@ RentMyKitty.Collections.Pets = Backbone.Collection.extend({
   
   url: "/api/pets",
 
-  // comparator: function(pet) {
-  //   return pet.get('age');
-  // },
-  //
+  comparator: 'age',
+
   getOrFetch: function (id) {
     var pets = this;
     var pet;
@@ -18,7 +16,7 @@ RentMyKitty.Collections.Pets = Backbone.Collection.extend({
         success: function () { pets.add(pet); }
       });
     }
-
     return pet;
   }
+  
 });

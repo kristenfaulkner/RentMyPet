@@ -3,7 +3,7 @@ module Api
   
     def create
       @pet_rental_request = PetRentalRequest.new(pet_rental_request_params)
-    
+      @pet_rental_request.requester_id = current_user.id
       if @pet_rental_request.save
         # if @pet_rental_request.overlapping_requests.empty?
           render json: @pet_rental_request
@@ -25,56 +25,27 @@ module Api
     def show
       @pet= Pet.find(params[:pet_id])
       @pet_rental_request = PetRentalRequest.find(params[:id])
-      render json: @pet_rental_request, include: [:requester, :pet]
+      render json: @pet_rental_request
     end
     
     def update
       @pet_rental_request = PetRentalRequest.find(params[:id])
       
-      if params[:pet_rental_request][:status] == "Approve"
-        @pet_rental_request.update(:status => "Approved")
-      
-        @pet_rental_request.overlapping_pending_requests.each do |request|
-          request.update(:status => "Denied")
-        end
-      
-        @pet = Pet.find(@pet_rental_request.pet_id)
-        session[:pet_id] = @pet.id
-        render json: @pet.pet_rental_requests
-      
-      elsif params[:pet_rental_request][:status] == "Deny"
-        @pet_rental_request.update(:status => "Denied") 
-        @pet = Pet.find(@pet_rental_request.pet_id)
-        session[:pet_id] = @pet.id
-        render json: @pet.pet_rental_requests.errors.full_messages, status: :unprocessable_entity
+      if @pet_rental_request.update(pet_rental_request_params)  
+         render json: @pet_rental_request     
+      else
+        render json: @pet_rental_request.errors.full_messages, status: :unprocessable_entity
       end
     end
     
-    def respond
+    def destroy
       @pet_rental_request = PetRentalRequest.find(params[:id])
-      
-      if params[:pet_rental_request][:status] == "Approve"
-        @pet_rental_request.update(:status => "Approved")
-      
-        @pet_rental_request.overlapping_pending_requests.each do |request|
-          request.update(:status => "Denied")
-        end
-      
-        @pet = Pet.find(@pet_rental_request.pet_id)
-        session[:pet_id] = @pet.id
-        render json: @pet.pet_rental_requests
-        
-      elsif params[:pet_rental_request][:status] == "Deny"
-        @pet_rental_request.update(:status => "Denied")
-        @pet = Pet.find(@pet_rental_request.pet_id)
-        session[:pet_id] = @pet.id
-        redirect_to pet_url(@pet)
-        render json: @pet.pet_rental_requests
-      end
+      @pet_rental_request.destroy
+      render :json => {}
     end
   
     def pet_rental_request_params
-      params.require(:pet_rental_request).permit(:pet_id, :requester_id, :start_date, :end_date, :status)
+      params.require(:pet_rental_request).permit(:pet_id, :start_date, :end_date, :status)
     end
   end
 end

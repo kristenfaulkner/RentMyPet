@@ -3,8 +3,6 @@ class Pet < ActiveRecord::Base
   validates :name, :age, :color, :gender, presence: true
   validates_numericality_of :age, on: :create
   validates_inclusion_of :gender, in: ["Male", "Female"]
-
-  has_many(:cat_rental_requests, dependent: :destroy)
   
   belongs_to(
     :owner,
@@ -17,7 +15,8 @@ class Pet < ActiveRecord::Base
     :pet_rental_requests,
     class_name: "PetRentalRequest",
     foreign_key: :pet_id,
-    primary_key: :id
+    primary_key: :id,
+    dependent: :destroy
   )
   
   has_many(

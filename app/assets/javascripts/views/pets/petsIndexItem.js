@@ -5,14 +5,14 @@ RentMyKitty.Views.PetsIndexItem = Backbone.CompositeView.extend({
   initialize: function () {
     this.listenTo(this.model, "sync", this.render);
 },
-
+  
   render: function () {
     var view = this;
     var renderedContent = view.template({
       pet: view.model
     });
+    view.$el.attr( 'data-pet-id', view.model.get('id'));
     view.$el.html(renderedContent);
-    view.attachSubviews();
     return view;
   }
 });

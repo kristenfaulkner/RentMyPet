@@ -2,6 +2,7 @@ RentMyKitty.Collections.PetRentalRequests = Backbone.Collection.extend({
   model: RentMyKitty.Models.PetRentalRequest,
   url: "/api/pet_rental_requests",
 
+  comparator: 'status',
   getOrFetch: function (id) {
     var petRentalRequests = this;
     var petRentalRequest;

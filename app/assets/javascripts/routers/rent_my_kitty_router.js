@@ -3,9 +3,7 @@ RentMyKitty.Routers.RentMyKittyRouter = Backbone.Router.extend({
     "": "petsIndex",
     "pets/new" : "petsNew",
     "pets/:id" : "petsShow",
-    "pets/:id/edit" : "petsEdit",
-    "pets/:id/pet_rental_requests/new" : "rentalRequestNew",
-    "pets/:id/pet_rental_requests/index" : "rentalRequestIndex"
+    "pets/:id/edit" : "petsEdit"
   },
 
   petsIndex: function () {
@@ -38,26 +36,25 @@ RentMyKitty.Routers.RentMyKittyRouter = Backbone.Router.extend({
     var showView = new RentMyKitty.Views.PetsShowView({
       model: pet
     });
-
     this._swapView(showView);
   },
 
-  rentalRequestNew: function(id) {
-    var pet = RentMyKitty.Collections.pets.getOrFetch(id);
-    var newRequest = new RentMyKitty.Models.PetRentalRequest({ pet: pet });
-    var newView = new RentMyKitty.Views.PetRentalRequestNew({
-      model: newRequest
-    });
-    this._swapView(newView);
-  },
-  
-  rentalRequestIndex: function(id) {
-    var pet = RentMyKitty.Collections.pets.getOrFetch(id);
-    var newRequest = new RentMyKitty.Views.PetRentalRequestsIndex({ 
-      collection: pet.petRentalRequests() 
-    });
-    this._swapView(newRequest);
-  },
+  // rentalRequestNew: function(id) {
+//     var pet = RentMyKitty.Collections.pets.getOrFetch(id);
+//     var newRequest = new RentMyKitty.Models.PetRentalRequest({ pet: pet });
+//     var newView = new RentMyKitty.Views.PetRentalRequestNew({
+//       model: newRequest
+//     });
+//     this._swapView(newView);
+//   },
+//
+//   rentalRequestIndex: function(id) {
+//     var pet = RentMyKitty.Collections.pets.getOrFetch(id);
+//     var newRequest = new RentMyKitty.Views.PetRentalRequestsIndex({
+//       collection: pet.petRentalRequests()
+//     });
+//     this._swapView(newRequest);
+//   },
   
   _swapView: function (newView) {
     if (this.currentView) {
