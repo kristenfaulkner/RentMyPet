@@ -5,9 +5,7 @@
         <img src="<%= pet.escape('image_url')%>" class="show-page-photo">
         <% if (window.current_user_id == pet.escape('owner_id')) { %>
           <a href="#/pets/<%= pet.escape('id')%>/edit">Edit Your Pet Information</a>
-          <% } else { %>
-          <h4><a href="#/pets/<%= pet.escape('id')%>/pet_rental_requests/new">Click Here to Rent me Now!</a></h4>
-          <% } %>
+        <% } %>
       <!-- </div> -->
       <div class="col-xs-5" id="show-page-column2">
         <p><strong>Pet Information</stong></p>
@@ -20,4 +18,13 @@
     </div>
   </div>
   
+  
+  <% if (window.current_user_id == pet.escape('owner_id')) { %>
+    <div class="rental-request-list">
+    </div>
+  <% } else { %>
+    <div class="new-rental-request">
+    </div>
+  
+  <% } %>
 </div>

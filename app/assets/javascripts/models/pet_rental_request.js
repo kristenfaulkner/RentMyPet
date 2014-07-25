@@ -1,7 +1,10 @@
 RentMyKitty.Models.PetRentalRequest = Backbone.Model.extend({
   urlRoot: "api/pet_rental_request",
 
-
+  initialize: function(options) {
+    this.pet = options.pet;
+  },
+  
   requester: function() {
     this._requester = this._requester || new RentMyKitty.Models.User({}, { id: this.requester_id})
     return this._requester;

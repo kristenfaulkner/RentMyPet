@@ -19,17 +19,17 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
   //
   addPet: function (pet) {
       var petsIndexItem = new RentMyKitty.Views.PetsIndexItem({ model: pet });
-      this.addSubview("#pets", petsIndexItem);
+      this.addSubview(".rental-request-list", petsIndexItem);
     },
 
-  removePet: function (pet) {
+  removePet: function (petRental) {
       var subview = _.find(
-        this.subviews(".pets"),
+        this.subviews(".rental-request-list"),
         function (subview) {
-          return subview.model === pet;
+          return subview.model === petRental;
         }
       );
-      this.removeSubview(".pets", subview);
+      this.removeSubview(".rental-request-list", subview);
     },
 
 

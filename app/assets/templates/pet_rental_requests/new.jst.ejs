@@ -1,0 +1,31 @@
+<h1>Want to rent me? Fill out this form to request a rental!</h1>
+
+
+<form id="new-rental-request-form" role="form">       
+  Start Date: 
+    <input name="pet_rental_request[start_date]" class="datepicker">
+      <span class="add-on">
+        <i class= "glyphicon glyphicon-calendar"></i>
+      </span>
+    </input>
+
+  End Date:
+    <input name="pet_rental_request[end_date]" class="datepicker">
+      <span class="add-on">
+        <i class= "glyphicon glyphicon-calendar"></i>
+      </span>
+    </input>
+    
+       <!-- script to run the calendar code-->
+           <script type="text/javascript">  
+
+            $(function () {
+
+                $('.datepicker').datepicker({
+                    format: "dd/mm/yyyy"
+                }); 
+            });
+        </script>
+
+    <button type="submit" class="btn btn-success" role="button" id="submit-rental-request-button">Submit Request</button>
+</form>

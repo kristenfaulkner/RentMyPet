@@ -1,11 +1,11 @@
-RentMyKitty.Views.PetRentalRequestsNewView = Backbone.CompositeView.extend({
-  template: JST["petRentalRequests/new"],
+RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
+  template: JST["pet_rental_requests/new"],
 
   events: {
     "submit form#new-rental-request": "submit",
   },
   
-  initialize: function(options) {
+  initialize: function() {
   },
   
   render: function () {
@@ -21,8 +21,12 @@ RentMyKitty.Views.PetRentalRequestsNewView = Backbone.CompositeView.extend({
     newRentalView.model.set(params["petRentalRequest"]);
     newRentalView.model.save({ wait: true}, {
       success: function () {
-        newRentalView.collection().add(newRentalView.model);
+        newRentalView.model.collection().add(newRentalView.model);
+        alert("Your rental request has been submitted");
       }
     });
   }
 });
+
+   
+   

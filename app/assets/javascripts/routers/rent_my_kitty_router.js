@@ -4,7 +4,8 @@ RentMyKitty.Routers.RentMyKittyRouter = Backbone.Router.extend({
     "pets/new" : "petsNew",
     "pets/:id" : "petsShow",
     "pets/:id/edit" : "petsEdit",
-    "pets/:id/pet_rental_requests/new" : "rentalRequestNew"
+    "pets/:id/pet_rental_requests/new" : "rentalRequestNew",
+    "pets/:id/pet_rental_requests/index" : "rentalRequestIndex"
   },
 
   petsIndex: function () {
@@ -42,11 +43,20 @@ RentMyKitty.Routers.RentMyKittyRouter = Backbone.Router.extend({
   },
 
   rentalRequestNew: function(id) {
-    var newRequest = new RentMyKitty.Models.PetRentalRequest({ pet_id: id });
+    var pet = RentMyKitty.Collections.pets.getOrFetch(id);
+    var newRequest = new RentMyKitty.Models.PetRentalRequest({ pet: pet });
     var newView = new RentMyKitty.Views.PetRentalRequestNew({
       model: newRequest
     });
     this._swapView(newView);
+  },
+  
+  rentalRequestIndex: function(id) {
+    var pet = RentMyKitty.Collections.pets.getOrFetch(id);
+    var newRequest = new RentMyKitty.Views.PetRentalRequestsIndex({ 
+      collection: pet.petRentalRequests() 
+    });
+    this._swapView(newRequest);
   },
   
   _swapView: function (newView) {

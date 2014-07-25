@@ -1,0 +1,15 @@
+
+<td><%= model.requester().name %></td>
+<td><%= model.start_date %></td>
+<td><%= model.end_date %></td>
+
+<% if (model.status === "Pending") { %>
+  <td>
+    <button type="submit" class="btn btn-success" role="button" id="approve-request-button">Approve</button>
+    <button type="submit" class="btn btn-danger" role="button" id="deny-request-button">Deny</button>
+  </td>
+<% } else { %>
+    <td><%= model.status %></td>
+<% } %>
+
+  
