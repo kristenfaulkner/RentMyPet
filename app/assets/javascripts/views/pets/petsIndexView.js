@@ -6,30 +6,20 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     this.listenTo(this.collection, "add", this.addPet);
     this.listenTo(this.collection, "remove", this.removePet);
   },
-  //
-  // events: {
-  //   "click button.upload-new-pet" : "newPetPage"
-  // },
-  //
-  // newPetPage: {
-  //   var newPet = new RentMyKitty.Models.Pet();
-  //   var petsNewView = new RentMyKitty.Views.PetsNewView({ model: newPet });
-  //   this.$el(petsNewView.render().$el);
-  // },
-  //
+
   addPet: function (pet) {
       var petsIndexItem = new RentMyKitty.Views.PetsIndexItem({ model: pet });
-      this.addSubview(".rental-request-list", petsIndexItem);
+      this.addSubview("#pets", petsIndexItem);
     },
 
   removePet: function (petRental) {
       var subview = _.find(
-        this.subviews(".rental-request-list"),
+        this.subviews("#pets"),
         function (subview) {
           return subview.model === petRental;
         }
       );
-      this.removeSubview(".rental-request-list", subview);
+      this.removeSubview("#pets", subview);
     },
 
 

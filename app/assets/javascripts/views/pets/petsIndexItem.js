@@ -1,6 +1,6 @@
 RentMyKitty.Views.PetsIndexItem = Backbone.CompositeView.extend({
   template: JST["pets/index_item"],
-  className: "pet-box",
+  className: "wrapper",
 
   initialize: function () {
     this.listenTo(this.model, "sync", this.render);

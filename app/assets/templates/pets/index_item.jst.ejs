@@ -1,9 +1,6 @@
- <img src="<%=pet.escape('image_url')%>">
-  <ul>
-    <li>Pet ID: <%=pet.escape('id')%></li>
-    <li>Name: <%=pet.escape('name')%></li>
-    <li>Age: <%=pet.escape('age')%> years old</li>
-    <li>Color: <%=pet.escape('color')%></li>
-    <li>Gender: <%=pet.escape('gender')%></li>
-    <li><a href="#/pets/<%= pet.escape('id') %>"><%= pet.escape('name')%>'s profile></a></li>
-  </ul>
+<div id="index-image"><img src="<%=pet.escape('image_url')%>"></div>
+<div class="ribbon-wrapper-green"><div class="ribbon-green">Available</div></div>
+  <p id="name"><%=pet.escape('name')%></p>
+  <p id="pet-info"><%=pet.escape('gender')%>, <%=pet.escape('age')%> years old</p>
+  <p id="pet-profile-link"><a href="#/pets/<%= pet.escape('id') %>">Profile></a></p>
+</div>

@@ -21,14 +21,14 @@
 
 body {
   padding-top: 50px;
-  font-family: "monaco"; 
+  font-family: "LL Circular"; 
   background: fixed;        
-  background-color: tan;
+  background-color: #F0F8FF;
   color: black;
 }
 
 body.homepage {
-  background-image:url('http://www.hdwallpapers.in/walls/cute_kitten-wide.jpg');
+  background-image: url('http://www.hdwallpapers.in/walls/cute_kitten-wide.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -153,6 +153,9 @@ h3 {
   display: inline-block;
 }
 
+p#name {
+  font-size: x-large;
+}
 #show-page-column2 {
   width: 250px;
   position: absolute;
@@ -177,17 +180,12 @@ h3 {
   width: 150px;
   height: 50px;
 }
-.pet-box > ul {
-  list-style: none;
-  padding-left: 0;
-  margin-left: 25px;
-}
 
 h1 {
   text-align: center;
 }
 
-.show-page-img {
+.show-page-image {
   position: absolute;
   left: 40%;
   top: 10%;
@@ -195,13 +193,11 @@ h1 {
   width: auto;
 }
 
-.pet-box img {
+.wrapper img {
   display: block;
-  max-width: 150px;
-  max-height: 150px;
-  margin: 5px auto;
-  height: auto;
-  
+  max-width: 230px;
+  max-height: 230px;
+  align: center;
 }
 
 #edit-form.my-class {
@@ -209,32 +205,112 @@ h1 {
 }
 
 #pets {
-  width: 1200px;
+  width: 80%;
   align: center;
   position: absolute;
-  left: 18%;
+  left: 15%;
 }
 
 h2 {
   text-align: center;
 }
 
-#cat-container {
-  width: 200px;
-  margin: auto;
-  outline: burlywood 5px solid;
-  padding-left: 10px;
-  padding-right: 10px;
+.wrapper:hover {
+  width: 290px;
+  height: 385px;
+  position: relative;
+  margin: 15px;
 }
 
-.pet-box {
-  width: 200px;
-  height: 290px;
-  text-align: bottom;
-  outline: thin solid black;
+.wrapper {
+  width: 280px;
+  height: 370px;
+  background: white;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+  -moz-box-shadow:    0px 0px 8px rgba(0,0,0,0.3);
+  box-shadow:         0px 0px 8px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 90;
   display: inline-block;
-  margin: 20px;
   background-color: ivory;
+//    outline: thin solid gray;
+    display: inline-block;
+    background-color: ivory;
+    margin: 15px;
+    transition-property: width height;
+    transition-duration: .2s;
+    -webkit-transition-property: width height; /* Safari */
+    -webkit-transition-duration: .2s; /* Safari */
+  }
+
+  #main {
+    width: 90%;
+  }
+.ribbon-wrapper-green {
+  width: 85px;
+  height: 88px;
+  overflow: hidden;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+}
+
+#index-image {
+  width: 230px;
+  height: 230px;
+  margin: 20px auto;
+  align: center;
+}
+
+.ribbon-green {
+  font: bold 15px Sans-Serif;
+  color: #333;
+  text-align: center;
+  text-shadow: rgba(255,255,255,0.5) 0px 1px 0px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform:    rotate(45deg);
+  -ms-transform:     rotate(45deg);
+  -o-transform:      rotate(45deg);
+  position: relative;
+  padding: 7px 0;
+  left: -5px;
+  top: 15px;
+  width: 120px;
+  background-color: #BFDC7A;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#BFDC7A), to(#8EBF45)); 
+  background-image: -webkit-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:    -moz-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:     -ms-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:      -o-linear-gradient(top, #BFDC7A, #8EBF45); 
+  color: #6a6340;
+//  -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+//  -moz-box-shadow:    0px 0px 3px rgba(0,0,0,0.3);
+//  box-shadow:         0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.ribbon-green:before, .ribbon-green:after {
+  content: "";
+  border-top:   3px solid #6e8900;   
+  border-left:  3px solid transparent;
+  border-right: 3px solid transparent;
+  position:absolute;
+  bottom: -3px;
+}
+
+.ribbon-green:before {
+  left: 0;
+}
+.ribbon-green:after {
+  right: 0;
+}
+
+.wrapper p {
+  font-weight: bold;
+  font-size: medium;
+  text-align: center;
+  color: gray;
+  font-weight: 200;
 }
 
 .myclass {
@@ -251,7 +327,7 @@ h2 {
           padding:10px;
           margin: 5px;
           width: 250px;
-      }
+}
       
 .password {
   -webkit-text-security: disc;
@@ -285,31 +361,3 @@ h4 {
   right: 20%;
   display: block;
 }
-
-    //  /*AliceBlue*/
-//  .advancedSearchTextbox {
-//      width: 526px;
-//      margin-right: -4px;
-//  }
-//
-//  * {
-//   font-size: 100%;
-//   font-family: monaco;
-//  }
-//
-//  ul
-//  {
-//      list-style: none;
-//  }
-//
-//  tr.spaceUnder > td
-//  {
-//    padding-top: 2em;
-//    padding-bottom: 2em;
-//  }
-//
-//  tr.horLines {
-//      border-bottom: 1px solid black;
-//      border-top: 1px solid black;
-//      border-collapse: collapse;
-//  }​

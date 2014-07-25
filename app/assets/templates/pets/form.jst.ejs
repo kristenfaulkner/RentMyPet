@@ -1,4 +1,10 @@
-<h1><%= pet.escape('name') ? "Edit Your Pet" :  "Upload a new Pet" %></h1>
+<% if (pet.escape('name')) { %>
+  <h1>Edit Your Pet</h1>
+  <a href="#/pets/<%=pet.escape('id')%>">&lt&ltBack to <%=pet.escape('name')%>'s profile</a>
+<% } else { %>
+  <h1>Upload a new Pet</h1>
+  <a href="/#">&lt&ltBack to Pets</a>
+<% } %>
 
 <div id="edit-form">
   <form role="form" class="edit-pet-form">

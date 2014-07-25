@@ -5,9 +5,6 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
     "submit form#new-rental-request": "submit",
   },
   
-  initialize: function() {
-  },
-  
   render: function () {
     var renderedContent = this.template();    
     this.$el.html(renderedContent);
