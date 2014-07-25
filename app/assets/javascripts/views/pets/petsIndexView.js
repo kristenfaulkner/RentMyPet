@@ -4,6 +4,7 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
   initialize: function(options) {
     this.listenTo(this.collection, "sync", this.render);
     this.listenTo(this.collection, "add", this.addPet);
+    this.listenTo(this.collection, "remove", this.removePet);
   },
   //
   // events: {
@@ -21,15 +22,15 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
       this.addSubview("#pets", petsIndexItem);
     },
 
-  // removePet: function (pet) {
- //      var subview = _.find(
- //        this.subviews(".pets"),
- //        function (subview) {
- //          return subview.model === pet;
- //        }
- //      );
- //      this.removeSubview(".pets", subview);
- //    },
+  removePet: function (pet) {
+      var subview = _.find(
+        this.subviews(".pets"),
+        function (subview) {
+          return subview.model === pet;
+        }
+      );
+      this.removeSubview(".pets", subview);
+    },
 
 
   render: function () {

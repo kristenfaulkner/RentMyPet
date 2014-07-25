@@ -1,8 +1,13 @@
 RentMyKitty.Views.PetsNewView = Backbone.View.extend({
   template: JST["pets/form"],
 
+  initialize: function() {
+    this.listenTo(this.model, "sync", this.render)
+  },
+  
   events: {
-    "submit form": "submit"
+    "submit form": "submit",
+    "click button#delete-pet-button" : "deletePet"
   },
 
   render: function () {
@@ -11,6 +16,11 @@ RentMyKitty.Views.PetsNewView = Backbone.View.extend({
     return this;
   },
 
+  deletePet: function(event) {
+    event.preventDefault();
+    this.model.destroy();
+  },
+  
   submit: function (event) {
     var view = this;
     event.preventDefault();
