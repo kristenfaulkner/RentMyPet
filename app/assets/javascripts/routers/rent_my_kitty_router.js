@@ -1,6 +1,8 @@
 RentMyKitty.Routers.RentMyKittyRouter = Backbone.Router.extend({
   routes: {
     "": "petsIndex",
+    "pets/new" : "petsNew",
+    "pets/:id" : "petsShow"
   },
 
   petsIndex: function () {
@@ -12,20 +14,23 @@ RentMyKitty.Routers.RentMyKittyRouter = Backbone.Router.extend({
     this._swapView(petsIndexView);
   },
 
-  // petsNew: function () {
-  //   var newView = new RentMyKitty.Views.PetsNewView();
-  //   this._swapView(newView);
-  // },
-  //
-  // petsShow: function (id) {
-  //   var pet = RentMyKitty.Collections.pets.getOrFetch(id);
-  //
-  //   var showView = new RentMyKitty.Views.PetsShowView({
-  //     model: pet
-  //   });
-  //
-  //   this._swapView(showView);
-  // },
+  petsNew: function () {
+    var newPet = new RentMyKitty.Models.Pet();
+    var newView = new RentMyKitty.Views.PetsNewView({
+      model: newPet
+    });
+    this._swapView(newView);
+  },
+
+  petsShow: function (id) {
+    var pet = RentMyKitty.Collections.pets.getOrFetch(id);
+
+    var showView = new RentMyKitty.Views.PetsShowView({
+      model: pet
+    });
+
+    this._swapView(showView);
+  },
 
   _swapView: function (newView) {
     if (this.currentView) {

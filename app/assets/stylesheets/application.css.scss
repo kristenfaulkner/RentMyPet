@@ -205,6 +205,17 @@ h1 {
   display: inline-block;
 }
 
+#pets {
+  width: 1200px;
+  align: center;
+  position: absolute;
+  left: 18%;
+}
+
+h2 {
+  text-align: center;
+}
+
 #cat-container {
   width: 200px;
   margin: auto;
@@ -213,7 +224,7 @@ h1 {
   padding-right: 10px;
 }
 
-.cat-box {
+.pet-box {
   width: 200px;
   outline: thin solid black;
   display: inline-block;
@@ -251,6 +262,11 @@ h4 {
 
 .feature-photo {
   max-height: 150px;
+  width: auto;
+}
+
+.show-page-photo {
+  height: 40px;
   width: auto;
 }
 

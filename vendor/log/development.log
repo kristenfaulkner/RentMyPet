@@ -38388,3 +38388,15 @@ Started GET "/assets/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 
   [1m[36mPet Load (0.3ms)[0m  [1mSELECT  "pets".* FROM "pets"  WHERE "pets"."id" = ? LIMIT 1[0m  [["id", 5]]
   [1m[35mPetRentalRequest Load (0.2ms)[0m  SELECT "pet_rental_requests".* FROM "pet_rental_requests"  WHERE "pet_rental_requests"."pet_id" = ?  [["pet_id", 5]]
   [1m[36mPet Load (4.4ms)[0m  [1mSELECT "pets".* FROM "pets"[0m
+  [1m[36mPet Load (39.7ms)[0m  [1mSELECT "pets".* FROM "pets"[0m
+  [1m[35mPet Load (0.3ms)[0m  SELECT  "pets".* FROM "pets"   ORDER BY "pets"."id" DESC LIMIT 1
+  [1m[36mPet Load (0.3ms)[0m  [1mSELECT  "pets".* FROM "pets"   ORDER BY "pets"."id" DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.7ms)[0m  [1mUPDATE "pets" SET "image_url" = ?, "updated_at" = ? WHERE "pets"."id" = 10[0m  [["image_url", "http://media.moddb.com/images/downloads/1/66/65404/Cute_cat_1.jpg"], ["updated_at", "2014-07-24 23:44:21.656200"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36mPet Load (0.3ms)[0m  [1mSELECT  "pets".* FROM "pets"  WHERE "pets"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mPet Load (0.2ms)[0m  SELECT  "pets".* FROM "pets"  WHERE "pets"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mPet Load (0.2ms)[0m  [1mSELECT  "pets".* FROM "pets"  WHERE "pets"."id" = ? LIMIT 1[0m  [["id", 9]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "pets" SET "image_url" = ?, "updated_at" = ? WHERE "pets"."id" = 9[0m  [["image_url", "http://upload.wikimedia.org/wikipedia/commons/2/22/Turkish_Van_Cat.jpg"], ["updated_at", "2014-07-25 00:14:23.351577"]]
+  [1m[35m (1.6ms)[0m  commit transaction

@@ -3,6 +3,7 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
 
   initialize: function(options) {
     this.listenTo(this.collection, "sync", this.render);
+    this.listenTo(this.collection, "add", this.addPet);
   },
   //
   // events: {
@@ -15,10 +16,10 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
   //   this.$el(petsNewView.render().$el);
   // },
   //
-  // addPet: function (pet) {
-  //     var petsIndexItem = new RentMyKitty.Views.PetsIndexItem({ model: pet });
-  //     this.addSubview(".pets", petsIndexItem);
-  //   },
+  addPet: function (pet) {
+      var petsIndexItem = new RentMyKitty.Views.PetsIndexItem({ model: pet });
+      this.addSubview("#pets", petsIndexItem);
+    },
 
   // removePet: function (pet) {
  //      var subview = _.find(
@@ -32,11 +33,10 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
 
 
   render: function () {
-    alert('rendering')
     var view = this;
     var renderedContent = this.template({ pets: this.collection });
     this.$el.html(renderedContent);
-
+    this.attachSubviews();
     return this;
   }
 });

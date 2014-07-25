@@ -17,8 +17,6 @@
 //= require bootstrap
 //= require bootstrap-datepicker
 //= require serializeJSON
-//= require underscore
-//= require backbone
 //= require rent_my_kitty
 //= require_tree ../templates
 //= require_tree ./models

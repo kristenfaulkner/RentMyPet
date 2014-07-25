@@ -1,0 +1,9 @@
+ <img src="<%=pet.escape('image_url')%>">
+  <ul>
+    <li>Pet ID: <%=pet.escape('id')%></li>
+    <li>Name: <%=pet.escape('name')%></li>
+    <li>Age: <%=pet.escape('age')%> years old</li>
+    <li>Color: <%=pet.escape('color')%></li>
+    <li>Gender: <%=pet.escape('gender')%></li>
+    <li><a href="#/pets/<%= pet.escape('id') %>"><%= pet.escape('name')%>'s profile></a></li>
+  </ul>
