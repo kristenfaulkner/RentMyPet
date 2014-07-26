@@ -46,35 +46,36 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
   render: function () {
     var image1 = "http://media.eukanuba.com/en_us/data_root/_images/global/Puppy-Growth-Development-icon.png";
     var image2 = 'http://fc09.deviantart.net/fs71/f/2011/306/2/6/kawaii_pixel_cat_icon_by_boogle_chan-d4evsi1.gif';
-    var renderedContent = this.template({ pets: this.collection });
+    var renderedContent = this.template({ pets: this.collection, view: this });
     this.$el.html(renderedContent);
-    this.initializeMap([[40.0, 120.0, image1], [39, 118, image2], [42, 121], image2]);
+    this.initializeMap();
     this.attachSubviews();
     return this;
   },
   
-  initializeMap: function(locations){
+  initializeMap: function(){
+    var view = this;
     var mapOptions = {
       center: new google.maps.LatLng(37.7833, -122.4167),
       zoom: 11
     };
-    var map = new google.maps.Map(this.$('#myMap')[0], mapOptions);
-    this.setMarkers(this.locations(), map);
+    Window.map = new google.maps.Map(view.$('#myMap')[0], mapOptions);
+    view.setMarkers(view.petData(), Window.map);
   },
   
-  locations: function() {
-    var beaches = [
-      ['Bondi Beach', 37.75, -122.42, 4],
-      ['App Academy', 37.75, -122.45, 4],
-      ['Coogee Beach', 37.7, -122.41, 5],
-      ['Cronulla Beach', 37.8, -122.412, 3],
-      ['Manly Beach', 37.73, -122.38, 2],
-      ['Maroubra Beach', 37.9, -122.4, 1]
+  petData: function() {
+    var image1 = "http://media.eukanuba.com/en_us/data_root/_images/global/Puppy-Growth-Development-icon.png";
+    return [
+      ['Bondi Beach', 37.75, -122.42, 4, image1, '<div>This is my content</div>'],
+      ['App Academy', 37.75, -122.45, 4, image1, '<div>This is my content</div>'],
+      ['Coogee Beach', 37.7, -122.41, 5, image1, '<div>This is my content</div>'],
+      ['Cronulla Beach', 37.8, -122.412, 3, image1, '<div>This is my content</div>'],
+      ['Manly Beach', 37.73, -122.38, 2, image1, '<div>This is my content</div>'],
+      ['Maroubra Beach', 37.9, -122.4, 1, image1, '<div>This is my content</div>']
     ];
-    return beaches;
   },
   
-  setMarkers: function(locations, map) {
+  setMarkers: function(petData, map) {
     
     var image = {
        url: 'http://www.pixeljoint.com/files/icons/full/cat__r177950541.gif',
@@ -86,16 +87,43 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
        anchor: new google.maps.Point(0, 32)
     };
      
-     for (var i = 0; i < locations.length; i++) {
-       var beach = locations[i];
+     for (var i = 0; i < petData.length; i++) {
+       var beach = petData[i];
        var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
        var marker = new google.maps.Marker({
            position: myLatLng,
-           map: map,
-           icon: image,
+           map: Window.map,
+           icon: beach[4],
            title: beach[0],
-           zIndex: beach[3]
+           zIndex: beach[3],
+           draggable: false,   
+       });
+       
+       google.maps.event.addListener(marker, 'click', function() {
+         infoWindow.open(Window.map, marker);
+       });
+
+       var infoWindow = new google.maps.InfoWindow({
+             content: beach[5],
+             maxWidth: 300
        });
      }
-  }
+  }// ,
+//
+//   codeAddress: function() {
+//     var address = this.$('address').val();
+//     geocoder.geocode( { 'address': address}, function(results, status) {
+//       if (status == google.maps.GeocoderStatus.OK) {
+//         Window.map.setCenter(results[0].geometry.location);
+//         var marker = new google.maps.Marker({
+//             map: Window.map,
+//             position: results[0].geometry.location
+//         });
+//       } else {
+//         alert('Geocode was not successful for the following reason: ' + status);
+//       }
+//     });
+//   }
+  
+
 });
