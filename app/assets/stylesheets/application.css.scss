@@ -248,6 +248,9 @@ h4 {
   left: 2%;
   margin-bottom: 3%;
   top: 16%;
+  -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+  -moz-box-shadow:    0px 0px 10px rgba(0,0,0,0.5);
+  box-shadow:         0px 0px 10px rgba(0,0,0,0.5);
 }
 
 #map-canvas {
@@ -272,7 +275,7 @@ h4 {
 }
 
 .wrapper:hover {
-  background-color: seashell;
+  background-color: #FFF5EE;
   color: black;
 //  width: 290px;
 //  height: 385px;
@@ -283,8 +286,9 @@ h4 {
 }
 
 .wrapper {
-  width: 270px;
+  width: 260px;
   height: 350px;
+  padding: 10px;
   background: white;
   border-radius: 5px;
   -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
@@ -316,8 +320,7 @@ h4 {
 #index-image {
   width: 230px;
   height: 230px;
-  margin: 10px auto;
-  margin-bottom: 0;
+//  margin: 5px 5px 5px 5px;
   align: center;
 }
 
