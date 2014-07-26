@@ -238,11 +238,36 @@ h4 {
 
 ///////////////////////////////////////// Index Page //////////////////////////////////////
 
+#upload-pet-link {
+  text-align: center;
+}
+#myMap {
+  position: absolute;
+  height: 80%;
+  width: 38%;
+  left: 2%;
+  margin-bottom: 3%;
+  top: 16%;
+}
+
+#map-canvas {
+  height: 450px;
+  width: 30%;
+  float: left;
+  margin-top: 3%;
+}
+
+#pets {
+  width: 60%;
+  float: right;
+//  position: absolute;
+//  left: 15%;
+}
 
 .wrapper img {
   display: block;
-  max-width: 230px;
-  max-height: 230px;
+  max-width: 240px;
+  max-height: 240px;
   align: center;
 }
 
@@ -258,8 +283,8 @@ h4 {
 }
 
 .wrapper {
-  width: 280px;
-  height: 370px;
+  width: 270px;
+  height: 350px;
   background: white;
   border-radius: 5px;
   -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
@@ -291,7 +316,8 @@ h4 {
 #index-image {
   width: 230px;
   height: 230px;
-  margin: 20px auto;
+  margin: 10px auto;
+  margin-bottom: 0;
   align: center;
 }
 
@@ -347,6 +373,8 @@ h4 {
 }
 
 /////////////////////////////////////////  Unknown ///////////////////////////////////////// 
+
+
 h4 {
   position: absolute;
   left: 25%;
@@ -370,14 +398,6 @@ p#name {
 }
 
 
-
-#pets {
-  width: 80%;
-  align: center;
-  position: absolute;
-  left: 15%;
-}
-
 h2 {
   text-align: center;
 }
@@ -392,12 +412,6 @@ h2 {
 #rental-request {
   text-align: center;
 }
-
-
-
-
-
-
 
 
 .feature-photo {
