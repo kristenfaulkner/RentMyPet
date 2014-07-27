@@ -2,10 +2,11 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
   template: JST["pet_rental_requests/new"],
 
   events: {
-    "submit #new-rental-request": "submit",
+    "click #submit-rental-request" : "submit"
   },
   
   initialize: function() {
+    Window.unavailableDates = this.model.pet().unavailableDates();
   },
   
   render: function () {
@@ -17,10 +18,14 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
   submit: function (event) {
     var view = this;
     event.preventDefault();
+    var start_date = this.$("#start-date").val();
+    var end_date = this.$("#end-date").val();
+    console.log(start_date);
+    console.log(end_date);
     var rental = this.model;
-    var params = $(event.currentTarget).serializeJSON();
-    console.log(params);
-    rental.set(params["pet_rental_request"]);
+    var start_date = this.$("#start-date").val();
+    var end_date = this.$("#end-date").val();
+    rental.set({start_date: new Date(start_date), end_date: new Date(end_date)});
     rental.save({}, {
       success: function () {
         rental.pet().petRentalRequests().add(rental);

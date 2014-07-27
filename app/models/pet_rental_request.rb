@@ -15,11 +15,11 @@ class PetRentalRequest < ActiveRecord::Base
   
   
     def overlapping_rentals(newlyApprovedRental)
-      pending = PetRentalRequest.all.select({|rental| rental.status == "Pending"})
+      pending = PetRentalRequest.all.select {|rental| rental.status == "Pending"}
       pending.each do |rental|
         if rental.start_date.between?(newRental.start_date, newRental.end_date) || 
            rental.end_date.between?(newRental.start_date, newRental.end_date)
-           rental.overlapping = true
+           rental.update({ overlapping: true })
         end  
       end
     end

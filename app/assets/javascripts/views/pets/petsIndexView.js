@@ -7,11 +7,13 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     this.listenTo(this.collection, 'sort', this.resetPets);
     this.listenTo(this.collection, "remove", this.removePet);
     this.resetPets();
+    // var map = new RentMyKitty.Views.GooleMapsView({ collection: this.collection });
+    // this.addSubview('.map', map);
   },
   
   events: {
-    "click .wrapper" : "goToPetProfile",
-    "click #codeAddress" : "codeAddress"
+    "click .wrapper" : "goToPetProfile"// ,
+//     "click #codeAddress" : "codeAddress"
   },
   
   goToPetProfile: function(event) {
@@ -59,7 +61,6 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
       zoom: 11
     };
     RentMyKitty.infoWindow = new google.maps.InfoWindow({
-         content: '<div>Rent Me!</div>',
          maxWidth: 300
     });
     RentMyKitty.map = new google.maps.Map(view.$('#myMap')[0], mapOptions);

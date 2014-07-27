@@ -3,6 +3,10 @@
   <p>Age: <%= pet.escape('age') %></p>
   <p>Gender: <%= pet.escape('gender') %></p>
   <p>Color: White</p>
+  <p><%= pet.escape('address') %></p>
+  <p><%= pet.escape('city') %></p>
+  <p><%= pet.escape('state') %></p>
+  <p><%= pet.escape('zip') %></p>
   <a href="#/pets/<%=pet.escape('id')%>">Rent me now!</p>
   </div>
   <div>

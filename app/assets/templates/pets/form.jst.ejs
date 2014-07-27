@@ -35,8 +35,8 @@
       </select><br>
       <br>
   Gender:
-      <input type="radio" name="pet[gender]" value="Male"> Male
-      <input type="radio" name="pet[gender]" value="Female"> Female<br>
+      <input type="radio" name="pet[gender]" value="Male" checked="<%= pet.get('gender') == "Male"%>"> Male
+      <input type="radio" name="pet[gender]" value="Female" checked="<%= pet.get('gender') == "Female"%>"> Female<br>
       <br>
       
   <label for="edit-pet-address">Address: </label>

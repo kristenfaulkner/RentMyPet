@@ -14,7 +14,7 @@ module Api
   
     def show
       @pet = Pet.find(params[:id])
-      @pet_rental_requests = PetRentalRequest.find_by_pet_id(@pet.id)
+      @pet_rental_requests = PetRentalRequest.all.select {|rental| rental.pet_id == @pet.id }
       @user = current_user
       render json: @pet, include: [:owner, :pet_rental_requests]
     end

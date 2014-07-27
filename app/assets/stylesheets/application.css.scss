@@ -238,9 +238,14 @@ h4 {
 
 ///////////////////////////////////////// Index Page //////////////////////////////////////
 
-
 #upload-pet-link {
   text-align: center;
+}
+
+.map {
+  position: absolute;
+  height: 85%;
+  width: 40%;
 }
 #myMap {
   position: absolute;

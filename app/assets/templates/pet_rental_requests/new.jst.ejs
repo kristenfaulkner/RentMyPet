@@ -3,33 +3,35 @@
 <h1>Want to rent me? Fill out this form to request a rental!</h1>
 
 
-<form id="new-rental-request" role="form">       
-  <label for='start-date'>Start Date: </label>
-    <input name="pet_rental_request[start_date]" type="date" id="start-date">
-      <span class="add-on">
-        <i class= "glyphicon glyphicon-calendar"></i>
-      </span>
-    </input>
-
-  <label for='end-date'>End Date: </label>
-    <input name="pet_rental_request[end_date]" type="date" id="end-date">
-      <span class="add-on">
-        <i class= "glyphicon glyphicon-calendar"></i>
-      </span>
-    </input>
     
-       <!-- script to run the calendar code-->
-           <script type="text/javascript">  
-
-            // $(function () {
-//
-//                 $('.datepicker').datepicker({
-//                     minDate: new Date(),
-//                     format: "yy/mm/dd"
-//                 });
-//             });
-        </script>
-
-    <button type="submit" class="btn btn-success" role="button" id="submit-rental-request-button">Submit Request</button>
+      
+      <div class="input-daterange" id="datepicker">
+        <form class="form-inline">
+        <label for='start-date'>Start Date: </label>
+          <input type="text" class="input-sm form-control" id="start-date"/>
+        <label for='end-date'>End Date: </label>
+          <input type="text" class="input-sm form-control" id="end-date"/>
+        <button type="submit" class="btn btn-primary" id="submit-rental-request" role="button">Rent me!
+        </form>
+      </div>
+      
+       <!--script to run the calendar code-->
+            <script type="text/javascript"> 
+            
+              var unavailable = Window.unavailableDates.map(function(date) {
+                return date.getTime();
+              
+              });
+            
+              $('#datepicker').datepicker({
+                  minDate: new Date(),
+                  format: "mm/dd/yy",
+                  beforeShowDay: function(date) {
+                    d = date.getTime();
+                    return ($.inArray(d, unavailable) < 0);
+                  }
+              });
+              
+            </script>
 </form>
 </div>
