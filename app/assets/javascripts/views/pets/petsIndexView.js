@@ -2,7 +2,7 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
   template: JST["pets/index"],
 
   initialize: function(options) {
-    window.view = this;
+
     this.listenTo(this.collection, "sync", this.render);
     this.listenTo(this.collection, 'sort', this.resetPets);
     this.listenTo(this.collection, "remove", this.removePet);
@@ -53,13 +53,18 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
   },
   
   initializeMap: function(){
+    var view = this;
     var mapOptions = {
       center: new google.maps.LatLng(37.7833, -122.4167),
       zoom: 11
     };
-    Window.map = new google.maps.Map(view.$('#myMap')[0], mapOptions);
+    RentMyKitty.infoWindow = new google.maps.InfoWindow({
+         content: '<div>Rent Me!</div>',
+         maxWidth: 300
+    });
+    RentMyKitty.map = new google.maps.Map(view.$('#myMap')[0], mapOptions);
     this.getLocation();
-    this.setMarkers();    
+    this.petData();
   },
 
   getLocation: function() {
@@ -69,12 +74,12 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
                                            position.coords.longitude);
 
           var infowindow = new google.maps.InfoWindow({
-            map: Window.map,
+            map: RentMyKitty.map,
             position: pos,
             content: 'Location found using HTML5.'
           });
 
-          Window.map.setCenter(pos);
+          RentMyKitty.map.setCenter(pos);
         }, function() {
           handleNoGeolocation(true);
       });
@@ -92,46 +97,38 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     };
 
     var options = {
-      map: Window.map,
+      map: RentMyKitty.map,
       position: new google.maps.LatLng(window.current_location[0], window.current_location[1]),
       content: content
     };
 
     var infowindow = new google.maps.InfoWindow(options);
-    Window.map.setCenter(options.position);
+    RentMyKitty.map.setCenter(options.position);
   },
 
   
   petData: function() {
     var view = this;
-    // var data = [];
     var geo = new google.maps.Geocoder;
     
-    // this.collection.each(function(pet) {
-//       var address = pet.get('address') + " " + pet.get('city') + " " + pet.get('state') + " " + pet.get('zipcode');
-//       geo.geocode( { 'address': address}, function(results, status) {
-//         if (status == google.maps.GeocoderStatus.OK) {
-//           var coords = results[0].geometry.location;
-//           var lat = coords.k;
-//           var long = coords.B;
-//           var content = JST["pets/map_popup"];
-//           data.push([pet.get('name'), lat, long, 4, content({ pet: pet})]);
-//         }
-//       });
-//     });
-    var data = [
-          ['Bondi Beach', 37.75, -122.42, 4, "<div>Hello World!</div>"],
-          ['App Academy', 37.75, -122.45, 4,"<div>Hello World!</div>"],
-          ['Coogee Beach', 37.7, -122.41, 5,"<div>Hello World!</div>"],
-          ['Cronulla Beach', 37.8, -122.412, 3,"<div>Hello World!</div>"],
-          ['Manly Beach', 37.73, -122.38, 2,"<div>Hello World!</div>"],
-          ['Maroubra Beach', 37.9, -122.4, 1, "<div>Hello World!</div>"]
-        ];
-        return data;
+    this.collection.each(function(pet) {
+      var address = pet.get('address') + " " + pet.get('city') + " " + pet.get('state') + " " + pet.get('zipcode');
+      geo.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          var coords = results[0].geometry.location;
+          var lat = coords.k;
+          var long = coords.B;
+          var content = JST["pets/map_popup"];
+          var petData = [pet.get('name'), lat, long, 4, content({ pet: pet})];
+          view.setMarker(petData);
+        }
+      });
+    });
   },
   
-  setMarkers: function() {
-    var petData = this.petData();
+  setMarker: function(petData) {
+    
+    //set target image on map
     var image = {
        url: 'http://www.pixeljoint.com/files/icons/full/cat__r177950541.gif',
        // This marker is 20 pixels wide by 32 pixels tall.
@@ -141,29 +138,22 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
        // The anchor for this image is the base of the flagpole at 0,32.
        anchor: new google.maps.Point(0, 32)
     };
-     
-     for (var i = 0; i < petData.length; i++) {
-       var pet = petData[i];
-       var myLatLng = new google.maps.LatLng(pet[1], pet[2]);
-       var marker = new google.maps.Marker({
-           position: myLatLng,
-           map: Window.map,
-           icon: "http://media.eukanuba.com/en_us/data_root/_images/global/Puppy-Growth-Development-icon.png",
-           title: pet[0],
-           zIndex: pet[3],
-           draggable: false,   
-       });
-       
-       var infoWindow = new google.maps.InfoWindow({
-             content: pet[4],
-             maxWidth: 300
-       });
-       
-       google.maps.event.addListener(marker, 'click', function() {
-         infoWindow.open(Window.map, marker);
-       });
-
-     }
+   
+    var myLatLng = new google.maps.LatLng(petData[1], petData[2]);
+    var marker = new google.maps.Marker({
+       position: myLatLng,
+       map: RentMyKitty.map,
+       icon: image,
+       title: petData[0],
+       zIndex: petData[3],
+       draggable: false,   
+    });
+   
+    google.maps.event.addListener(marker, 'click', function() {
+      RentMyKitty.infoWindow.close();
+      RentMyKitty.infoWindow.setContent(petData[4]);
+      RentMyKitty.infoWindow.open(RentMyKitty.map, marker);
+    });
   },
 
   getCoords: function(address) {
@@ -184,9 +174,9 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     var address = this.$('#address').val();
     geo.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
-        Window.map.setCenter(results[0].geometry.location);
+        RentMyKitty.map.setCenter(results[0].geometry.location);
         var marker = new google.maps.Marker({
-            map: Window.map,
+            map: RentMyKitty.map,
             position: results[0].geometry.location
         });
       } else {
