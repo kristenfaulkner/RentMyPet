@@ -13,47 +13,24 @@ class PetRentalRequest < ActiveRecord::Base
       primary_key: :id
     )
   
-    def overlapping_pending_requests
-      PetRentalRequest.find_by_sql([
-        "SELECT
-           *
-         FROM
-           pet_rental_requests
-         WHERE
-           (? BETWEEN start_date AND end_date
-         OR
-           ? BETWEEN start_date AND end_date)
-         AND
-           pet_id = ?
-         AND
-           id != ?
-         AND status = 'Pending'
-           ", self.start_date, self.end_date, self.pet_id, self.id
-        ])
-    end
-
-    def overlapping_requests
-      PetRentalRequest.find_by_sql([
-        "SELECT
-           *
-         FROM
-           pet_rental_requests
-         WHERE
-           (? BETWEEN start_date AND end_date
-         OR
-           ? BETWEEN start_date AND end_date)
-         AND
-           pet_id = ?
-         AND
-           id != ?
-        AND status = 'Approved'
-           ", self.start_date, self.end_date, self.pet_id, self.id
-        ])
-    end
-
-    def overlapping_approved_requests
-      if overlapping_requests
-        errors.add(:overlap, "Overlapping Approved Rentals")
+  
+    def overlapping_rentals(newlyApprovedRental)
+      pending = PetRentalRequest.all.select({|rental| rental.status == "Pending"})
+      pending.each do |rental|
+        if rental.start_date.between?(newRental.start_date, newRental.end_date) || 
+           rental.end_date.between?(newRental.start_date, newRental.end_date)
+           rental.overlapping = true
+        end  
       end
     end
+    
+    def unavailable_dates
+      unavailable = []
+      PetRentalRequests.all.each do |rental| 
+        dates = (rental.start_Date...rental.end_date)
+        unavailable.push(dates)
+      end
+      return unavailable
+    end
+    
 end
