@@ -2,15 +2,16 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
   template: JST["pets/index"],
 
   initialize: function(options) {
+    window.view = this;
     this.listenTo(this.collection, "sync", this.render);
     this.listenTo(this.collection, 'sort', this.resetPets);
     this.listenTo(this.collection, "remove", this.removePet);
-    
     this.resetPets();
   },
   
   events: {
-    "click .wrapper" : "goToPetProfile"
+    "click .wrapper" : "goToPetProfile",
+    "click #codeAddress" : "codeAddress"
   },
   
   goToPetProfile: function(event) {
@@ -44,8 +45,6 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
   },
 
   render: function () {
-    var image1 = "http://media.eukanuba.com/en_us/data_root/_images/global/Puppy-Growth-Development-icon.png";
-    var image2 = 'http://fc09.deviantart.net/fs71/f/2011/306/2/6/kawaii_pixel_cat_icon_by_boogle_chan-d4evsi1.gif';
     var renderedContent = this.template({ pets: this.collection, view: this });
     this.$el.html(renderedContent);
     this.initializeMap();
@@ -54,29 +53,85 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
   },
   
   initializeMap: function(){
-    var view = this;
     var mapOptions = {
       center: new google.maps.LatLng(37.7833, -122.4167),
       zoom: 11
     };
     Window.map = new google.maps.Map(view.$('#myMap')[0], mapOptions);
-    view.setMarkers(view.petData(), Window.map);
+    this.getLocation();
+    this.setMarkers();    
   },
+
+  getLocation: function() {
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var pos = new google.maps.LatLng(position.coords.latitude,
+                                           position.coords.longitude);
+
+          var infowindow = new google.maps.InfoWindow({
+            map: Window.map,
+            position: pos,
+            content: 'Location found using HTML5.'
+          });
+
+          Window.map.setCenter(pos);
+        }, function() {
+          handleNoGeolocation(true);
+      });
+    } else {
+      // Browser doesn't support Geolocation
+      view.handleNoGeolocation(false);
+    }
+  },
+      
+  handleNoGeolocation: function(errorFlag) {
+    if (errorFlag) {
+      var content = 'Error: The Geolocation service failed.';
+    } else {
+      var content = 'Error: Your browser doesn\'t support geolocation.';
+    };
+
+    var options = {
+      map: Window.map,
+      position: new google.maps.LatLng(window.current_location[0], window.current_location[1]),
+      content: content
+    };
+
+    var infowindow = new google.maps.InfoWindow(options);
+    Window.map.setCenter(options.position);
+  },
+
   
   petData: function() {
-    var image1 = "http://media.eukanuba.com/en_us/data_root/_images/global/Puppy-Growth-Development-icon.png";
-    return [
-      ['Bondi Beach', 37.75, -122.42, 4, image1, '<div>This is my content</div>'],
-      ['App Academy', 37.75, -122.45, 4, image1, '<div>This is my content</div>'],
-      ['Coogee Beach', 37.7, -122.41, 5, image1, '<div>This is my content</div>'],
-      ['Cronulla Beach', 37.8, -122.412, 3, image1, '<div>This is my content</div>'],
-      ['Manly Beach', 37.73, -122.38, 2, image1, '<div>This is my content</div>'],
-      ['Maroubra Beach', 37.9, -122.4, 1, image1, '<div>This is my content</div>']
-    ];
+    var view = this;
+    // var data = [];
+    var geo = new google.maps.Geocoder;
+    
+    // this.collection.each(function(pet) {
+//       var address = pet.get('address') + " " + pet.get('city') + " " + pet.get('state') + " " + pet.get('zipcode');
+//       geo.geocode( { 'address': address}, function(results, status) {
+//         if (status == google.maps.GeocoderStatus.OK) {
+//           var coords = results[0].geometry.location;
+//           var lat = coords.k;
+//           var long = coords.B;
+//           var content = JST["pets/map_popup"];
+//           data.push([pet.get('name'), lat, long, 4, content({ pet: pet})]);
+//         }
+//       });
+//     });
+    var data = [
+          ['Bondi Beach', 37.75, -122.42, 4, "<div>Hello World!</div>"],
+          ['App Academy', 37.75, -122.45, 4,"<div>Hello World!</div>"],
+          ['Coogee Beach', 37.7, -122.41, 5,"<div>Hello World!</div>"],
+          ['Cronulla Beach', 37.8, -122.412, 3,"<div>Hello World!</div>"],
+          ['Manly Beach', 37.73, -122.38, 2,"<div>Hello World!</div>"],
+          ['Maroubra Beach', 37.9, -122.4, 1, "<div>Hello World!</div>"]
+        ];
+        return data;
   },
   
-  setMarkers: function(petData, map) {
-    
+  setMarkers: function() {
+    var petData = this.petData();
     var image = {
        url: 'http://www.pixeljoint.com/files/icons/full/cat__r177950541.gif',
        // This marker is 20 pixels wide by 32 pixels tall.
@@ -88,42 +143,57 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     };
      
      for (var i = 0; i < petData.length; i++) {
-       var beach = petData[i];
-       var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
+       var pet = petData[i];
+       var myLatLng = new google.maps.LatLng(pet[1], pet[2]);
        var marker = new google.maps.Marker({
            position: myLatLng,
            map: Window.map,
-           icon: beach[4],
-           title: beach[0],
-           zIndex: beach[3],
+           icon: "http://media.eukanuba.com/en_us/data_root/_images/global/Puppy-Growth-Development-icon.png",
+           title: pet[0],
+           zIndex: pet[3],
            draggable: false,   
+       });
+       
+       var infoWindow = new google.maps.InfoWindow({
+             content: pet[4],
+             maxWidth: 300
        });
        
        google.maps.event.addListener(marker, 'click', function() {
          infoWindow.open(Window.map, marker);
        });
 
-       var infoWindow = new google.maps.InfoWindow({
-             content: beach[5],
-             maxWidth: 300
-       });
      }
-  }// ,
-//
-//   codeAddress: function() {
-//     var address = this.$('address').val();
-//     geocoder.geocode( { 'address': address}, function(results, status) {
-//       if (status == google.maps.GeocoderStatus.OK) {
-//         Window.map.setCenter(results[0].geometry.location);
-//         var marker = new google.maps.Marker({
-//             map: Window.map,
-//             position: results[0].geometry.location
-//         });
-//       } else {
-//         alert('Geocode was not successful for the following reason: ' + status);
-//       }
-//     });
-//   }
+  },
+
+  getCoords: function(address) {
+    var geo = new google.maps.Geocoder;
+    geo.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        var coords = results[0].geometry.location;
+        console.log(coords.k, coords.B);
+        return coords;
+      } else {
+        return false;
+      }
+    });
+  },
   
+  codeAddress: function() {
+    var geo = new google.maps.Geocoder;
+    var address = this.$('#address').val();
+    geo.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        Window.map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: Window.map,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+
 
 });

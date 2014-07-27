@@ -38,6 +38,20 @@
       <input type="radio" name="pet[gender]" value="Male"> Male
       <input type="radio" name="pet[gender]" value="Female"> Female<br>
       <br>
+      
+  <label for="edit-pet-address">Address: </label>
+      <input type="text" name="pet[address]" class="edit-form-inputs" id="edit-pet-address"
+      placeholder="Address" value = <%= pet.escape('address') %>>
+  <label for="edit-pet-name">City: </label>
+      <input type="text" name="pet[city]" class="edit-form-inputs" id="edit-pet-city"
+      placeholder="City" value = <%= pet.escape('city') %>>
+  <label for="edit-pet-name">State: </label>
+      <input type="text" name="pet[state]" class="edit-form-inputs" id="edit-pet-state"
+      placeholder="State" value = <%= pet.escape('state') %>>
+  <label for="edit-pet-name">Zipcode: </label>
+      <input type="text" name="pet[zipcode]" class="edit-form-inputs" id="edit-pet-zipcode"
+      placeholder="Zipcode" value = <%= pet.escape('zipcode') %>>
+                      
   <label for="edit-pet-bio">Bio: </label>
       <textarea type="text" name="pet[bio]" id="edit-pet-bio"><%=pet.escape('bio') %></textarea>
       <br>

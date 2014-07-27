@@ -44,7 +44,7 @@ module Api
     private
   
     def pet_params
-      params.require(:pet).permit(:owner_id, :name, :type, :age, :color, :gender, :gender, :image_url, :bio, :animal)
+      params.require(:pet).permit(:owner_id, :name, :type, :age, :color, :gender, :gender, :image_url, :bio, :animal, :address, :city, :state, :zipcode)
     end
   end
 end
