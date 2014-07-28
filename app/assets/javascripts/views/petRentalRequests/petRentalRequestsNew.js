@@ -10,6 +10,7 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
   },
   
   initialize: function() {
+    view = this;
   },
   
   render: function () {
@@ -29,7 +30,7 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
     this.$('#datepicker').datepicker({
         minDate: new Date(),
         startDate: "today",
-        format: "mm/dd/yy",
+        // format: "mm/dd/yy",
         beforeShowDay: function(date) {
           var d = [date.getDate(), date.getMonth(), date.getFullYear()].join("-");
           return ($.inArray(d, unavailable) < 0);
@@ -74,27 +75,46 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
     }
   },
   
+  clearInputs: function() {
+    this.$("#start-date").val("");
+    this.$("#end-date").val("");
+  }, 
+  
+  checkExistingRequests: function(start, end) {
+    console.log(new Date(start))
+    console.log(new Date(end))
+    var view = this;
+    this.model.pet().petRentalRequests().forEach(function(rental) {
+      console.log(rental.get('start_date'))
+      console.log(rental.get('end_date'))
+      if (rental.get('start_date') === new Date(start) && rental.get('end_date') == new Date(end) && rental.get('owner_id') == window.current_user_id) {
+        alert("You already submitted a request for these dates");
+        view.clearInputs();
+        return false;
+      } 
+    });
+    return true;
+  },
+  
   submit: function (event) {
     event.preventDefault();
+    var view = this;
     var start_date = this.$("#start-date").val();
     var end_date = this.$("#end-date").val();
-    if (this.validDates(start_date, end_date)) {
-    var rental = this.model;
-    rental.set({start_date: new Date(start_date), end_date: new Date(end_date)});
-    rental.save({}, {
-      success: function () {
-        this.$('.message').html("");
-        rental.pet().petRentalRequests().add(rental);
-        alert("Your request has been submitted!");
-        this.$("#start-date").val("");
-        this.$("#end-date").val("");
-      }
-    });
-  }
+    if (this.validDates(start_date, end_date) && this.checkExistingRequests(start_date, end_date)) {
+      var rental = this.model;
+      rental.set({start_date: new Date(start_date), end_date: new Date(end_date)});
+      rental.save({}, {
+        success: function () {
+          view.$('.message').html("");
+          rental.pet().petRentalRequests().add(rental);
+          alert("Your request has been submitted!");
+          view.clearInputs();
+        }
+      });
+    }
   }
 });
 
-   
 
-
-   
+// new Date(new Date(this.$("#start-date").val()).getTime() + new Date().getTimezoneOffset()*60*1000)

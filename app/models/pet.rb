@@ -39,7 +39,7 @@ class Pet < ActiveRecord::Base
   def unavailable_dates
     unavailable = []
     self.pet_rental_requests.each do |rental| 
-      dates = (rental.start_Date...rental.end_date).to_a
+      dates = (rental.start_date...rental.end_date).to_a
       unavailable += dates
     end
     return unavailable

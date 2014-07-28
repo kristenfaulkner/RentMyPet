@@ -1,6 +1,9 @@
 RentMyKitty.Models.Pet = Backbone.Model.extend({
   urlRoot: "/api/pets",
   
+  initialize: function() {
+  },
+  
   petRentalRequests: function () {
     this._petRentalRequests = this._petRentalRequests ||
       new RentMyKitty.Collections.PetRentalRequests([], { pet: this });

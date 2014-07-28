@@ -1,24 +1,34 @@
+/*global RentMyKitty, google, JST */
+
 RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
   template: JST["maps/google_map"],
-
+  
   events: {
     "click #codeAddress" : "codeAddress"
   },
+
+  initialize: function() {
+    this.listenTo(this.collection, "sync add remove", this.render)
+  },
   
-  initializeMap: function(){
+  render: function() {
     var mapOptions = {
       center: new google.maps.LatLng(37.7833, -122.4167),
-      zoom: 11
+      zoom: 12
     };   
-    RentMyKitty.infoWindow = new google.maps.InfoWindow({
-         maxWidth: 300
-    });    
-    RentMyKitty.map = new google.maps.Map(view.$('#myMap')[0], mapOptions);
+    RentMyKitty.infowindow = new google.maps.InfoWindow({
+      minWidth: 100
+    })
+    var renderedContent = this.template();
+    this.$el.html(renderedContent);
+    RentMyKitty.map = new google.maps.Map(this.$('#myMap')[0], mapOptions);
     this.getLocation();
     this.petData();
+    return this;
   },
-
+  
   getLocation: function() {
+    var view = this;
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           var pos = new google.maps.LatLng(position.coords.latitude,
@@ -26,13 +36,12 @@ RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
 
           var infowindow = new google.maps.InfoWindow({
             map: RentMyKitty.map,
-            position: pos,
-            content: 'Location found using HTML5.'
+            position: pos
           });
 
           RentMyKitty.map.setCenter(pos);
         }, function() {
-          handleNoGeolocation(true);
+          view.handleNoGeolocation(true);
       });
     } else {
       // If browser doesn't support Geolocation
@@ -41,10 +50,11 @@ RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
   },
       
   handleNoGeolocation: function(errorFlag) {
+    var content;
     if (errorFlag) {
-      var content = 'Error: The Geolocation service failed.';
+      content = 'Error: The Geolocation service failed.';
     } else {
-      var content = 'Error: Your browser doesn\'t support geolocation.';
+      content = 'Error: Your browser doesn\'t support geolocation.';
     };
 
     var options = {
@@ -52,16 +62,12 @@ RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
       position: new google.maps.LatLng(window.current_location[0], window.current_location[1]),
       content: content
     };
-
-    var infowindow = new google.maps.InfoWindow(options);
-    RentMyKitty.map.setCenter(options.position);
   },
 
   
   petData: function() {
     var view = this;
     var geo = new google.maps.Geocoder;
-    
     this.collection.each(function(pet) {
       var address = pet.get('address') + " " + pet.get('city') + " " + pet.get('state') + " " + pet.get('zipcode');
       geo.geocode( { 'address': address}, function(results, status) {

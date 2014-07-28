@@ -8,18 +8,14 @@
           <a href="#/pets/<%= pet.escape('id')%>/edit">Edit Your Pet Information</a>
         <% } %>
         
-      <!-- </div> -->
-      <!-- <div class="col-xs-5" id="show-page-column2"> -->
+
         <p><strong>Pet Information</stong></p>
           <p>Pet ID: <%=pet.escape('id')%></p>
           <p>Name: <%=pet.escape('name')%></p>
           <p>Age: <%=pet.escape('age')%> years old</p>
           <p>Color: <%=pet.escape('color')%></p>
           <p>Gender: <%=pet.escape('gender')%></p>
-      <!-- </div>
-    </div>
-  </div>
-   -->
+
   
   <% if (window.current_user_id == pet.escape('owner_id')) { %>
     <div class="rental-request-list">
