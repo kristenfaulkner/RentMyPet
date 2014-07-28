@@ -20,7 +20,6 @@ RentMyKitty.Models.Pet = Backbone.Model.extend({
     var approved = this.petRentalRequests().filter(function(request) { 
       return request.get('status') === "Approved";
     });
-    console.log(approved);
     approved.forEach(function(res) {
       var current = res.get('start_date');
       while (current <= res.get('end_date')) {

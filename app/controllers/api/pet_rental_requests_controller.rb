@@ -27,7 +27,7 @@ module Api
       
       if @pet_rental_request.update(pet_rental_request_params)  
         @pet = Pet.find(params[:pet_id])
-        @pet.destroy_overlapping_requests(@pet_rental_requests)
+        @pet.destroy_overlapping_requests(@pet_rental_request)
          render json: @pet_rental_request     
       else
         render json: @pet_rental_request.errors.full_messages, status: :unprocessable_entity

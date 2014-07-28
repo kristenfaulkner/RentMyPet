@@ -23,8 +23,9 @@ RentMyKitty.Views.PetRentalRequestItem = Backbone.CompositeView.extend({
 
   denyRequest: function(event) {
     event.preventDefault();
-    alert("Rental Denied");
     this.model.destroy();
+    alert("Rental Denied");
+    
 
   },
   

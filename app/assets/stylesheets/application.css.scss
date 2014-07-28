@@ -189,6 +189,15 @@ h4 {
   width: auto;
 }
 
+.invalid-request {
+  color: red;
+  font-size: medium;
+}
+
+.valid-request {
+  color: green;
+  font-size: medium;
+}
 /////////////////////////////////////////  Edit Pet Page ///////////////////////////////////////// 
 
 #edit-form.my-class {

@@ -2,9 +2,12 @@ RentMyKitty.Views.PetsShowView = Backbone.CompositeView.extend({
   
   template: JST['pets/show'],
   
+  events: {
+    // "click" : "showMessage"
+  },
+  
+  
   initialize: function() {
-    window.pet = this.model;
-    
     this.listenTo(this.model, "sync", this.render);
     
     var newRental = new RentMyKitty.Models.PetRentalRequest({ pet_id: this.model.get('id') });
@@ -17,6 +20,39 @@ RentMyKitty.Views.PetsShowView = Backbone.CompositeView.extend({
     });
     this.addSubview(".rental-request-list", approvedRentals);
   },
+  
+  // validDates: function(start_date, end_date) {
+  //
+  //   var unavailable = this.model.unavailableDates();
+  //   var unavailable_times = unavailable.map(function(date) {
+  //     return date.getTime();
+  //   });
+  //   var start = new Date(start_date).getTime();
+  //   var end = new Date(end_date).getTime();
+  //   var tmp = true;
+  //   unavailable_times.forEach(function(date) {
+  //     if (date >= start && date <= end) {
+  //       tmp = false;
+  //     }
+  //   })
+  //   return tmp;
+  // },
+  //
+  // showMessage: function() {
+  //   var start = this.$("#start-date").val();
+  //   var end = this.$("#end-date").val();
+  //   if ((start == "") || (end == "")) {
+  //     this.$('.message').html("");
+  //   } else if (this.validDates(start, end)) {
+  //       this.$('.message').html(
+  //         "<div class='valid-request'><span class='glyphicon glyphicon-ok'></span> These dates are available</div>"
+  //       );
+  //   } else {
+  //     this.$('.message').html(
+  //       "<div class='invalid-request'>Sorry, those dates are unavailable. Please try again.</div>"
+  //     );
+  //   }
+  // },
   
   render: function () {
     var view = this;
