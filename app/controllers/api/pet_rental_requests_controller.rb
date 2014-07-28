@@ -5,13 +5,7 @@ module Api
       @pet_rental_request = PetRentalRequest.new(pet_rental_request_params)
       @pet_rental_request.requester_id = current_user.id
       if @pet_rental_request.save
-        # if @pet_rental_request.overlapping_requests.empty?
           render json: @pet_rental_request
-        # else
-        #   @pet_rental_request.destroy
-        #   flash[:notice] = "Sorry, Pet Taken On These Dates!"
-        #   render 'new'
-        # end
       else
         render json: @pet_rental_request.errors.full_messages, status: :unprocessable_entity
       end
@@ -32,6 +26,8 @@ module Api
       @pet_rental_request = PetRentalRequest.find(params[:id])
       
       if @pet_rental_request.update(pet_rental_request_params)  
+        @pet = Pet.find(params[:pet_id])
+        @pet.destroy_overlapping_requests(@pet_rental_requests)
          render json: @pet_rental_request     
       else
         render json: @pet_rental_request.errors.full_messages, status: :unprocessable_entity

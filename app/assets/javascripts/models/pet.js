@@ -16,18 +16,17 @@ RentMyKitty.Models.Pet = Backbone.Model.extend({
   },
     
   unavailableDates: function() {
-    debugger
     var dates = [];  
     var approved = this.petRentalRequests().filter(function(request) { 
-      return request.status === "Approved";
+      return request.get('status') === "Approved";
     });
     console.log(approved);
     approved.forEach(function(res) {
       var current = res.get('start_date');
       while (current <= res.get('end_date')) {
         dates.push(current);
-        var tmp = current.getTime() - 60*60*24*1000;
-        current = newDate(tmp);
+        var tmp = current.getTime() + 60*60*24*1000;
+        current = new Date(tmp);
       }
     });
   

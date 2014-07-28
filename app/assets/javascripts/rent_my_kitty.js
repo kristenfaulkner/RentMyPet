@@ -4,8 +4,6 @@ window.RentMyKitty = {
   Views: {},
   Routers: {},
   initialize: function() {
-    RentMyKitty.Collections.pets = new RentMyKitty.Collections.Pets();
-    
     new RentMyKitty.Routers.RentMyKittyRouter();
     Backbone.history.start();
   }

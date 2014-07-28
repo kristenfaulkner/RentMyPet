@@ -5,18 +5,28 @@ RentMyKitty.Collections.Pets = Backbone.Collection.extend({
 
   comparator: 'age',
 
-  getOrFetch: function (id) {
+  getOrFetch: function (id, fetch) {
+    if (_.isUndefined(fetch)) {
+      fetch = true;
+    }
+    
     var pets = this;
     var pet;
     if (pet = this.get(id)) {
-      pet.fetch();
+      if (fetch) {
+        pet.fetch();
+      }
     } else {
       pet = new RentMyKitty.Models.Pet({ id: id });
-      pet.fetch({
-        success: function () { pets.add(pet); }
-      });
+      pets.add(pet);
+
+      if (fetch) {
+        pet.fetch();
+      }
     }
     return pet;
   }
   
 });
+
+RentMyKitty.Collections.pets = new RentMyKitty.Collections.Pets();

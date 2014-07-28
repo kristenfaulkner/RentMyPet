@@ -26,4 +26,23 @@ class Pet < ActiveRecord::Base
   source: :requester_id
   )
 
+  def destroy_overlapping_requests(newRental)
+    pending = self.pet_rental_requests.select {|rental| rental.status == "Pending"}
+    pending.each do |rental|
+      if rental.start_date.between?(newRental.start_date, newRental.end_date) || 
+         rental.end_date.between?(newRental.start_date, newRental.end_date)
+         rental.destroy
+      end  
+    end
+  end
+
+  def unavailable_dates
+    unavailable = []
+    self.pet_rental_requests.each do |rental| 
+      dates = (rental.start_Date...rental.end_date).to_a
+      unavailable += dates
+    end
+    return unavailable
+  end
+  
 end

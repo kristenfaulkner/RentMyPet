@@ -1,37 +1,16 @@
 <div id="rental-request">
   
 <h1>Want to rent me? Fill out this form to request a rental!</h1>
-
-
-    
       
-      <div class="input-daterange" id="datepicker">
-        <form class="form-inline">
-        <label for='start-date'>Start Date: </label>
-          <input type="text" class="input-sm form-control" id="start-date"/>
-        <label for='end-date'>End Date: </label>
-          <input type="text" class="input-sm form-control" id="end-date"/>
-        <button type="submit" class="btn btn-primary" id="submit-rental-request" role="button">Rent me!
-        </form>
-      </div>
-      
-       <!--script to run the calendar code-->
-            <script type="text/javascript"> 
-            
-              var unavailable = Window.unavailableDates.map(function(date) {
-                return date.getTime();
-              
-              });
-            
-              $('#datepicker').datepicker({
-                  minDate: new Date(),
-                  format: "mm/dd/yy",
-                  beforeShowDay: function(date) {
-                    d = date.getTime();
-                    return ($.inArray(d, unavailable) < 0);
-                  }
-              });
-              
-            </script>
-</form>
+  <div class="input-daterange" id="datepicker">
+    <form class="form-inline">
+      <label for='start-date'>Start Date: </label>
+      <input type="text" class="input-sm form-control" id="start-date"/>
+  
+      <label for='end-date'>End Date: </label>
+      <input type="text" class="input-sm form-control" id="end-date"/>
+  
+      <button type="submit" class="btn btn-primary" id="submit-rental-request" role="button">Rent me!
+    </form>
+  </div>
 </div>

@@ -38,6 +38,9 @@ gem 'bcrypt', '~> 3.1.7'
 # for API keys
 gem 'figaro'
 
+# for images
+gem 'filepicker-rails'
+
 
 gem 'backbone-on-rails'
 gem 'bootstrap-sass'

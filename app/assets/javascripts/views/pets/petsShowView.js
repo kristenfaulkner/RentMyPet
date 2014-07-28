@@ -3,6 +3,8 @@ RentMyKitty.Views.PetsShowView = Backbone.CompositeView.extend({
   template: JST['pets/show'],
   
   initialize: function() {
+    window.pet = this.model;
+    
     this.listenTo(this.model, "sync", this.render);
     
     var newRental = new RentMyKitty.Models.PetRentalRequest({ pet_id: this.model.get('id') });
