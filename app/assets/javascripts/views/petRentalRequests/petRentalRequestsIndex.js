@@ -19,7 +19,7 @@ RentMyKitty.Views.PetRentalRequestsIndex = Backbone.CompositeView.extend({
   },
   
   addPetRentalRequest: function (request) {
-    var rentalItem = new RentMyKitty.Views.PetRentalRequestItem({ model: request});
+    var rentalItem = new RentMyKitty.Views.PetRentalRequestItem({ model: request, collection: this.collection});
     this.addSubview(".rental-request-list", rentalItem);
   },
   

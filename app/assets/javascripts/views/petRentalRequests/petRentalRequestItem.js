@@ -13,10 +13,13 @@ RentMyKitty.Views.PetRentalRequestItem = Backbone.CompositeView.extend({
   },
 
   approveRequest: function(event) {
+    var view = this;
     event.preventDefault();
     this.model.save({status: "Approved"}, {     
       success: function () {
         alert("Rental Approved");
+   
+        debugger
       }
     });
   },
@@ -25,8 +28,6 @@ RentMyKitty.Views.PetRentalRequestItem = Backbone.CompositeView.extend({
     event.preventDefault();
     this.model.destroy();
     alert("Rental Denied");
-    
-
   },
   
   render: function () {

@@ -32,6 +32,10 @@ RentMyKitty.Models.Pet = Backbone.Model.extend({
       }
     });
   
+    dates = dates.map(function (date) {
+      d = new Date(date);
+        return d.setMinutes(d.getTimezoneOffset());
+    });
     return dates;
   }
     // if (payload.owner) {

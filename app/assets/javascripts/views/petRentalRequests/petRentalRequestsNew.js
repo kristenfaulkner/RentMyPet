@@ -24,7 +24,8 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
   
   delegateDatepicker: function () {
     var unavailable = this.model.pet().unavailableDates().map(function(date) {
-      return [date.getDate(), date.getMonth(), date.getFullYear()].join("-");
+      d = new Date(date);
+      return [d.getDate(), d.getMonth(), d.getFullYear()].join("-");
     });
 
     this.$('#datepicker').datepicker({
@@ -43,13 +44,19 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
     this.delegateDatepicker();
   },
 
+  fixTimezone: function (date) {
+    var offset = date.getTimezoneOffset();
+    var newMinutes = date.setMinutes(offset);
+    return new Date(newMinutes);
+  },
+  
   validDates: function(start_date, end_date) {   
     var unavailable = this.model.pet().unavailableDates();
     var unavailable_times = unavailable.map(function(date) {
-      return date.getTime();
+      return (new Date(date)).getTime();
     });
-    var start = new Date(start_date).getTime();
-    var end = new Date(end_date).getTime();
+    var start = (new Date(start_date)).getTime();
+    var end = (new Date(end_date)).getTime();
     var tmp = true;
     unavailable_times.forEach(function(date) {
       if (date >= start && date <= end) {
@@ -81,19 +88,21 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
   }, 
   
   checkExistingRequests: function(start, end) {
-    console.log(new Date(start))
-    console.log(new Date(end))
     var view = this;
-    this.model.pet().petRentalRequests().forEach(function(rental) {
-      console.log(rental.get('start_date'))
-      console.log(rental.get('end_date'))
-      if (rental.get('start_date') === new Date(start) && rental.get('end_date') == new Date(end) && rental.get('owner_id') == window.current_user_id) {
-        alert("You already submitted a request for these dates");
-        view.clearInputs();
-        return false;
-      } 
-    });
-    return true;
+    var tmp = true;
+    this.model.pet().petRentalRequests().each(function(rental) {
+      var s = view.fixTimezone(rental.get('start_date'));
+      var e = view.fixTimezone(rental.get('end_date'));
+      if (s.getTime() === new Date(start).getTime() && 
+          e.getTime() == new Date(end).getTime() && 
+          rental.get('requester_id') == window.current_user_id) {
+
+            alert("You already submitted a request for these dates");
+            view.clearInputs();
+            tmp = false;
+          } 
+      });
+      return tmp
   },
   
   submit: function (event) {
@@ -102,7 +111,7 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
     var start_date = this.$("#start-date").val();
     var end_date = this.$("#end-date").val();
     if (this.validDates(start_date, end_date) && this.checkExistingRequests(start_date, end_date)) {
-      var rental = this.model;
+      var rental = new RentMyKitty.Models.PetRentalRequest({ pet_id: view.model.pet().get('id')});
       rental.set({start_date: new Date(start_date), end_date: new Date(end_date)});
       rental.save({}, {
         success: function () {
@@ -110,6 +119,9 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
           rental.pet().petRentalRequests().add(rental);
           alert("Your request has been submitted!");
           view.clearInputs();
+        },
+        error: function() {
+          alert("You have already submitted a request for these dates");
         }
       });
     }

@@ -17,17 +17,15 @@ module Api
     end
     
     def show
-      @pet= Pet.find(params[:pet_id])
+      @pet = Pet.find(params[:pet_id])
       @pet_rental_request = PetRentalRequest.find(params[:id])
       render json: @pet_rental_request
     end
     
     def update
       @pet_rental_request = PetRentalRequest.find(params[:id])
-      
-      if @pet_rental_request.update(pet_rental_request_params)  
-        @pet = Pet.find(params[:pet_id])
-        @pet.destroy_overlapping_requests(@pet_rental_request)
+      if @pet_rental_request.update(pet_rental_request_params)
+         @pet_rental_request.destroy_overlapping  
          render json: @pet_rental_request     
       else
         render json: @pet_rental_request.errors.full_messages, status: :unprocessable_entity
