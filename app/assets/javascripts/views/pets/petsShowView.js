@@ -11,9 +11,17 @@ RentMyKitty.Views.PetsShowView = Backbone.CompositeView.extend({
     
   
     var approvedRentals = new RentMyKitty.Views.PetRentalRequestsIndex({
-      collection: this.model.petRentalRequests()
+      collection: this.model.petRentalRequests(),
+      model: this.model
     });
     this.addSubview(".rental-request-list", approvedRentals);
+    
+    
+    var photos = new RentMyKitty.Views.ImagesIndex({
+      collection: this.model.images(),
+      model: this.model
+    });
+    this.addSubview(".images", photos);
   },
   
   render: function () {

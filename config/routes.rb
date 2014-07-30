@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     
   resources :users, :only => [:new]
   resource :session, :only => [:create, :destroy, :new]
-  
+
   
   # resources :pets do
   #   resources :pet_rental_requests do
@@ -14,10 +14,11 @@ Rails.application.routes.draw do
   #   end
   # end
     
-    
+  
   namespace :api, defaults: { format: :json } do
     resources :pets 
     resources :pet_rental_requests
+    resources :images
   end
   
   get '/about', :to => 'static_pages#about', as: :about_page

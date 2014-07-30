@@ -3,8 +3,10 @@ RentMyKitty.Views.PetRentalRequestItem = Backbone.CompositeView.extend({
   className: "rental-request-item",
   tagName: "tr",
 
-  initialize: function () {
+  initialize: function (options) {
+    this.pet = options.pet
     this.listenTo(this.model, "sync", this.render);
+    this.listenTo(this.model, "remove", this.render);
   },
 
   events: {
@@ -18,8 +20,8 @@ RentMyKitty.Views.PetRentalRequestItem = Backbone.CompositeView.extend({
     this.model.save({status: "Approved"}, {     
       success: function () {
         alert("Rental Approved");
-   
-        debugger
+        view.pet.fetch();
+        // view.collection.reset({data: {pet_id: view.model.pet_id}});
       }
     });
   },

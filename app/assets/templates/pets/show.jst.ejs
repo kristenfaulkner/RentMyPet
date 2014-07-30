@@ -1,28 +1,28 @@
 <a href="#">&lt&lt Back to All Pets</a>
 <div class="show-page"
-  <div class="show-page-row row">
-    <div id="show-page-column1">
-      <div>
-        <img src="<%= pet.escape('image_url')%>" class="show-page-photo">
+  <div id="show-page-profile-header">
+      <img src="<%= pet.escape('image_url')%>" class="show-page-feature-photo" />
+      
+      <div class="pet-information">
         <% if (window.current_user_id == pet.escape('owner_id')) { %>
-          <a href="#/pets/<%= pet.escape('id')%>/edit">Edit Your Pet Information</a>
+          <div>
+            <a href="#/pets/<%= pet.escape('id')%>/edit">Edit Your Pet Information</a>
+          </div>
         <% } %>
-        
 
-        <p><strong>Pet Information</stong></p>
-          <p>Pet ID: <%=pet.escape('id')%></p>
-          <p>Name: <%=pet.escape('name')%></p>
-          <p>Age: <%=pet.escape('age')%> years old</p>
-          <p>Color: <%=pet.escape('color')%></p>
-          <p>Gender: <%=pet.escape('gender')%></p>
-
-  
-  <% if (window.current_user_id == pet.escape('owner_id')) { %>
-    <div class="rental-request-list">
-    </div>
+        <p>Pet ID: <%=pet.escape('id')%></p>
+        <p>Name: <%=pet.escape('name')%></p>
+        <p>Age: <%=pet.escape('age')%> years old</p>
+        <p>Color: <%=pet.escape('color')%></p>
+        <p>Gender: <%=pet.escape('gender')%></p>
+      </div>
+  </div>
+  <% if (window.current_user_id != pet.escape('owner_id')) { %>
+    <div class="new-rental-request"></div>
   <% } else { %>
-    <div class="new-rental-request">
-    </div>
-  
+    <div class="rental-request-list"></div>
   <% } %>
+  <div class="images"></div>
 </div> 
+ 
+

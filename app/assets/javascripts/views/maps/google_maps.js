@@ -34,11 +34,11 @@ RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
           var pos = new google.maps.LatLng(position.coords.latitude,
                                            position.coords.longitude);
 
-          var infowindow = new google.maps.InfoWindow({
+          RentMyKitty.infowindow = new google.maps.InfoWindow({
             map: RentMyKitty.map,
-            position: pos
+            position: pos,
+            maxWidth: 200
           });
-
           RentMyKitty.map.setCenter(pos);
         }, function() {
           view.handleNoGeolocation(true);

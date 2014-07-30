@@ -1,6 +1,8 @@
 <% if (pet.escape('name')) { %>
   <h1>Edit Your Pet</h1>
-  <a href="#/pets/<%=pet.escape('id')%>">&lt&ltBack to <%=pet.escape('name')%>'s profile</a>
+  <a href="#/pets/<%=pet.escape('id')%>">
+    &lt&ltBack to <%=pet.escape('name')%>'s profile
+  </a>
 <% } else { %>
   <h1>Upload a new Pet</h1>
   <a href="/#">&lt&ltBack to Pets</a>
@@ -9,56 +11,105 @@
 <div id="edit-form">
   <form role="form" class="edit-pet-form">
 
-  <label for="edit-pet-name">Name: </label>
-      <input type="text" name="pet[name]" class="edit-form-inputs" id="edit-pet-name"
-      placeholder="name" value = <%= pet.escape('name') %>>
-  <label for="edit-pet-animal">Animal Type: </label>
-      <select name="pet[animal]" id="edit-pet-animal" value = <%= pet.escape('animal') %>>
-        <option value="cat">Cat</option>
-        <option value="dog">Dog</option>
-        <option value="other">Other</option>
-      </select><br>
-  <label for="edit-pet-age">Age: </label>
-      <input type="integer" name="pet[age]" class="edit-form-inputs" id="edit-pet-age"
-      placeholder="age" value = <%= pet.escape('age') %> >
-  <label for="edit-pet-image">Picture (url): </label>
-      <input type="text" name="pet[image_url]" class="edit-form-inputs" id="edit-pet-image"
-       value=<%= pet.escape('image_url') %>>
-  <label for="edit-pet-color">Color: </label>
-      <select name="pet[color]" id="edit-pet-color" value = <%= pet.escape('color') %>>
-        <option value="black">Black</option>
-        <option value="white">White</option>
-        <option value="gray">Gray</option>
-        <option value="yellow">Yellow</option>
-        <option value="red">Red</option>
-        <option value="polka_dot">Multicolored</option>
-      </select><br>
-      <br>
-  Gender:
-      <input type="radio" name="pet[gender]" value="Male" checked="<%= pet.get('gender') == "Male"%>"> Male
-      <input type="radio" name="pet[gender]" value="Female" checked="<%= pet.get('gender') == "Female"%>"> Female<br>
-      <br>
+    <label for="edit-pet-name">Name: </label>
+    <input type="text" 
+           name="pet[name]" 
+           class="edit-form-inputs" 
+           id="edit-pet-name"
+           placeholder="name" 
+           value = <%= pet.escape('name') %>>
+    <label for="edit-pet-animal">Animal Type: </label>
+    <select name="pet[animal]" 
+            id="edit-pet-animal" 
+            value = <%= pet.escape('animal') %>>
+      <option value="cat">Cat</option>
+      <option value="dog">Dog</option>
+      <option value="other">Other</option>
+    </select><br>
+    <label for="edit-pet-age">Age: </label>
+    <input type="integer" 
+           name="pet[age]" 
+           class="edit-form-inputs" 
+           id="edit-pet-age"
+           placeholder="age" 
+           value= <%= pet.escape('age') %> >        
+    <label for="edit-pet-color">Color: </label>
+    <select name="pet[color]" 
+            id="edit-pet-color" 
+            value = <%= pet.escape('color') %>>
+      <option value="black">Black</option>
+      <option value="white">White</option>
+      <option value="gray">Gray</option>
+      <option value="yellow">Yellow</option>
+      <option value="red">Red</option>
+      <option value="polka_dot">Multicolored</option>
+    </select><br>
+    <br>
+    Gender:
+    <input type="radio" 
+           name="pet[gender]" 
+           value="Male" 
+           checked="<%= pet.get('gender') == "Male"%>"> Male
+    <input type="radio" 
+           name="pet[gender]" 
+           value="Female" 
+           checked="<%= pet.get('gender') == "Female"%>"> Female<br>
+    <br>
       
-  <label for="edit-pet-address">Address: </label>
-      <input type="text" name="pet[address]" class="edit-form-inputs" id="edit-pet-address"
-      placeholder="Address" value = <%= pet.escape('address') %>>
-  <label for="edit-pet-name">City: </label>
-      <input type="text" name="pet[city]" class="edit-form-inputs" id="edit-pet-city"
-      placeholder="City" value = <%= pet.escape('city') %>>
-  <label for="edit-pet-name">State: </label>
-      <input type="text" name="pet[state]" class="edit-form-inputs" id="edit-pet-state"
-      placeholder="State" value = <%= pet.escape('state') %>>
-  <label for="edit-pet-name">Zipcode: </label>
-      <input type="text" name="pet[zipcode]" class="edit-form-inputs" id="edit-pet-zipcode"
-      placeholder="Zipcode" value = <%= pet.escape('zipcode') %>>
-                      
-  <label for="edit-pet-bio">Bio: </label>
-      <textarea type="text" name="pet[bio]" id="edit-pet-bio"><%=pet.escape('bio') %></textarea>
-      <br>
-      <input type="submit" value="Save pet" class="btn btn-primary" id="edit-pet-button">
-  </form>
+    <label for="edit-pet-address">Address: </label>
+    <input type="text" 
+           name="pet[address]" 
+           class="edit-form-inputs" 
+           id="edit-pet-address"
+           placeholder="Address" 
+           value = <%= pet.escape('address') %>>
+           
+    <label for="edit-pet-name">City: </label>
+    <input type="text" 
+           name="pet[city]" 
+           class="edit-form-inputs" 
+           id="edit-pet-city"
+           placeholder="City" 
+           value = <%= pet.escape('city') %>>
+           
+    <label for="edit-pet-name">State: </label>
+    <input type="text" 
+           name="pet[state]" 
+           class="edit-form-inputs" 
+           id="edit-pet-state"
+           placeholder="State" 
+           value = <%= pet.escape('state') %>>  
+           
+    <label for="edit-pet-name">Zipcode: </label>
+    <input type="text" 
+           name="pet[zipcode]" 
+           class="edit-form-inputs" 
+           id="edit-pet-zipcode"
+           placeholder="Zipcode" value= <%= pet.escape('zipcode') %>>                    
+    <label for="edit-pet-bio">Bio: </label>
+    <textarea type="text" 
+              name="pet[bio]" 
+              id="edit-pet-bio"><%=pet.escape('bio') %></textarea>
+    <br>
+    <br>
+    <!-- <div class="upload-images"></div> -->
+   <button id="add-image">Upload Photos</button>
+    <br>
+    <input type="submit" 
+           value="Save pet" 
+           class="btn btn-primary" 
+           id="edit-pet-button">
+    <!-- <button value="upload file"></button> -->
+    
+</form>
+
+
+   
+   
   <% if (pet.escape('name')) { %>
     <input type="submit" value="Delete pet" class="btn btn-danger" id="delete-pet-button">
   <% } %>
 </div>
 
+
+      

@@ -6,14 +6,27 @@ RentMyKitty.Models.Pet = Backbone.Model.extend({
   
   petRentalRequests: function () {
     this._petRentalRequests = this._petRentalRequests ||
-      new RentMyKitty.Collections.PetRentalRequests([], { pet: this });
+      new RentMyKitty.Collections.PetRentalRequests([], { pet: this});
     return this._petRentalRequests;
   },
 
+  images: function () {
+    this._images = this._images ||
+      new RentMyKitty.Collections.Images([], { pet: this});
+    return this._images;
+  },
+  
   parse: function (payload) {
     if (payload.pet_rental_requests) {
-      this.petRentalRequests().set(payload.pet_rental_requests, { parse: true });
+      this.petRentalRequests().set(payload.pet_rental_requests, {               parse: true 
+      });
       delete payload.pet_rental_requests;
+    }
+    if (payload.images) {
+      this.images().set(payload.images, {  
+         parse: true 
+      });
+      delete payload.images;
     }
     return payload;
   },

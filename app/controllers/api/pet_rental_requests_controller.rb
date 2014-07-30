@@ -10,12 +10,7 @@ module Api
         render json: @pet_rental_request.errors.full_messages, status: :unprocessable_entity
       end
     end
-  
-    def index
-      @pet= Pet.find(params[:pet_id])
-      render json: @pet.pet_rental_requests
-    end
-    
+   
     def show
       @pet = Pet.find(params[:pet_id])
       @pet_rental_request = PetRentalRequest.find(params[:id])

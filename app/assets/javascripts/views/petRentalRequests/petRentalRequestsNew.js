@@ -50,7 +50,7 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
     return new Date(newMinutes);
   },
   
-  validDates: function(start_date, end_date) {   
+  validDates: function(start_date, end_date) {
     var unavailable = this.model.pet().unavailableDates();
     var unavailable_times = unavailable.map(function(date) {
       return (new Date(date)).getTime();
@@ -87,30 +87,30 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
     this.$("#end-date").val("");
   }, 
   
-  checkExistingRequests: function(start, end) {
-    var view = this;
-    var tmp = true;
-    this.model.pet().petRentalRequests().each(function(rental) {
-      var s = view.fixTimezone(rental.get('start_date'));
-      var e = view.fixTimezone(rental.get('end_date'));
-      if (s.getTime() === new Date(start).getTime() && 
-          e.getTime() == new Date(end).getTime() && 
-          rental.get('requester_id') == window.current_user_id) {
-
-            alert("You already submitted a request for these dates");
-            view.clearInputs();
-            tmp = false;
-          } 
-      });
-      return tmp
-  },
+  // checkExistingRequests: function(start, end) {
+ //    var view = this;
+ //    var tmp = true;
+ //    this.model.pet().petRentalRequests().each(function(rental) {
+ //      var s = view.fixTimezone(rental.get('start_date'));
+ //      var e = view.fixTimezone(rental.get('end_date'));
+ //      if (s.getTime() === new Date(start).getTime() &&
+ //          e.getTime() == new Date(end).getTime() &&
+ //          rental.get('requester_id') == window.current_user_id) {
+ //
+ //            alert("You already submitted a request for these dates");
+ //            view.clearInputs();
+ //            tmp = false;
+ //          }
+ //      });
+ //      return tmp
+ //  },
   
   submit: function (event) {
     event.preventDefault();
     var view = this;
     var start_date = this.$("#start-date").val();
     var end_date = this.$("#end-date").val();
-    if (this.validDates(start_date, end_date) && this.checkExistingRequests(start_date, end_date)) {
+    if (this.validDates(start_date, end_date)) {
       var rental = new RentMyKitty.Models.PetRentalRequest({ pet_id: view.model.pet().get('id')});
       rental.set({start_date: new Date(start_date), end_date: new Date(end_date)});
       rental.save({}, {
@@ -120,9 +120,9 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
           alert("Your request has been submitted!");
           view.clearInputs();
         },
-        error: function() {
-          alert("You have already submitted a request for these dates");
-        }
+        // error: function() {
+//           alert("You have already submitted a request for these dates");
+//         }
       });
     }
   }
