@@ -113,25 +113,21 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
 //   },
 //
   filterDates: function() {
-    // alert("made it!");
- //    var view = this;
- //    var start = this.$("#start-date").val();
- //    var end = this.$("#end-date").val();
- //    if ((start == "") || (end == "")) {
- //      return;
- //    } else {
- //        view.collection.each(function(pet) {
- //          if (view.validDates(pet, start, end)) {
- //            debugger
- //            console.log(pet.get('name'));
- //            console.log(pet.unavailableDates());
- //            return;
- //          } else {
- //            alert("Invalid Dates!");
- //            view.removePet(pet);
- //          }
- //      });
- //    }
+    var view = this;
+    view.resetPets();
+    var view = this;
+    var start = this.$("#start-date").val();
+    var end = this.$("#end-date").val();
+    if ((start != "") && (end != "")) {
+        view.collection.each(function(pet) {
+           var fname = pet.get('name');
+           console.log(fname);
+          if (!pet.validDates(start, end)) {
+              console.log(pet);
+            view.removePet(pet);
+          }
+      });
+    }
   },
   
   filterColor: function(event) {

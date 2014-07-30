@@ -17,6 +17,7 @@ RentMyKitty.Models.Pet = Backbone.Model.extend({
   },
   
   parse: function (payload) {
+    var pet  = this;
     if (payload.pet_rental_requests) {
       this.petRentalRequests().set(payload.pet_rental_requests, { parse: true 
       });
@@ -53,6 +54,7 @@ RentMyKitty.Models.Pet = Backbone.Model.extend({
   },
   
   validDates: function(start_date, end_date) {
+
     var unavailable = this.unavailableDates();
     var unavailable_times = unavailable.map(function(date) {
       return (new Date(date)).getTime();
