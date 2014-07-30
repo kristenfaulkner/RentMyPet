@@ -22,4 +22,5 @@ RentMyKitty.Models.PetRentalRequest = Backbone.Model.extend({
     return payload;
   }
 
+
 });

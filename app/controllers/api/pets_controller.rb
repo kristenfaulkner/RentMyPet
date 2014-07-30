@@ -23,7 +23,7 @@ module Api
       @pets = Pet.all
       user_token = session[:session_token]
       @user = current_user
-      render json: @pets
+      render :index
     end
     
     def update
@@ -44,7 +44,7 @@ module Api
     private
   
     def pet_params
-      params.require(:pet).permit(:owner_id, :name, :type, :age, :color, :gender, :gender, :image_url, :bio, :animal, :address, :city, :state, :zipcode)
+      params.require(:pet).permit(:owner_id, :name, :age, :color, :gender, :gender, :image_url, :bio, :animal, :address, :city, :state, :zipcode)
     end
   end
 end

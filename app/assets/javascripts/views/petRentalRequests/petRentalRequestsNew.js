@@ -43,12 +43,6 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
     Backbone.View.prototype.delegateEvents.call(this);
     this.delegateDatepicker();
   },
-
-  fixTimezone: function (date) {
-    var offset = date.getTimezoneOffset();
-    var newMinutes = date.setMinutes(offset);
-    return new Date(newMinutes);
-  },
   
   validDates: function(start_date, end_date) {
     var unavailable = this.model.pet().unavailableDates();

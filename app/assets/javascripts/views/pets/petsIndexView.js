@@ -18,9 +18,12 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     "click #start-date" : "repositionCatsDown",
     "click #end-date" : "repositionCatsDown",
     "click #end-date" : "repositionCatsDown",
-    // "mouseover .input-daterange" : "repositionCatsDown",
-    "mouseover #pets" : "repositionCatsUp"
+    "mouseover #pets" : "repositionCatsUp",
+    "changeDate #start-date" : "filterDates",
+    "changeDate #end-date" : "filterDates",
+    "click .checkbox-inline" : "filterColor"
   },
+  
   
   goToPetProfile: function(event) {
     event.preventDefault();
@@ -39,6 +42,7 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     this.subviews('#pets').forEach(function(subview) {
       subview.remove();
     });
+    this._subviews["#pets"] = [];
     this.collection.each(function(pet) { that.addPet(pet) });
   },
 
@@ -90,7 +94,60 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
   
   repositionCatsUp: function() {
     this.$('#pets').css("margin-top", "0");
-  }
+  },
 
+  // validDates: function(pet, start_date, end_date) {
+//     var unavailable = pet.unavailableDates();
+//     var unavailable_times = unavailable.map(function(date) {
+//       return (new Date(date)).getTime();
+//     });
+//     var start = (new Date(start_date)).getTime();
+//     var end = (new Date(end_date)).getTime();
+//     var tmp = true;
+//     unavailable_times.forEach(function(date) {
+//       if (date >= start && date <= end) {
+//         tmp = false;
+//       }
+//     })
+//     return tmp;
+//   },
+//
+  filterDates: function() {
+    // alert("made it!");
+ //    var view = this;
+ //    var start = this.$("#start-date").val();
+ //    var end = this.$("#end-date").val();
+ //    if ((start == "") || (end == "")) {
+ //      return;
+ //    } else {
+ //        view.collection.each(function(pet) {
+ //          if (view.validDates(pet, start, end)) {
+ //            debugger
+ //            console.log(pet.get('name'));
+ //            console.log(pet.unavailableDates());
+ //            return;
+ //          } else {
+ //            alert("Invalid Dates!");
+ //            view.removePet(pet);
+ //          }
+ //      });
+ //    }
+  },
+  
+  filterColor: function(event) {
+    var view = this;
+    view.resetPets();
+    var checked = this.$(".checkbox-inline").filter(":checked").toArray();
+    if (checked.length > 0) {
+      var colors = [];  
+      checked.forEach(function(box) { colors.push(box.value)});
+      this.collection.each(function(pet) {
+        if ($.inArray(pet.get('color'), colors) < 0) {
+          view.removePet(pet)
+        }
+      });
+    }
+  }
+  
 });
 

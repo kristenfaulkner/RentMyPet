@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140729215320) do
+ActiveRecord::Schema.define(version: 20140730173548) do
 
   create_table "images", force: true do |t|
     t.string   "image_url",  null: false
@@ -23,11 +23,11 @@ ActiveRecord::Schema.define(version: 20140729215320) do
   create_table "pet_rental_requests", force: true do |t|
     t.integer  "pet_id",                           null: false
     t.integer  "requester_id",                     null: false
-    t.date     "start_date",                       null: false
-    t.date     "end_date",                         null: false
     t.string   "status",       default: "Pending", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "start_date"
+    t.datetime "end_date"
   end
 
   create_table "pets", force: true do |t|

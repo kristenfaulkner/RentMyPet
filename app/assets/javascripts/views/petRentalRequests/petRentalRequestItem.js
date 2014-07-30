@@ -32,7 +32,13 @@ RentMyKitty.Views.PetRentalRequestItem = Backbone.CompositeView.extend({
     alert("Rental Denied");
   },
   
+  fixTimezone: function() {
+    var s = this.model.get('start-date');
+    var e = this.model.get('end-date');
+  },
+  
   render: function () {
+    this.fixTimezone();
     var view = this;
     var renderedContent = view.template({
       model: view.model

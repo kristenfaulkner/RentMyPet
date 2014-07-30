@@ -18,7 +18,7 @@ RentMyKitty.Models.Pet = Backbone.Model.extend({
   
   parse: function (payload) {
     if (payload.pet_rental_requests) {
-      this.petRentalRequests().set(payload.pet_rental_requests, {               parse: true 
+      this.petRentalRequests().set(payload.pet_rental_requests, { parse: true 
       });
       delete payload.pet_rental_requests;
     }
@@ -50,6 +50,22 @@ RentMyKitty.Models.Pet = Backbone.Model.extend({
         return d.setMinutes(d.getTimezoneOffset());
     });
     return dates;
+  },
+  
+  validDates: function(start_date, end_date) {
+    var unavailable = this.unavailableDates();
+    var unavailable_times = unavailable.map(function(date) {
+      return (new Date(date)).getTime();
+    });
+    var start = (new Date(start_date)).getTime();
+    var end = (new Date(end_date)).getTime();
+    var tmp = true;
+    unavailable_times.forEach(function(date) {
+      if (date >= start && date <= end) {
+        tmp = false;
+      }
+    })
+    return tmp;
   }
     // if (payload.owner) {
     //   this.owner().set(payload.owner, { parse: true });

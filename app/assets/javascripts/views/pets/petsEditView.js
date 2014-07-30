@@ -9,6 +9,7 @@ RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
       model: this.model
     });
     this.addSubview(".edit-images", photos);
+    var view = this
     // this.$('img').append('<button id="delete-image" class = "btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>');
   },
   

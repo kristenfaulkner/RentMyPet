@@ -37,12 +37,12 @@
     <select name="pet[color]" 
             id="edit-pet-color" 
             value = <%= pet.escape('color') %>>
-      <option value="black">Black</option>
-      <option value="white">White</option>
-      <option value="gray">Gray</option>
-      <option value="yellow">Yellow</option>
-      <option value="red">Red</option>
-      <option value="polka_dot">Multicolored</option>
+       <option value="black">Black</option>
+       <option value="white">White</option>
+       <option value="gray">Gray</option>
+       <option value="yellow">Yellow</option>
+       <option value="brown">Brown</option>
+       <option value="other">Other</option>
     </select><br>
     <br>
     Gender:
@@ -104,7 +104,8 @@
 </form>
 
 
-   
+   <div class="edit-images">
+   </div>
    
   <% if (pet.escape('name')) { %>
     <input type="submit" value="Delete pet" class="btn btn-danger" id="delete-pet-button">

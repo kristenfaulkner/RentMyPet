@@ -5,7 +5,7 @@ RentMyKitty.Views.PetsShowView = Backbone.CompositeView.extend({
   initialize: function() {
     this.listenTo(this.model, "sync", this.render);
     
-    var newRental = new RentMyKitty.Models.PetRentalRequest({ pet_id: this.model.get('id') });
+    var newRental = new RentMyKitty.Models.PetRentalRequest({ pet_id: this.model.get('id'), pet: this.model });
     var newRentalView = new RentMyKitty.Views.PetRentalRequestsNew({ model: newRental });
     this.addSubview(".new-rental-request", newRentalView);
     

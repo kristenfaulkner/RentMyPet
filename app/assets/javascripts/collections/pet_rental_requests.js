@@ -18,7 +18,6 @@ RentMyKitty.Collections.PetRentalRequests = Backbone.Collection.extend({
         success: function () { petRentalRequestRentalRequests.add(petRentalRequest); }
       });
     }
-
     return petRentalRequest;
   }
 });
