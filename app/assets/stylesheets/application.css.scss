@@ -54,7 +54,13 @@ h4 {
   text-align: center;
 }
 
-
+#myModal {
+  position: absolute;
+  left: 40%;
+  width: 20%;
+  height: 20%;
+  top: 50%;
+}
 
 /////////////////////////////////////////  Contact & About Us
 .jumbotron {
@@ -296,7 +302,7 @@ h4 {
 }
 #myMap {
   position: absolute;
-  top: 100px;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -317,22 +323,45 @@ h4 {
   top: 75px;
   height: 150px;
   right: 0;
-  left: 43%;
-    font-size: large;
+  left: 45%;
+  align: center;
+  font-size: medium;
+  font-weight: 200;
 }
+
+input[type=checkbox] { 
+  -webkit-transform: scale(1.5,1.5);
+  -moz-transform: scale(1.5,1.5);
+  -o-transform: scale(1.5,1.5);
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: middle;
+}
+
+.filter-title {
+  font-size: large;
+  font-weight: 500;
+}
+
 #pets {
   position: absolute;
-  top: 300px;
+  top: 250px;
   bottom: 0;
   right: 0;
   left: 42%;
   overflow-y: scroll;
+//  transition: margin .25s linear 0s;
 }
 
+.filter {
+  display: inline-block;
+}
 .wrapper img {
   display: block;
-  max-width: 300px;
+  max-width: 315px;
   max-height: 240px;
+  align: center;
+  position: absolute;
   align: center;
 }
 

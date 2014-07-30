@@ -129,6 +129,7 @@ RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
   codeAddress: function() {
     var geo = new google.maps.Geocoder;
     var address = this.$('#address').val();
+    
     geo.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         RentMyKitty.map.setCenter(results[0].geometry.location);

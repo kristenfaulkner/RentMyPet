@@ -1,5 +1,5 @@
-RentMyKitty.Views.PetsNewView = Backbone.CompositeView.extend({
-  template: JST["pets/form"],
+RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
+  template: JST["pets/edit"],
 
   initialize: function() {
     this.listenTo(this.model, "sync", this.render);
@@ -44,10 +44,6 @@ RentMyKitty.Views.PetsNewView = Backbone.CompositeView.extend({
     });
   },
   
-  //
-  // deleteImage: function() {
-  //     <button id="delete-image" class = "btn btn-danger"><span class="glyphicon glyphicon-remove"></button>
-  // },
   
   render: function () {
     var renderedContent = this.template({ pet: this.model});
@@ -76,5 +72,3 @@ RentMyKitty.Views.PetsNewView = Backbone.CompositeView.extend({
   }
 });
 
-
-// set pet owner id to current user will happen on the rail's side?

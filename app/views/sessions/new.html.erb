@@ -1,12 +1,10 @@
 <%if signed_in?%>
-
-<% redirect_to current_user_url%>
-
-<%else%>
+  <% redirect_to current_user_url%>
+<%else%> 
 
 <div class="sign-in">
-<form action="<%= session_url %>" 
-      method="post" 
+<form action="<%= session_url %>"
+      method="post"
       role="form"
       id="sign-in">
   <input
@@ -36,9 +34,9 @@
 </form>
 
 
-<!-- form  for guest login -->
-<form action="<%= session_url %>" 
-      method="post" 
+
+ <form action="<%= session_url %>"
+      method="post"
       role="form"
       id="sign-in-guest">
   <input
@@ -52,5 +50,65 @@
 </form>
 </div>
 
-<%end%>
+<% end %>
+<!-- <button type="button" data-toggle="modal" data-target="#myModal">Launch modal</button>
+
+<div id="myModal" class="modal hide fade" tabindex="-1" data-width="500" role="dialog">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Sign In</h3>
+  </div>
+
+  <div class="modal-body">
+
+  <div class="sign-in">
+  <form action="<%= session_url %>"
+        method="post"
+        role="form"
+        id="sign-in">
+    <input
+       name="authenticity_token"
+       type="hidden"
+       value="<%= form_authenticity_token %>">
+
+    <label for="user_username">Username</label>
+    <input
+       id="user_username"
+       name="user[username]"
+       type="text"
+       Placeholder="username"
+       class="myclass">
+    <br>
+
+    <label for="user_password">Password</label>
+    <input
+       id="user_password"
+       name="user[password]"
+       type="password"
+       Placeholder="password"
+       class="myclass">
+    <br>
+    <button type="submit" class="btn btn-success" role="button" id="sign-in-button">Log In</button>
+  </form>
+
+
+
+  <!- <form action="<%= session_url %>"
+        method="post"
+        role="form"
+        id="sign-in-guest">
+    <input
+       name="authenticity_token"
+       type="hidden"
+       value="<%= form_authenticity_token %>">
+
+    <input name="user[username]" type="hidden" value="guestuser">
+    <input name="user[password]" type="hidden" value="guestuser">
+    <button type="submit" class="btn btn-primary" role="button" id="sign-in-guest-button">Guest Demo</button>
+  </form>
+  </div>
+    <!- Not yet a user? <a href="<%= new_user_url%>"> Sign up! </a> -->
+  <!-- </div>
+</div>  -->
+
 

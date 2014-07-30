@@ -9,11 +9,17 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     this.resetPets();
     mapView = new RentMyKitty.Views.GooleMapsView({ collection: this.collection });
     this.addSubview('.map', mapView);
+    
   },
   
   events: {
     "click .wrapper" : "goToPetProfile",
-    "click #codeAddress" : "codeAddress"
+    "click #codeAddress" : "codeAddress",
+    "click #start-date" : "repositionCatsDown",
+    "click #end-date" : "repositionCatsDown",
+    "click #end-date" : "repositionCatsDown",
+    // "mouseover .input-daterange" : "repositionCatsDown",
+    "mouseover #pets" : "repositionCatsUp"
   },
   
   goToPetProfile: function(event) {
@@ -61,8 +67,6 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     this.attachSubviews();
     return this;
   },
-
-  
   
   codeAddress: function() {
     var geo = new google.maps.Geocoder;
@@ -78,8 +82,15 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
         alert('Geocode was not successful for the following reason: ' + status);
       }
     });
-  }
+  },
 
+  repositionCatsDown: function() {
+    this.$('#pets').css("margin-top", "115px");
+  },
+  
+  repositionCatsUp: function() {
+    this.$('#pets').css("margin-top", "0");
+  }
 
 });
 
