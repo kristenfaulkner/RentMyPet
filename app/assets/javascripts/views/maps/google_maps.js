@@ -16,9 +16,11 @@ RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
       center: new google.maps.LatLng(37.7833, -122.4167),
       zoom: 12
     };   
+    
     RentMyKitty.infowindow = new google.maps.InfoWindow({
       minWidth: 100
-    })
+    });
+    
     var renderedContent = this.template();
     this.$el.html(renderedContent);
     RentMyKitty.map = new google.maps.Map(this.$('#myMap')[0], mapOptions);

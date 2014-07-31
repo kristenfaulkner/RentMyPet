@@ -19,9 +19,9 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     "click #end-date" : "repositionCatsDown",
     "click #end-date" : "repositionCatsDown",
     "mouseover #pets" : "repositionCatsUp",
-    "changeDate #start-date" : "filterDates",
-    "changeDate #end-date" : "filterDates",
-    "click .checkbox-inline" : "filterColor"
+    "change .filter-date" : "filterDates",
+    "change .filter-color" : "filterColor",
+    "change .filter-gender" : "filterGender"
   },
   
   
@@ -130,15 +130,30 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     }
   },
   
-  filterColor: function(event) {
+  filterColor: function() {
     var view = this;
     view.resetPets();
-    var checked = this.$(".checkbox-inline").filter(":checked").toArray();
+    var checked = this.$(".filter-color").filter(":checked").toArray();
     if (checked.length > 0) {
       var colors = [];  
       checked.forEach(function(box) { colors.push(box.value)});
       this.collection.each(function(pet) {
         if ($.inArray(pet.get('color'), colors) < 0) {
+          view.removePet(pet)
+        }
+      });
+    }
+  },
+  
+  filterGender: function() {
+    var view = this;
+    view.resetPets();
+    var checked = this.$(".filter-gender").filter(":checked").toArray();
+    if (checked.length > 0) {
+      var genders = [];  
+      checked.forEach(function(box) { genders.push(box.value)});
+      this.collection.each(function(pet) {
+        if ($.inArray(pet.get('gender'), genders) < 0) {
           view.removePet(pet)
         }
       });

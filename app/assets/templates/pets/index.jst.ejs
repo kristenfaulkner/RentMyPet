@@ -9,9 +9,9 @@
           <span style="display:inline-block;" class= "filter-title">Dates</span>
           <span style="display:inline-block; width: 20px" class="filter-title"></span>
     			<div class="input-daterange input-group calendar-left filter" id="index-datepicker">
-    				<input type="text" class="input-sm form-control" id="start-date" placeholder="Start Date">
+    				<input type="text" class="input-sm form-control filter-date" id="start-date" placeholder="Start Date">
     				<span class="input-group-addon">to</span>
-    				<input type="text" class="input-sm form-control" id="end-date" placeholder="end Date">
+    				<input type="text" class="input-sm form-control filter-date" id="end-date" placeholder="end Date">
     			</div>
           
           <span style="display:inline-block; width: 80px;"></span>
@@ -22,15 +22,7 @@
             <input id="address" type="textbox" value="San Francisco, CA" class="form-control">
           </div>
 
-<!--    <hr>
-    <div class="row filter gender">
-      <span style="display:inline-block; width: 10px;"></span>
-      <span style="display:inline-block; width: 70px;" class= "filter-title">&nbsp &nbsp Gender</span>
-      <span style="display:inline-block; width: 10px;"></span>
-      <input type="checkbox" class="checkbox-inline" value="Male">Male
-      <input type="checkbox" class="checkbox-inline" value="Female">Female
-    </div>
-    <span style="display:inline-block; width: 100px;" class= "filter-title"></span>
+<!--    
 
     <div class="row filter animal">
       <span style="display:inline-block; width: 70px;" class= "filter-title">&nbsp &nbsp Animal</span>
@@ -43,13 +35,22 @@
     <hr>
     <div class="row filter color">
     	<span style="display:inline-block; width: 70px;" class= "filter-title">&nbsp &nbsp Color</span>
-    	<input type="checkbox" class="checkbox-inline" value="black">Black
-    	<input type="checkbox" class="checkbox-inline" value="gray">Gray
-    	<input type="checkbox" class="checkbox-inline" value="white">White
-      <input type="checkbox" class="checkbox-inline" value="brown"> Brown
-    	<input type="checkbox" class="checkbox-inline" value="yellow">Yellow
-    	<input type="checkbox" class="checkbox-inline" value="red">Other
+    	<input type="checkbox" class="checkbox-inline filter-color" value="black">Black
+    	<input type="checkbox" class="checkbox-inline filter-color" value="gray">Gray
+    	<input type="checkbox" class="checkbox-inline filter-color" value="white">White
+      <input type="checkbox" class="checkbox-inline filter-color" value="brown"> Brown
+    	<input type="checkbox" class="checkbox-inline filter-color" value="yellow">Yellow
+    	<input type="checkbox" class="checkbox-inline filter-color" value="red">Other
     </div>
+    
+    <hr>
+    <div class="row filter gender">
+      <span style="display:inline-block;" class="filter-title"> &nbsp &nbsp Gender</span>
+      <input type="checkbox" class="checkbox-inline filter-gender" value="Male">Male
+      <input type="checkbox" class="checkbox-inline filter-gender" value="Female">Female
+  
+    </div>
+        
     <span style="display:inline-block; width: 50px;" class= "filter-title"></span>
     <button id="codeAddress" class="btn btn-warning">Find Pets</button>
     		</div>
