@@ -25,7 +25,6 @@ body {
   font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
   background: fixed;        
   color: gray;
-  margin-left: 20px;
 }
 
 body.homepage {
@@ -38,11 +37,6 @@ body.homepage {
 
 .user-drop-down {
   margin-top: 8px;
-}
-
-.footer {
-  background-color: gray;
-  height: 150px;
 }
 
 h1 {
@@ -63,10 +57,60 @@ h4 {
 }
 
 hr {
-  margin: 15px;
+  margin: 20px;
 }
 
+.footer {
+  background-color: gray;
+  height: 150px;
+  color: white;
+}
 
+.footer-content {
+  width: 80%;
+  position: absolute;
+  left: 10%;
+  padding: 30px;
+  align: center;
+  color: white;
+}
+
+.footer-content a {
+  color: white;
+}
+
+.footer-content ul {
+  list-style: none;
+}
+
+.social li button {
+  display: inline-block;
+}
+
+.social-media {
+  position: absolute;
+  font-size: 20px;
+  margin-left: 10px;
+  left: 90%;
+}
+
+.fa {
+  height: 18px;
+  width: 18px;
+}
+
+.sign-in-page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+    background: url('http://www.hdwallpapers.in/walls/cute_kitten-wide.jpg') no-repeat center center !important;
+    background-size: cover;
+    -webkit-background-size: cover;
+}
+
+.navbar {
+  margin: 0;
+}
 /////////////////////////////////////////  Contact & About Us
 .jumbotron {
   margin-top: 0;
@@ -305,7 +349,7 @@ hr {
 
 .map {
   position: absolute;
-  width: 40%;
+  width: 38%;
   top: 50px;
   bottom: 0;
   left: 0;
@@ -334,7 +378,7 @@ hr {
   top: 75px;
   height: 150px;
   right: 0;
-  left: 45%;
+  left: 50%;
   align: center;
   font-size: medium;
   font-weight: 200;
@@ -351,15 +395,15 @@ input[type=checkbox] {
 
 .filter-title {
   font-size: large;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 #pets {
   position: absolute;
-  top: 250px;
+  top: 300px;
   bottom: 0;
   right: 0;
-  left: 42%;
+  left: 39%;
   overflow-y: scroll;
 //  transition: margin .25s linear 0s;
 }
@@ -388,8 +432,8 @@ input[type=checkbox] {
 }
 
 .wrapper {
-  width: 340px;
-  height: 355px;
+  width: 360px;
+  height: 360px;
   padding: 10px;
   background: white;
 //  border-radius: 5px;
@@ -422,14 +466,16 @@ input[type=checkbox] {
   width: 300px;
   height: 230px;
   align: center;
-  margin-left: 5px;
-  margin-right: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
 }
 
 
-p#name {
+.wrapper p {
   font-size: medium;
   margin-top: 15px;
+  margin-left: 10%;
 }
 
 .ribbon-green {
@@ -482,7 +528,14 @@ p#name {
   font-weight: 100;
 }
 
+.gm-style-iw {
+  max-height: 300px;
+  max-width: 400px;
+}
 
+.infowindow {
+  text-align: center;
+}
 /////////////////////////////////////////  Unknown ///////////////////////////////////////// 
 
 

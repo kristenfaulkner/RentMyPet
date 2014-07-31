@@ -41,7 +41,6 @@ gem 'figaro'
 # for images
 gem 'filepicker-rails'
 
-
 gem 'backbone-on-rails'
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'

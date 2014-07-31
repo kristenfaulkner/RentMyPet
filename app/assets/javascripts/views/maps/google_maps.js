@@ -1,5 +1,3 @@
-/*global RentMyKitty, google, JST */
-
 RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
   template: JST["maps/google_map"],
   
@@ -16,14 +14,16 @@ RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
       center: new google.maps.LatLng(37.7833, -122.4167),
       zoom: 12
     };   
-    
-    RentMyKitty.infowindow = new google.maps.InfoWindow({
-      minWidth: 100
-    });
+  
     
     var renderedContent = this.template();
     this.$el.html(renderedContent);
     RentMyKitty.map = new google.maps.Map(this.$('#myMap')[0], mapOptions);
+    
+    RentMyKitty.infowindow = new google.maps.InfoWindow({
+      map: RentMyKitty.map
+    });
+    
     this.getLocation();
     this.petData();
     return this;
@@ -38,8 +38,7 @@ RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
 
           RentMyKitty.infowindow = new google.maps.InfoWindow({
             map: RentMyKitty.map,
-            position: pos,
-            maxWidth: 200
+            position: pos
           });
           RentMyKitty.map.setCenter(pos);
         }, function() {
@@ -77,7 +76,7 @@ RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
           var coords = results[0].geometry.location;
           var lat = coords.k;
           var long = coords.B;
-          var content = JST["pets/map_popup"];
+          var content = JST["maps/infowindow"];
           var petData = [pet.get('name'), lat, long, 4, content({ pet: pet})];
           view.setMarker(petData);
         }
@@ -107,11 +106,11 @@ RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
        zIndex: petData[3],
        draggable: false,   
     });
-   
+
     google.maps.event.addListener(marker, 'click', function() {
-      RentMyKitty.infoWindow.close();
-      RentMyKitty.infoWindow.setContent(petData[4]);
-      RentMyKitty.infoWindow.open(RentMyKitty.map, marker);
+      RentMyKitty.infowindow.close();
+      RentMyKitty.infowindow.setContent(petData[4]);
+      RentMyKitty.infowindow.open(RentMyKitty.map, marker);
     });
   },
 

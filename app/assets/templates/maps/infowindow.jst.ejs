@@ -1,0 +1,16 @@
+<div class="infowindow">
+  <h3><%= pet.escape('name') %></h3>
+
+  <img src="<%= pet.escape('image_url')%>" height="75" width="75">
+
+
+    <p>Age: <%= pet.escape('age') %></p> 
+    <p>Gender: <%= pet.escape('gender') %></p>
+
+    <p><%= pet.escape('address') %>
+    <p><%= pet.escape('city') %>
+    <%= pet.escape('state') %>
+    <%= pet.escape('zip') %></p>
+
+  <a href="#/pets/<%=pet.escape('id')%>">Rent me now!</p>
+</div>

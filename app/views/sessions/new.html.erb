@@ -2,6 +2,7 @@
   <% redirect_to current_user_url%>
 <%else%> 
 
+<div class= "sign-in-page">
 <div class="sign-in">
 <form action="<%= session_url %>"
       method="post"
@@ -49,7 +50,7 @@
   <button type="submit" class="btn btn-primary" role="button" id="sign-in-guest-button">Guest Demo</button>
 </form>
 </div>
-
+</div>
 <% end %>
 <!-- <button type="button" data-toggle="modal" data-target="#myModal">Launch modal</button>
 
