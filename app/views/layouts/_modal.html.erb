@@ -1,0 +1,119 @@
+
+<!--<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Launch demo modal</button> -->
+
+<div class="modal fade" id="myModal" tabindex="-1"  role = "dialog">      
+  <div class="modal-body">
+    <div class="sign-in">
+      <form action="<%= session_url %>"
+        method="post"
+        role="form"
+        id="sign-in">
+        <input
+        name="authenticity_token"
+        type="hidden"
+        value="<%= form_authenticity_token %>"> 
+
+        <label for="user_username">Username</label>
+        <input
+        id="user_username"
+        name="user[username]"
+        type="text"
+        Placeholder="username"
+        class="myclass">
+        <br>
+
+        <label for="user_password">Password</label>
+        <input
+        id="user_password"
+        name="user[password]"
+        type="password"
+        Placeholder="password"
+        class="myclass">
+        <br>
+        <button type="submit" class="btn btn-success" role="button" id="sign-in-button">Log In</button>
+      </form>
+          
+          
+      <form action="<%= session_url %>"
+        method="post"
+        role="form"
+        id="sign-in-guest">
+        <input
+        name="authenticity_token"
+        type="hidden"
+        value="<%= form_authenticity_token %>">
+
+        <input name="user[username]" type="hidden" value="guestuser">
+        <input name="user[password]" type="hidden" value="guestuser">
+        <button type="submit" class="btn btn-primary" role="button" id="sign-in-guest-button">Guest Demo</button>
+      </form>
+    </div>
+
+</div>
+  <div class="sign-up-footer">
+      Not yet a user? <a href="<%= new_user_url %>"> Sign up! </a>
+  </div>
+</div>
+
+
+
+<!-- 
+
+<div id="myModal" class="modal hide fade" tabindex="-1" data-width="500" role="dialog">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Sign In</h3>
+  </div>
+
+  <div class="modal-body">
+
+  <div class="sign-in">
+  <form action="<%= session_url %>"
+        method="post"
+        role="form"
+        id="sign-in">
+    <input
+       name="authenticity_token"
+       type="hidden"
+       value="<%= form_authenticity_token %>">
+
+    <label for="user_username">Username</label>
+    <input
+       id="user_username"
+       name="user[username]"
+       type="text"
+       Placeholder="username"
+       class="myclass">
+    <br>
+
+    <label for="user_password">Password</label>
+    <input
+       id="user_password"
+       name="user[password]"
+       type="password"
+       Placeholder="password"
+       class="myclass">
+    <br>
+    <button type="submit" class="btn btn-success" role="button" id="sign-in-button">Log In</button>
+  </form>
+
+
+
+  <form action="<%= session_url %>"
+        method="post"
+        role="form"
+        id="sign-in-guest">
+    <input
+       name="authenticity_token"
+       type="hidden"
+       value="<%= form_authenticity_token %>">
+
+    <input name="user[username]" type="hidden" value="guestuser">
+    <input name="user[password]" type="hidden" value="guestuser">
+    <button type="submit" class="btn btn-primary" role="button" id="sign-in-guest-button">Guest Demo</button>
+  </form>
+  </div>
+     Not yet a user? <a href="<%= new_user_url%>"> Sign up! </a>
+</div>
+</div> -->
+

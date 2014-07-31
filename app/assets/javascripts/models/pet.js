@@ -73,6 +73,7 @@ RentMyKitty.Models.Pet = Backbone.Model.extend({
     //   this.owner().set(payload.owner, { parse: true });
     //   delete payload.owner;
     // }
+  
 
   // owner: function() {
   //   this._owner = this._owner || new RentMyKitty.Models.User({}, { id: this.owner_id, pet: this })

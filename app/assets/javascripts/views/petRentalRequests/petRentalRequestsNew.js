@@ -101,6 +101,10 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
   
   submit: function (event) {
     event.preventDefault();
+    if (!window.current_user) {
+      $('#myModal').modal({keyboard: true, backdrop: true}); 
+      // $('#myModal').modal("show");
+    } else {
     var view = this;
     var start_date = this.$("#start-date").val();
     var end_date = this.$("#end-date").val();
@@ -120,7 +124,5 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
       });
     }
   }
+}
 });
-
-
-// new Date(new Date(this.$("#start-date").val()).getTime() + new Date().getTimezoneOffset()*60*1000)

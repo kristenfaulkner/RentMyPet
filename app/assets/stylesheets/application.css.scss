@@ -20,11 +20,21 @@
 @import "font-awesome";
 
 ///////////////////////////////////////////  Root Page  ///////////////////////////////////////// 
+
+
+.alert {
+  margin-bottom: 0;
+}
+html {
+ height: 100%; 
+}
 body {
   padding-top: 50px;
   font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
   background: fixed;        
   color: gray;
+  position: relative;
+  min-height: 100%;
 }
 
 body.homepage {
@@ -60,19 +70,20 @@ hr {
   margin: 20px;
 }
 
+
+
 .footer {
   background-color: gray;
   height: 150px;
   color: white;
+  position: absolute;
+  top: 100%;
+  width: 100%;
 }
 
 .footer-content {
-  width: 80%;
-  position: absolute;
-  left: 10%;
-  padding: 30px;
-  align: center;
   color: white;
+  padding: 30px;
 }
 
 .footer-content a {
@@ -88,10 +99,7 @@ hr {
 }
 
 .social-media {
-  position: absolute;
   font-size: 20px;
-  margin-left: 10px;
-  left: 90%;
 }
 
 .fa {
@@ -103,6 +111,15 @@ hr {
   position: absolute;
   width: 100%;
   height: 100%;
+    background: url('http://www.hdwallpapers.in/walls/cute_kitten-wide.jpg') no-repeat center center !important;
+    background-size: cover;
+    -webkit-background-size: cover;
+}
+
+.sign-up-page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     background: url('http://www.hdwallpapers.in/walls/cute_kitten-wide.jpg') no-repeat center center !important;
     background-size: cover;
     -webkit-background-size: cover;
@@ -161,18 +178,42 @@ hr {
   top: 50%;
   left: 50%;
   margin-left: -325px;
-  margin-top: 20px;
+//  margin-top: 20px;
   padding: 30px;
   font-size: x-large;
 }
 
 
+.sign-up {
+  height: 250px;
+  width: 500px;
+  background-color: rgba(255,255,255,0.4);
+  border: thin light gray;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -325px;
+//  margin-top: 20px;
+  padding: 30px;
+  font-size: x-large;
+}
+
+#sign-up-button {
+  position: absolute;
+  position: absolute;
+  left: 18%;
+  margin-right: 10px;
+  bottom: 22%;
+  width: 150px;
+  height: 50px;
+}
+
 #sign-in-button {
   position: absolute;
   position: absolute;
-  left: 20%;
+  left: 18%;
   margin-right: 10px;
-  bottom: 20%;
+  bottom: 22%;
   width: 150px;
   height: 50px;
 }
@@ -199,14 +240,25 @@ hr {
 
 #sign-in-guest-button {
   position: absolute;
-  left: 50%;
+  left: 48%;
   margin-left: 10px;
-  bottom: 20%;
+  bottom: 22%;
   width: 150px;
   height: 50px;
 }
 
+.sign-up-footer {
+  position: absolute;
+  bottom: 15px;
+  left: 33%;
+  font-size: medium;
+}
 ///////////////////////////////////////// Pet Show Page ///////////////////////////////////////// 
+#back-to-index {
+  position: absolute;
+  left: 10%;
+}
+
 #approve-request, #deny-request {
   display: inline-block;
 }
@@ -290,14 +342,10 @@ hr {
 }
 
 .edit-pet-form {
-  height: 4000px;
+
   width: 500px;
   border: thin light gray;
-  position: absolute;
-  top: 15%;
-  left: 45%;
-  margin-left: -325px;
-  margin-top: 20px;
+  margin: 20px auto;
   padding: 30px;
   font-size: large;
 }
@@ -574,5 +622,23 @@ h2 {
 
 .cat-team {
   text-align: bottom;
+}
+
+
+
+#myModal {
+  height: 280px;
+  width: 475px;
+  background-color: rgba(255,255,255, .9);
+  border: thin light gray;
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  margin-left: -125px;
+//  margin-top: 20px;
+  padding-left: 10%;
+  font-size: large;
+//  text-align: center;
+  overflow: hidden;
 }
 

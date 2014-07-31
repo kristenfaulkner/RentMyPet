@@ -19,9 +19,9 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     "click #end-date" : "repositionCatsDown",
     "click #end-date" : "repositionCatsDown",
     "mouseover #pets" : "repositionCatsUp",
-    "change .filter-date" : "filterDates",
-    "change .filter-color" : "filterColor",
-    "change .filter-gender" : "filterGender"
+    "change .filter-date" : "filter",
+    "change .filter-color" : "filter",
+    "change .filter-gender" : "filter"
   },
   
   
@@ -112,79 +112,31 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
 //     return tmp;
 //   },
 //
-  filterDates: function() {
-    var view = this;
-    view.resetPets();
-    var view = this;
-    var start = this.$("#start-date").val();
-    var end = this.$("#end-date").val();
-    if ((start != "") && (end != "")) {
-        view.collection.each(function(pet) {
-           var fname = pet.get('name');
-           console.log(fname);
-          if (!pet.validDates(start, end)) {
-              console.log(pet);
-            view.removePet(pet);
-          }
-      });
+ 
+filter: function() {
+  this.resetPets();
+  var view = this;
+
+  var start = this.$("#start-date").val();
+  var end = this.$("#end-date").val();
+
+  var genders = [];
+  var checkedGenders = this.$(".filter-gender").filter(":checked").toArray();
+  checkedGenders.forEach(function(box) { genders.push(box.value)});
+
+  var colors = [];
+  var checkedColors = this.$(".filter-color").filter(":checked").toArray();
+  checkedColors.forEach(function(box) { colors.push(box.value)});
+
+  this.collection.each(function(pet) {
+    if ((checkedColors.length > 0) && ($.inArray(pet.get('color'), colors) < 0)) {
+      view.removePet(pet)
+    } else if ((checkedGenders.length > 0) && ($.inArray(pet.get('gender'), genders) < 0)) {
+        view.removePet(pet)
+    } else if (((start != "") && (end != "")) && (!pet.validDates(start, end))) {
+          view.removePet(pet);
     }
-  },
-  
-  filterColor: function() {
-    var view = this;
-    view.resetPets();
-    var checked = this.$(".filter-color").filter(":checked").toArray();
-    if (checked.length > 0) {
-      var colors = [];  
-      checked.forEach(function(box) { colors.push(box.value)});
-      this.collection.each(function(pet) {
-        if ($.inArray(pet.get('color'), colors) < 0) {
-          view.removePet(pet)
-        }
-      });
-    }
-  },
-  
-  filterGender: function() {
-    var view = this;
-    view.resetPets();
-    var checked = this.$(".filter-gender").filter(":checked").toArray();
-    if (checked.length > 0) {
-      var genders = [];  
-      checked.forEach(function(box) { genders.push(box.value)});
-      this.collection.each(function(pet) {
-        if ($.inArray(pet.get('gender'), genders) < 0) {
-          view.removePet(pet)
-        }
-      });
-    }
-  }
-  
+  });
+}
+
 });
-
-
-// filter: function() {
-//   this.resetPets();
-//   var view = this;
-//
-//   var start = this.$("#start-date").val();
-//   var end = this.$("#end-date").val();
-//
-//   var genders = [];
-//   var checkedGenders = this.$(".filter-gender").filter(":checked").toArray();
-//   checkedGender.forEach(function(box) { genders.push(box.value)});
-//
-//   var colors = [];
-//   var checkedColors = this.$(".filter-color").filter(":checked").toArray();
-//   checkedColors.forEach(function(box) { colors.push(box.value)});
-//
-//   this.collection.each(function(pet) {
-//     if ((checkedColors.length > 0) && ($.inArray(pet.get('color'), colors))) < 0) {
-//       view.removePet(pet)
-//     } else if ((checkedGenders.length > 0) && ($.inArray(pet.get('gender'), genders))) < 0) {
-//         view.removePet(pet)
-//     } else if (((start != "") && (end != "")) && (!pet.validDates(start, end))) {
-//           view.removePet(pet);
-//     }
-//   }
-// }

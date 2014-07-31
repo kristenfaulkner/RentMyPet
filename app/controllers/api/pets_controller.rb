@@ -16,7 +16,7 @@ module Api
       @pet = Pet.find(params[:id])
       @pet_rental_requests = PetRentalRequest.all.select {|rental| rental.pet_id == @pet.id }
       @user = current_user
-      render json: @pet, include: [:owner, :pet_rental_requests, :images]
+      # render json: @pet, include: [:owner, :pet_rental_requests, :images]
     end
     
     def index
