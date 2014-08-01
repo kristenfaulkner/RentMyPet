@@ -6,6 +6,7 @@
     json.end_date pet_rental_request.end_date
     json.status pet_rental_request.status
     json.requester pet_rental_request.requester.username
+    json.pet_id pet_rental_request.pet_id
   end
   
   json.images @pet.images do |image|

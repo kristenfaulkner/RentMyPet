@@ -19,6 +19,7 @@ RentMyKitty.Views.PetRentalRequestItem = Backbone.CompositeView.extend({
     event.preventDefault();
     this.model.save({status: "Approved"}, {     
       success: function () {
+        debugger
         alert("Rental Approved");
         view.pet.fetch();
         // view.collection.reset({data: {pet_id: view.model.pet_id}});

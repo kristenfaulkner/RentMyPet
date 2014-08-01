@@ -110,6 +110,7 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
     var start_date = this.$("#start-date").val();
     var end_date = this.$("#end-date").val();
     if (this.validDates(start_date, end_date)) {
+      debugger
       var rental = new RentMyKitty.Models.PetRentalRequest({ pet_id: view.model.pet_id});
       rental.set({start_date: new Date(start_date), end_date: new Date(end_date)});
       rental.save({}, {
