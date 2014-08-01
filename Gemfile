@@ -46,7 +46,7 @@ gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'jquery-ui-rails'
 
-
+gem 'rails_12factor'
 
 group :development do
   gem 'annotate'
@@ -55,3 +55,4 @@ group :development do
   gem 'pry-rails'
   gem 'debugger'
 end
+
