@@ -3,7 +3,7 @@ RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
 
   initialize: function() {
     this.listenTo(this.model, "sync", this.render);
-    
+    debugger
     var photos = new RentMyKitty.Views.ImagesIndex({
       collection: this.model.images(),
       model: this.model
@@ -15,7 +15,7 @@ RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
   
   events: {
     "submit form.edit-pet-form": "submit",
-    "click button#delete-pet-button" : "deletePet",
+    "click button#delete-pet" : "deletePet",
     "click button#add-image": "addImage",
     "click delete-image" : "deleteImage"
   },
@@ -32,9 +32,6 @@ RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
              pet_id: view.model.id,
              image_url: blob.url
            });
-            
-           console.log(blob.url);
-           console.log(view.model.id);
            
            newImage.save({}, {
              success: function () {
@@ -55,7 +52,9 @@ RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
 
   deletePet: function(event) {
     event.preventDefault();
+    alert("clicked me!");
     this.model.destroy();
+    Backbone.history.navigate("#", { trigger: true });
   },
   
   submit: function (event) {

@@ -1,0 +1,57 @@
+
+<!--<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#signUpModal">Launch demo modal</button> -->
+
+<div class="modal fade" id="signUpModal" tabindex="-1"  role="dialog">      
+  <div class="modal-body">
+    <div class="sign-up">
+      <form action="<%= users_url %>"
+        method="post"
+        role="form"
+        id="sign-up">
+        <input
+        name="authenticity_token"
+        type="hidden"
+        value="<%= form_authenticity_token %>"> 
+
+        <label for="user_username">Username</label>
+        <input
+        id="user_username"
+        name="user[username]"
+        type="text"
+        Placeholder="username"
+        class="myclass">
+        <br>
+
+        <label for="user_password">Password</label>
+        <input
+        id="user_password"
+        name="user[password]"
+        type="password"
+        Placeholder="password"
+        class="myclass">
+        <br>
+        <button type="submit" class="btn btn-success" role="button" id="sign-up-button">Sign Up</button>
+      </form>
+          
+          
+      <form action="<%= session_url %>"
+        method="post"
+        role="form"
+        id="sign-up-guest">
+        <input
+        name="authenticity_token"
+        type="hidden"
+        value="<%= form_authenticity_token %>">
+
+        <input name="user[username]" type="hidden" value="guestuser">
+        <input name="user[password]" type="hidden" value="guestuser">
+        <button type="submit" class="btn btn-primary" role="button" id="sign-up-guest-button">Guest Demo</button>
+      </form>
+    </div>
+
+</div>
+  <div class="sign-up-footer">
+      Already a user? <button class="btn btn-link" id="navbar-sign-in" data-toggle="modal" data-target="#myModal">Sign In</button>
+  </div>
+</div>
+

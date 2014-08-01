@@ -16,6 +16,7 @@ module Api
       @pet = Pet.find(params[:id])
       @pet_rental_requests = PetRentalRequest.all.select {|rental| rental.pet_id == @pet.id }
       @user = current_user
+      render :show
       # render json: @pet, include: [:owner, :pet_rental_requests, :images]
     end
     
@@ -24,6 +25,11 @@ module Api
       user_token = session[:session_token]
       @user = current_user
       render :index
+    end
+    
+    def edit
+      @pet = Pet.find(params[:id])
+      render :edit
     end
     
     def update
@@ -44,7 +50,7 @@ module Api
     private
   
     def pet_params
-      params.require(:pet).permit(:owner_id, :name, :age, :color, :gender, :gender, :image_url, :bio, :animal, :address, :city, :state, :zipcode)
+      params.require(:pet).permit(:owner_id, :name, :age, :color, :gender, :gender, :image_url, :bio, :animal, :address, :city, :state, :zipcode, :lat, :lng)
     end
   end
 end

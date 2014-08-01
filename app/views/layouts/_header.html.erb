@@ -48,8 +48,10 @@
       </div>
       <% else %>
       <ul class="nav navbar-nav">
-        <li><%= link_to "Sign in", new_session_url %></li>
-        <li><%= link_to "Sign up", new_user_url %></li>
+        <li><button class="btn btn-link" id="navbar-sign-in" data-toggle="modal" data-target="#myModal">Sign In</li>
+        <li><button class="btn btn-link" id="navbar-sign-up" data-toggle="modal" data-target="#signUpModal">Sign Up</li>
+        <!-- <li><%= link_to "Sign in", new_session_url %></li>
+        <li><%= link_to "Sign up", new_user_url %></li> -->
       </ul>
       <% end %>
     </div>
@@ -68,3 +70,10 @@
   </div>
 <% end %>
 
+<script>
+    $(function() {
+      $('.modal-backdrop').on('click', function() { $('#myModal').modal("hide") })
+      // $('#navbar-sign-in').on('click', function() { $('#myModal').modal("show") })
+      
+    });
+</script>

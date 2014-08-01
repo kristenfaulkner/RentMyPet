@@ -1,0 +1,18 @@
+  renderMarkers: function(collection) {
+    this.clearMarkers();
+    var view = this;
+    var geo = new google.maps.Geocoder;
+    collection.forEach(function(pet) {
+      var address = pet.get('address') + " " + pet.get('city') + " " + pet.get('state') + " " + pet.get('zipcode');
+      geo.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          var coords = results[0].geometry.location;
+          var lat = coords.k;
+          var long = coords.B;
+          var content = JST["maps/infowindow"];
+          var data = [pet.get('name'), lat, long, 4, content({ pet: pet})];
+          view.setMarker(data);
+        }
+      });
+    });
+  },

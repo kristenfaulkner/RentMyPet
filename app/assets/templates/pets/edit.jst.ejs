@@ -1,69 +1,65 @@
 
-  <h1>Edit Your Pet</h1>
-  <a href="#/pets/<%=pet.escape('id')%>">
-    &lt&ltBack to <%=pet.escape('name')%>'s profile
-  </a>
+   <h1>Edit <%=pet.escape('name')%>'s profile</h1>
+   <a href="#/pets/<%=pet.escape('id')%>">
+     &lt&ltBack to <%=pet.escape('name')%>'s profile
+   </a>
 
+ <div id="edit-form">
+   <form role="form" class="edit-pet-form">
 
-
-
-  <!-- <%= render partial: "pets/form" %> -->
-<div id="edit-form">
-  <form role="form" class="edit-pet-form">
-
-    <label for="edit-pet-name">Name: </label>
-    <input type="text"
-           name="pet[name]"
-           class="edit-form-inputs"
-           id="edit-pet-name"
-           placeholder="name"
-           value = <%= pet.escape('name') %>>
-    <label for="edit-pet-animal">Animal Type: </label>
-    <select name="pet[animal]"
-            id="edit-pet-animal"
-            value = <%= pet.escape('animal')%>>
-      <option value="cat">Cat</option>
-      <option value="dog">Dog</option>
-      <option value="other">Other</option>
-    </select><br>
-    <label for="edit-pet-age">Age: </label>
-    <input type="integer"
-           name="pet[age]"
-           class="edit-form-inputs"
-           id="edit-pet-age"
-           placeholder="age"
-           value= <%= pet.escape('age') %>>
-    <label for="edit-pet-color">Color: </label>
-    <select name="pet[color]"
-            id="edit-pet-color"
-            value = <%= pet.escape('color') %>>
-      <option value="black">Black</option>
-      <option value="white">White</option>
-      <option value="gray">Gray</option>
-      <option value="yellow">Yellow</option>
-      <option value="brown">Brown</option>
-      <option value="other">Other</option>
-    </select><br>
-    <br>
-    Gender:
-    <input type="radio"
-           name="pet[gender]"
-           value="Male" 
-           checked="<%= pet.get('gender') == "Male"%>"> Male
-    <input type="radio" 
-           name="pet[gender]" 
-           value="Female" 
-           checked="<%= pet.get('gender') == "Female"%>"> Female<br>
-    <br>
+     <label for="edit-pet-name">Name: </label>
+     <input type="text"
+            name="pet[name]"
+            class="edit-form-inputs"
+            id="edit-pet-name"
+            placeholder="name"
+            value = <%= pet.escape('name') %>>
+     <label for="edit-pet-animal">Animal Type: </label>
+     <select name="pet[animal]"
+             id="edit-pet-animal"
+             value = <%= pet.escape('animal')%>>
+       <option value="cat">Cat</option>
+       <option value="dog">Dog</option>
+       <option value="other">Other</option>
+     </select><br>
+     <label for="edit-pet-age">Age: </label>
+     <input type="integer"
+            name="pet[age]"
+            class="edit-form-inputs"
+            id="edit-pet-age"
+            placeholder="age"
+            value= <%= pet.escape('age') %>>
+     <label for="edit-pet-color">Color: </label>
+     <select name="pet[color]"
+             id="edit-pet-color"
+             value = <%= pet.escape('color') %>>
+       <option value="black">Black</option>
+       <option value="white">White</option>
+       <option value="gray">Gray</option>
+       <option value="yellow">Yellow</option>
+       <option value="brown">Brown</option>
+       <option value="other">Other</option>
+     </select><br>
+     <br>
+     Gender:
+     <input type="radio"
+            name="pet[gender]"
+            value="Male" 
+            checked="<%= pet.get('gender') == "Male"%>"> Male
+     <input type="radio" 
+            name="pet[gender]" 
+            value="Female" 
+            checked="<%= pet.get('gender') == "Female"%>"> Female<br>
+     <br>
       
-    <label for="edit-pet-address">Address: </label>
-    <input type="text" 
-           name="pet[address]" 
-           class="edit-form-inputs" 
-           id="edit-pet-address"
-           placeholder="Address" 
-           value = <%= pet.escape('address') %>>
-           
+     <label for="edit-pet-address">Address: </label>
+     <input type="text" 
+            name="pet[address]" 
+            class="edit-form-inputs" 
+            id="edit-pet-address"
+            placeholder="Address" 
+            value = <%= pet.escape('address') %>>
+ 
     <label for="edit-pet-name">City: </label>
     <input type="text" 
            name="pet[city]" 
@@ -104,10 +100,10 @@
 </form>
 
 
-   
+<button class="btn btn-danger" id="delete-pet">Delete pet</button>
+
 <div class="edit-images"></div>   
 
-    <input type="submit" value="Delete pet" class="btn btn-danger" id="delete-pet-button">
 
 </div>
 

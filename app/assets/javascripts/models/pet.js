@@ -19,14 +19,11 @@ RentMyKitty.Models.Pet = Backbone.Model.extend({
   parse: function (payload) {
     var pet  = this;
     if (payload.pet_rental_requests) {
-      this.petRentalRequests().set(payload.pet_rental_requests, { parse: true 
-      });
+      this.petRentalRequests().set(payload.pet_rental_requests, { parse: true });
       delete payload.pet_rental_requests;
     }
     if (payload.images) {
-      this.images().set(payload.images, {  
-         parse: true 
-      });
+      this.images().set(payload.images, {  parse: true });
       delete payload.images;
     }
     return payload;

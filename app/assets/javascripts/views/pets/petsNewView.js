@@ -31,13 +31,13 @@ RentMyKitty.Views.PetsNewView = Backbone.CompositeView.extend({
              pet_id: view.model.id,
              image_url: blob.url
            });
-            
-           console.log(blob.url);
-           console.log(view.model.id);
            
            newImage.save({}, {
              success: function () {
                view.model.images().add(newImage);
+               view.model.set('image_url', newImage.get('image_url'));
+               view.model.save();
+               
              }
            });
       });
@@ -50,7 +50,7 @@ RentMyKitty.Views.PetsNewView = Backbone.CompositeView.extend({
   // },
   
   render: function () {
-    var renderedContent = this.template({ pet: this.model});
+    var renderedContent = this.template({ pet: this.model });
     this.$el.html(renderedContent);
     this.attachSubviews();
     return this;
@@ -61,20 +61,40 @@ RentMyKitty.Views.PetsNewView = Backbone.CompositeView.extend({
     this.model.destroy();
   },
   
+  setLatLng: function(params, callback) {
+    var pet = this.model
+    var geo = new google.maps.Geocoder;
+    
+    var myAddress = params["pet"]["address"] + " " + params["pet"]['city'] + " " + params["pet"]['state'] + " " + params["pet"]['zipcode'];
+      console.log(myAddress);
+      geo.geocode( { 'address': myAddress}, function(results, status) {
+        debugger
+        if (status == google.maps.GeocoderStatus.OK) {
+          var coords = results[0].geometry.location;
+          var lat = coords.k;
+          var long = coords.B;
+          params["pet"]['lat'] = lat;
+          params["pet"]['lng'] = long;
+        }
+        callback(params);
+      });
+      
+  },
+  
   submit: function (event) {
     var view = this;
     event.preventDefault();
     var params = $(event.currentTarget).serializeJSON();
-    view.model.save((params["pet"]), {
-      success: function () {
-        RentMyKitty.Collections.pets.add(view.model);
-        view.addImage();
-        var path = "#/pets/" + view.model.get('id');
-        Backbone.history.navigate(path, { trigger: true });
-      }
+    params = this.setLatLng(params, function(params) {
+      view.model.save((params["pet"]), {
+        success: function () {
+          RentMyKitty.Collections.pets.add(view.model);
+          view.addImage();
+          var path = "#/pets/" + view.model.get('id');
+          Backbone.history.navigate(path, { trigger: true });
+        }
+      });
     });
+    
   }
 });
-
-
-// set pet owner id to current user will happen on the rail's side?

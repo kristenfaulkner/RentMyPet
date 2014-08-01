@@ -1,5 +1,5 @@
 json.array! @pets do |pet| 
-  json.extract! pet, :id, :owner_id, :name, :age, :color, :gender, :gender, :image_url, :bio, :animal, :address, :city, :state, :zipcode
+  json.extract! pet, :id, :owner_id, :name, :age, :color, :gender, :gender, :image_url, :bio, :animal, :address, :city, :state, :zipcode, :lat, :lng
 
 
   json.pet_rental_requests pet.pet_rental_requests do |pet_rental_request|

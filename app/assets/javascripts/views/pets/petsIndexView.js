@@ -7,9 +7,9 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     this.listenTo(this.collection, 'sort', this.resetPets);
     this.listenTo(this.collection, "remove", this.removePet);
     this.resetPets();
-    // this.filtered = new RentMyKitty.Collections.Pets(this.filteredSubviews());
-    mapView = new RentMyKitty.Views.GooleMapsView({ collection: this.collection});
-    this.addSubview('.map', mapView);   
+    this.filtered = new RentMyKitty.Collections.Pets(this.filteredSubviews());
+    this.mapView = new RentMyKitty.Views.GooleMapsView({ collection: this.collection});
+    this.addSubview('.map', this.mapView);
   },
   
   events: {
@@ -25,7 +25,10 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
   },
   
   filteredSubviews: function() {
-    this.subviews('#pets').map(function(subview) { return subview.model})
+    var view = this
+    var filter = [];
+    this.subviews('#pets').forEach(function(subview) {  filter.push(subview.model)})
+    return filter;
   },
   
   goToPetProfile: function(event) {
@@ -47,6 +50,7 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     });
     this._subviews["#pets"] = [];
     this.collection.each(function(pet) { that.addPet(pet) });
+
   },
 
   delegateDatepicker: function() {
@@ -76,19 +80,22 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
   },
   
   codeAddress: function() {
-    var geo = new google.maps.Geocoder;
-    var address = this.$('#address').val();
-    geo.geocode( { 'address': address}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        RentMyKitty.map.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-            map: RentMyKitty.map,
-            position: results[0].geometry.location
-        });
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
-      }
-    });
+    this.mapView.codeAddress(myAddress);
+    var myAddress = this.$('#address').val();
+    // var geo = new google.maps.Geocoder;
+//     console.log(geo);
+//     var myAddress = this.$('#address').val();
+//     geo.geocode( { 'address': myAddress}, function(results, status) {
+//       if (status == google.maps.GeocoderStatus.OK) {
+//         RentMyKitty.map.setCenter(results[0].geometry.location);
+//         // var marker = new google.maps.Marker({
+//  //            map: RentMyKitty.map,
+//  //            position: results[0].geometry.location
+//  //        });
+//       } else {
+//         alert('Geocode was not successful for the following reason: ' + status);
+//       }
+//     });
   },
 
   repositionCatsDown: function() {
@@ -140,6 +147,7 @@ filter: function() {
           view.removePet(pet);
     }
   });
+  this.mapView.renderMarkers(this.filteredSubviews());
 }
 
 });

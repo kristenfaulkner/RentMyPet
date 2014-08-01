@@ -6,14 +6,13 @@ RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
   },
 
   initialize: function(options) {
-    this.filteredPets = options.filteredPets;
-    this.listenTo(this.collection, "sync add remove", this.render)
     this.markers = [];
+    this.listenTo(this.collection, "sync", this.render);
   },
   
   render: function() {
     var mapOptions = {
-      center: new google.maps.LatLng(37.7833, -122.4167),
+      center: new google.maps.LatLng(37.7250, -122.4450),
       zoom: 12
     };   
   
@@ -62,32 +61,40 @@ RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
 
     var options = {
       map: RentMyKitty.map,
-      position: new google.maps.LatLng(window.current_location[0], window.current_location[1]),
+      position: new google.maps.LatLng(37.7250, -122.4450),
       content: content
     };
   },
 
-  
-  petData: function() {
+  clearMarkers: function() {
+    this.markers.forEach(function(marker) {
+      marker.setMap(null);
+    });
+    this.markers = [];
+  },
+
+  renderMarkers: function(collection) {
+    this.clearMarkers();
+    var content = JST["maps/infowindow"];
     var view = this;
-    var geo = new google.maps.Geocoder;
+    collection.forEach(function(pet) {
+      var data = [pet.get('name'), pet.get('lat'), pet.get('lng'), 4, content({ pet: pet})];
+      view.setMarker(data);
+    })
+  },
+
+  petData: function() {
+    var content = JST["maps/infowindow"];
+    var view = this;
+    debugger
     this.collection.each(function(pet) {
-      var address = pet.get('address') + " " + pet.get('city') + " " + pet.get('state') + " " + pet.get('zipcode');
-      geo.geocode( { 'address': address}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-          var coords = results[0].geometry.location;
-          var lat = coords.k;
-          var long = coords.B;
-          var content = JST["maps/infowindow"];
-          var petData = [pet.get('name'), lat, long, 4, content({ pet: pet})];
-          view.setMarker(petData);
-        }
-      });
+      var petData = [pet.get('name'), pet.get('lat'), pet.get('lng'), 4, content({ pet: pet})];
+      view.setMarker(petData);
     });
   },
   
-  setMarker: function(petData) {
-    
+  setMarker: function(data) {
+    console.log("setting marker");
     //set target image on map
     var image = {
        url: 'http://www.pixeljoint.com/files/icons/full/cat__r177950541.gif',
@@ -99,21 +106,25 @@ RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
        anchor: new google.maps.Point(0, 32)
     };
    
-    var myLatLng = new google.maps.LatLng(petData[1], petData[2]);
+    var myLatLng = new google.maps.LatLng(data[1], data[2]);
     var marker = new google.maps.Marker({
        position: myLatLng,
        map: RentMyKitty.map,
        icon: image,
-       title: petData[0],
-       zIndex: petData[3],
+       title: data[0],
+       zIndex: data[3],
        draggable: false,   
     });
 
+    marker.setMap(RentMyKitty.map);
+    
     google.maps.event.addListener(marker, 'click', function() {
       RentMyKitty.infowindow.close();
-      RentMyKitty.infowindow.setContent(petData[4]);
+      RentMyKitty.infowindow.setContent(data[4]);
       RentMyKitty.infowindow.open(RentMyKitty.map, marker);
     });
+    this.markers.push(marker);
+
   },
 
   getCoords: function(address) {
@@ -128,12 +139,13 @@ RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
       }
     });
   },
-  
-  codeAddress: function() {
+
+  codeAddress: function(myAddress) {
     var geo = new google.maps.Geocoder;
-    var address = this.$('#address').val();
-    
-    geo.geocode( { 'address': address}, function(results, status) {
+    // var address = this.$('#address').val();
+
+    geo.geocode( { 'address': myAddress}, function(results, status) {
+      console.log(results);
       if (status == google.maps.GeocoderStatus.OK) {
         RentMyKitty.map.setCenter(results[0].geometry.location);
         var marker = new google.maps.Marker({

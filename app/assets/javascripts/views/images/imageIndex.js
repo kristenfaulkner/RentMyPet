@@ -1,7 +1,8 @@
 RentMyKitty.Views.ImagesIndex = Backbone.CompositeView.extend({
   template: JST["images/index"],
   
-  initialize: function() {
+  initialize: function(options) {
+    this.pet = options.pet;
     this.listenTo(this.collection, "add", this.addImage);
     this.listenTo(this.collection, "remove", this.removeImage);
     this.collection.each(this.addImage.bind(this));
@@ -11,7 +12,8 @@ RentMyKitty.Views.ImagesIndex = Backbone.CompositeView.extend({
     var imageView = new RentMyKitty.Views.ImageItem({ 
       model: image, 
       collection: this.collection, 
-      pet_id: this.model.id});
+      pet_id: this.pet.id
+    });
     this.addSubview(".show-page-images", imageView);
   },
   

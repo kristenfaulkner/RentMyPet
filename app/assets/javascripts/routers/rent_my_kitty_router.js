@@ -25,7 +25,7 @@ RentMyKitty.Routers.RentMyKittyRouter = Backbone.Router.extend({
   
   petsEdit: function(id) {
     var pet = RentMyKitty.Collections.pets.getOrFetch(id);
-    var newView = new RentMyKitty.Views.PetsNewView({
+    var newView = new RentMyKitty.Views.PetsEditView({
       model: pet
     });
     this._swapView(newView);

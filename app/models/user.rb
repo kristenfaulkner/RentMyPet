@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  username        :string(255)      not null
+#  password_digest :string(255)      not null
+#  session_token   :string(255)      not null
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
 class User < ActiveRecord::Base
   attr_reader :password
   validates :password_digest, :presence => true
@@ -15,7 +27,7 @@ class User < ActiveRecord::Base
   has_many(
     :pet_rental_requests,
     class_name: "PetRentalRequest",
-    foreign_key: :owner_id,
+    foreign_key: :requester_id,
     primary_key: :id
   )
 
