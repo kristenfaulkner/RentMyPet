@@ -9,5 +9,5 @@
   end
   
   json.images @pet.images do |image|
-    json.image image.image_url
+    json.image_url image.image_url
   end

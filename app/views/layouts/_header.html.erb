@@ -70,10 +70,10 @@
   </div>
 <% end %>
 
+
 <script>
-    $(function() {
-      $('.modal-backdrop').on('click', function() { $('#myModal').modal("hide") })
-      // $('#navbar-sign-in').on('click', function() { $('#myModal').modal("show") })
-      
-    });
-</script>
+ $(function() {
+  $('body').on('click', '.modal-backdrop', function() { $('#myModal').modal("hide") });
+  $('body').on('click', '.modal-backdrop', function() { $('#signUpModal').modal("hide") });
+ });
+ </script>

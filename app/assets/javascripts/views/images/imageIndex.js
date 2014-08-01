@@ -10,9 +10,7 @@ RentMyKitty.Views.ImagesIndex = Backbone.CompositeView.extend({
   
   addImage: function (image) {
     var imageView = new RentMyKitty.Views.ImageItem({ 
-      model: image, 
-      collection: this.collection, 
-      pet_id: this.pet.id
+      model: image
     });
     this.addSubview(".show-page-images", imageView);
   },

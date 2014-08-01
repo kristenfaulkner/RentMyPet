@@ -68,7 +68,6 @@ RentMyKitty.Views.PetsNewView = Backbone.CompositeView.extend({
     var myAddress = params["pet"]["address"] + " " + params["pet"]['city'] + " " + params["pet"]['state'] + " " + params["pet"]['zipcode'];
       console.log(myAddress);
       geo.geocode( { 'address': myAddress}, function(results, status) {
-        debugger
         if (status == google.maps.GeocoderStatus.OK) {
           var coords = results[0].geometry.location;
           var lat = coords.k;
@@ -84,6 +83,13 @@ RentMyKitty.Views.PetsNewView = Backbone.CompositeView.extend({
   submit: function (event) {
     var view = this;
     event.preventDefault();
+    if (!window.current_user_id) {  
+      $('#myModal').modal({keyboard: true, backdrop: true});
+            $('.modal-backdrop').on('click', function() { $('#signUpModal').modal("hide") })
+      $('.modal-backdrop').on('click', function() { $('#myModal').modal("hide") })
+      
+
+    } else {
     var params = $(event.currentTarget).serializeJSON();
     params = this.setLatLng(params, function(params) {
       view.model.save((params["pet"]), {
@@ -95,6 +101,6 @@ RentMyKitty.Views.PetsNewView = Backbone.CompositeView.extend({
         }
       });
     });
-    
+  }
   }
 });

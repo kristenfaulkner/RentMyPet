@@ -4,10 +4,7 @@ RentMyKitty.Views.ImageItem = Backbone.CompositeView.extend({
   // tagName: 'img',
   // className: "show-page-image",
   
-  initialize: function (options) {
-    this.pet_id = options.pet_id;
-    this.image_url = options.image_url;
-    // this.$el.attr('src', this.model.get('image_url'));
+  initialize: function () {
   },
   
   events: {

@@ -34,7 +34,7 @@ module Api
     end
   
     def pet_rental_request_params
-      params.require(:pet_rental_request).permit(:pet_id, :start_date, :end_date, :status)
+      params.require(:pet_rental_request).permit(:pet_id, :requester_id, :start_date, :end_date, :status)
     end
   end
 end

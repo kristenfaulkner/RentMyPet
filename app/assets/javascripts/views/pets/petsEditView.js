@@ -3,7 +3,6 @@ RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
 
   initialize: function() {
     this.listenTo(this.model, "sync", this.render);
-    debugger
     var photos = new RentMyKitty.Views.ImagesIndex({
       collection: this.model.images(),
       model: this.model
@@ -22,7 +21,6 @@ RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
   
   addImage: function(){
     var view = this;
-    // event.preventDefault();
     var that = this;
 
     filepicker.pickMultiple(function(InkBlobs){

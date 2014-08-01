@@ -86,7 +86,6 @@ RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
   petData: function() {
     var content = JST["maps/infowindow"];
     var view = this;
-    debugger
     this.collection.each(function(pet) {
       var petData = [pet.get('name'), pet.get('lat'), pet.get('lng'), 4, content({ pet: pet})];
       view.setMarker(petData);

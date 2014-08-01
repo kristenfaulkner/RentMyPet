@@ -45,13 +45,12 @@
 
         <input name="user[username]" type="hidden" value="guestuser">
         <input name="user[password]" type="hidden" value="guestuser">
-        <button type="submit" class="btn btn-primary" role="button" id="sign-up-guest-button">Guest Demo</button>
+        <button type="submit" class="btn btn-primary" role="button" id="sign-in-guest-button">Guest Demo</button>
       </form>
     </div>
 
 </div>
   <div class="sign-up-footer">
-      Already a user? <button class="btn btn-link" id="navbar-sign-in" data-toggle="modal" data-target="#myModal">Sign In</button>
+      Already a user? <a href="<%= new_session_url %>">Sign In</a>
   </div>
 </div>
-

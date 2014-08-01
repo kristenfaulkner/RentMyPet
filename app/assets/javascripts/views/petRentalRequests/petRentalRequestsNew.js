@@ -9,8 +9,7 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
     "changeDate #end-date" : "showMessage"
   },
   
-  initialize: function() {
-    view = this;
+  initialize: function(options) {
   },
   
   render: function () {
@@ -100,18 +99,18 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
  //  },
   
   submit: function (event) {
+    var view = this;
     event.preventDefault();
     if (!window.current_user_id) {  
       $('#myModal').modal({keyboard: true, backdrop: true});
-            $('.modal-backdrop').on('click', function() { $('#signUpModal').modal("hide") })
-      $('.modal-backdrop').on('click', function() { $('#myModal').modal("hide") })
-
+      $('.modal-backdrop').on('click', function() { $('#signUpModal').modal("hide") });
+      $('.modal-backdrop').on('click', function() { $('#myModal').modal("hide") });
     } else {
     var view = this;
     var start_date = this.$("#start-date").val();
     var end_date = this.$("#end-date").val();
     if (this.validDates(start_date, end_date)) {
-      var rental = new RentMyKitty.Models.PetRentalRequest({ pet_id: view.model.pet().get('id')});
+      var rental = new RentMyKitty.Models.PetRentalRequest({ pet_id: view.model.pet_id});
       rental.set({start_date: new Date(start_date), end_date: new Date(end_date)});
       rental.save({}, {
         success: function () {
