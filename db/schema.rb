@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140730173548) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "images", force: true do |t|
     t.string   "image_url",  null: false
     t.datetime "created_at"
@@ -55,7 +58,7 @@ ActiveRecord::Schema.define(version: 20140730173548) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

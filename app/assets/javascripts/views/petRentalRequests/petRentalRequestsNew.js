@@ -101,9 +101,9 @@ RentMyKitty.Views.PetRentalRequestsNew = Backbone.CompositeView.extend({
   
   submit: function (event) {
     event.preventDefault();
-    if (!window.current_user) {
-      $('#myModal').modal({keyboard: true, backdrop: true}); 
-      // $('#myModal').modal("show");
+    if (!window.current_user) {      
+      $('#myModal').modal({keyboard: true, backdrop: true});
+      $('.modal-backdrop').on('click', function() { $('#myModal').modal("hide") })
     } else {
     var view = this;
     var start_date = this.$("#start-date").val();

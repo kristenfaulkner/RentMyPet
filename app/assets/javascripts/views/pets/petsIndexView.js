@@ -7,9 +7,9 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     this.listenTo(this.collection, 'sort', this.resetPets);
     this.listenTo(this.collection, "remove", this.removePet);
     this.resetPets();
-    mapView = new RentMyKitty.Views.GooleMapsView({ collection: this.collection });
-    this.addSubview('.map', mapView);
-    
+    // this.filtered = new RentMyKitty.Collections.Pets(this.filteredSubviews());
+    mapView = new RentMyKitty.Views.GooleMapsView({ collection: this.collection});
+    this.addSubview('.map', mapView);   
   },
   
   events: {
@@ -24,6 +24,9 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     "change .filter-gender" : "filter"
   },
   
+  filteredSubviews: function() {
+    this.subviews('#pets').map(function(subview) { return subview.model})
+  },
   
   goToPetProfile: function(event) {
     event.preventDefault();

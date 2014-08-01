@@ -5,8 +5,10 @@ RentMyKitty.Views.GooleMapsView = Backbone.View.extend({
     "click #codeAddress" : "codeAddress"
   },
 
-  initialize: function() {
+  initialize: function(options) {
+    this.filteredPets = options.filteredPets;
     this.listenTo(this.collection, "sync add remove", this.render)
+    this.markers = [];
   },
   
   render: function() {
