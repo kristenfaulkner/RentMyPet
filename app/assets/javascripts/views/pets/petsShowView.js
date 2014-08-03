@@ -10,11 +10,11 @@ RentMyKitty.Views.PetsShowView = Backbone.CompositeView.extend({
     this.addSubview(".new-rental-request", newRentalView);
     
   
-    var approvedRentals = new RentMyKitty.Views.PetRentalRequestsIndex({
+    var rentals = new RentMyKitty.Views.PetRentalRequestsIndex({
       collection: this.model.petRentalRequests(),
       model: this.model
     });
-    this.addSubview(".rental-request-list", approvedRentals);
+    this.addSubview(".rental-request-list", rentals);
     
     
     var photos = new RentMyKitty.Views.ImagesIndex({

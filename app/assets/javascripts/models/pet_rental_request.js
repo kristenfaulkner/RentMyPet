@@ -13,7 +13,7 @@ RentMyKitty.Models.PetRentalRequest = Backbone.Model.extend({
   pet: function() {
     // this._pet = this._pet || new RentMyKitty.Models.Pet({ id: this.pet_id})
     // return this._pet;
-    return RentMyKitty.Collections.pets.getOrFetch(this.get('pet_id'), false);
+    return RentMyKitty.Collections.pets.getOrFetch(this.pet_id, false);
   },
   
   parse: function(payload) {

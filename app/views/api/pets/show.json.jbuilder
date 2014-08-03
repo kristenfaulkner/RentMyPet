@@ -5,7 +5,7 @@
     json.start_date pet_rental_request.start_date
     json.end_date pet_rental_request.end_date
     json.status pet_rental_request.status
-    json.requester pet_rental_request.requester.username
+    json.requester_id pet_rental_request.requester_id
     json.pet_id pet_rental_request.pet_id
   end
   

@@ -3,8 +3,8 @@ module Api
   
     def create
       @pet_rental_request = PetRentalRequest.new(pet_rental_request_params)
-      @pet_rental_request.requester_id = current_user.id
       if @pet_rental_request.save
+        puts params
           render json: @pet_rental_request
       else
         render json: @pet_rental_request.errors.full_messages, status: :unprocessable_entity
@@ -20,6 +20,7 @@ module Api
     def update
       @pet_rental_request = PetRentalRequest.find(params[:id])
       if @pet_rental_request.update(pet_rental_request_params)
+
          @pet_rental_request.destroy_overlapping  
          render json: @pet_rental_request     
       else
