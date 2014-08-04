@@ -28,7 +28,6 @@ RentMyKitty.Views.PetRentalRequestsIndex = Backbone.CompositeView.extend({
     this.subviews('.rental-list-items').forEach(function(subview) {
       subview.remove();
     });
-    debugger
     this.collection.each(function(rental) { that.addPetRentalRequest(rental) });
   },
 
