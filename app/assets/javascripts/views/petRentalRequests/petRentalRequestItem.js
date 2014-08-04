@@ -18,10 +18,8 @@ RentMyKitty.Views.PetRentalRequestItem = Backbone.CompositeView.extend({
     event.preventDefault();
     this.model.set({ status: "Approved" });
     debugger
-    this.model.save({}, { 
-      patch: true,
+    this.model.save({}, {
       success: function () {
-        
         alert("Rental Approved");
         view.pet.fetch();
         // view.collection.reset({data: {pet_id: view.model.pet_id}});
@@ -34,12 +32,12 @@ RentMyKitty.Views.PetRentalRequestItem = Backbone.CompositeView.extend({
     this.model.destroy();
     alert("Rental Denied");
   },
-  
+
   fixTimezone: function() {
     var s = this.model.get('start-date');
     var e = this.model.get('end-date');
   },
-  
+
   render: function () {
     this.fixTimezone();
     var view = this;

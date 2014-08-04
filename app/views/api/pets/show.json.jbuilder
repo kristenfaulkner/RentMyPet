@@ -7,8 +7,9 @@
     json.status pet_rental_request.status
     json.requester_id pet_rental_request.requester_id
     json.pet_id pet_rental_request.pet_id
+    json.id pet_rental_request.id
   end
-  
+
   json.images @pet.images do |image|
     json.image_url image.image_url
   end

@@ -1,15 +1,15 @@
 RentMyKitty.Views.PetRentalRequestsIndex = Backbone.CompositeView.extend({
   template: JST["pet_rental_requests/index"],
   className: "row",
-  
+
   initialize: function() {
-    this.listenTo(this.collection, "sync", this.render);   
+    this.listenTo(this.collection, "sync", this.render);
     this.listenTo(this.collection, "sort", this.resetPetRentalRequests);
     this.listenTo(this.collection, "remove", this.removePetRentalRequest);
     this.listenTo(this.collection, "reset", this.resetSubviews)
     this.collection.each(this.addPetRentalRequest.bind(this));
   },
-  
+
   resetSubviews: function() {
     this.removeSubviews();
     this.collection.each(this.addPetRentalRequest.bind(this));
@@ -22,20 +22,21 @@ RentMyKitty.Views.PetRentalRequestsIndex = Backbone.CompositeView.extend({
 //     })
     this.render();
   },
-  
+
   resetPetRentalRequests: function() {
     var that = this;
     this.subviews('.rental-list-items').forEach(function(subview) {
       subview.remove();
     });
+    debugger
     this.collection.each(function(rental) { that.addPetRentalRequest(rental) });
   },
-  
+
   addPetRentalRequest: function (request) {
     var rentalItem = new RentMyKitty.Views.PetRentalRequestItem({ model: request, collection: this.collection, pet: this.model});
     this.addSubview(".rental-list-items", rentalItem);
   },
-  
+
   removePetRentalRequest: function (request) {
     var subview = _.find(
       this.subviews(".rental-list-items"),
