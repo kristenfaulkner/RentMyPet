@@ -11,7 +11,7 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     this.mapView = new RentMyKitty.Views.GooleMapsView({ collection: this.collection});
     this.addSubview('.map', this.mapView);
   },
-  
+
   events: {
     "click .wrapper" : "goToPetProfile",
     "click #codeAddress" : "codeAddress",
@@ -23,26 +23,26 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
     "change .filter-color" : "filter",
     "change .filter-gender" : "filter"
   },
-  
+
   filteredSubviews: function() {
     var view = this
     var filter = [];
     this.subviews('#pets').forEach(function(subview) {  filter.push(subview.model)})
     return filter;
   },
-  
+
   goToPetProfile: function(event) {
     event.preventDefault();
     var id = $(event.currentTarget).data('petId')
     var path = "#/pets/" + id;
     Backbone.history.navigate(path, { trigger: true });
   },
-  
+
   addPet: function (pet) {
     var petsIndexItem = new RentMyKitty.Views.PetsIndexItem({ model: pet });
     this.addSubview("#pets", petsIndexItem);
   },
-  
+
   resetPets: function() {
     var that = this;
     this.subviews('#pets').forEach(function(subview) {
@@ -60,7 +60,7 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
         format: "mm/dd/yy"
     });
   },
-  
+
   removePet: function (pet) {
     var subview = _.find(
       this.subviews("#pets"),
@@ -74,34 +74,32 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
   render: function () {
     var renderedContent = this.template({ pets: this.collection, view: this });
     this.$el.html(renderedContent);
-    this.delegateDatepicker(); 
+    this.delegateDatepicker();
     this.attachSubviews();
     return this;
   },
-  
+
   codeAddress: function() {
-    this.mapView.codeAddress(myAddress);
+    // this.mapView.codeAddress(myAddress);
     var myAddress = this.$('#address').val();
-    // var geo = new google.maps.Geocoder;
-//     console.log(geo);
-//     var myAddress = this.$('#address').val();
-//     geo.geocode( { 'address': myAddress}, function(results, status) {
-//       if (status == google.maps.GeocoderStatus.OK) {
-//         RentMyKitty.map.setCenter(results[0].geometry.location);
-//         // var marker = new google.maps.Marker({
-//  //            map: RentMyKitty.map,
-//  //            position: results[0].geometry.location
-//  //        });
-//       } else {
-//         alert('Geocode was not successful for the following reason: ' + status);
-//       }
-//     });
+    var geo = new google.maps.Geocoder;
+    geo.geocode( { 'address': myAddress}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        RentMyKitty.map.setCenter(results[0].geometry.location);
+        // var marker = new google.maps.Marker({
+ //            map: RentMyKitty.map,
+ //            position: results[0].geometry.location
+ //        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
   },
 
   repositionCatsDown: function() {
     this.$('#pets').css("margin-top", "115px");
   },
-  
+
   repositionCatsUp: function() {
     this.$('#pets').css("margin-top", "0");
   },
@@ -122,7 +120,7 @@ RentMyKitty.Views.PetsIndexView = Backbone.CompositeView.extend({
 //     return tmp;
 //   },
 //
- 
+
 filter: function() {
   this.resetPets();
   var view = this;

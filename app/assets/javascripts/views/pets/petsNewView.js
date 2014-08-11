@@ -1,9 +1,9 @@
 RentMyKitty.Views.PetsNewView = Backbone.CompositeView.extend({
-  template: JST["pets/form"],
+  template: JST["pets/new"],
 
   initialize: function() {
     this.listenTo(this.model, "sync", this.render);
-    
+
     var photos = new RentMyKitty.Views.ImagesIndex({
       collection: this.model.images(),
       model: this.model
@@ -11,14 +11,14 @@ RentMyKitty.Views.PetsNewView = Backbone.CompositeView.extend({
     this.addSubview(".edit-images", photos);
     // this.$('img').append('<button id="delete-image" class = "btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>');
   },
-  
+
   events: {
     "submit form.edit-pet-form": "submit",
     "click button#delete-pet-button" : "deletePet",
     "click button#add-image": "addImage",
     "click delete-image" : "deleteImage"
   },
-  
+
   addImage: function(){
     var view = this;
     // event.preventDefault();
@@ -31,24 +31,24 @@ RentMyKitty.Views.PetsNewView = Backbone.CompositeView.extend({
              pet_id: view.model.id,
              image_url: blob.url
            });
-           
+
            newImage.save({}, {
              success: function () {
                view.model.images().add(newImage);
                view.model.set('image_url', newImage.get('image_url'));
                view.model.save();
-               
+
              }
            });
       });
     });
   },
-  
+
   //
   // deleteImage: function() {
   //     <button id="delete-image" class = "btn btn-danger"><span class="glyphicon glyphicon-remove"></button>
   // },
-  
+
   render: function () {
     var renderedContent = this.template({ pet: this.model });
     this.$el.html(renderedContent);
@@ -60,11 +60,11 @@ RentMyKitty.Views.PetsNewView = Backbone.CompositeView.extend({
     event.preventDefault();
     this.model.destroy();
   },
-  
+
   setLatLng: function(params, callback) {
     var pet = this.model
     var geo = new google.maps.Geocoder;
-    
+
     var myAddress = params["pet"]["address"] + " " + params["pet"]['city'] + " " + params["pet"]['state'] + " " + params["pet"]['zipcode'];
       console.log(myAddress);
       geo.geocode( { 'address': myAddress}, function(results, status) {
@@ -77,17 +77,17 @@ RentMyKitty.Views.PetsNewView = Backbone.CompositeView.extend({
         }
         callback(params);
       });
-      
+
   },
-  
+
   submit: function (event) {
     var view = this;
     event.preventDefault();
-    if (!window.current_user_id) {  
+    if (!window.current_user_id) {
       $('#myModal').modal({keyboard: true, backdrop: true});
             $('.modal-backdrop').on('click', function() { $('#signUpModal').modal("hide") })
       $('.modal-backdrop').on('click', function() { $('#myModal').modal("hide") })
-      
+
 
     } else {
     var params = $(event.currentTarget).serializeJSON();

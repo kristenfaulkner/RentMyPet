@@ -9,16 +9,15 @@ RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
     });
     this.addSubview(".edit-images", photos);
     var view = this
-    // this.$('img').append('<button id="delete-image" class = "btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>');
   },
-  
+
   events: {
     "submit form.edit-pet-form": "submit",
     "click button#delete-pet" : "deletePet",
     "click button#add-image": "addImage",
     "click delete-image" : "deleteImage"
   },
-  
+
   addImage: function(){
     var view = this;
     var that = this;
@@ -30,7 +29,7 @@ RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
              pet_id: view.model.id,
              image_url: blob.url
            });
-           
+
            newImage.save({}, {
              success: function () {
                view.model.images().add(newImage);
@@ -39,22 +38,31 @@ RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
       });
     });
   },
-  
-  
+
+  deleteImage: function(event) {
+    event.preventDefault();
+    alert("wow!");
+    debugger
+    $(event.currentTarget).append($('<button id="delete-image" class = "btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>'));
+  },
+
   render: function () {
     var renderedContent = this.template({ pet: this.model});
     this.$el.html(renderedContent);
     this.attachSubviews();
+    this.$('.delete-image').removeClass('hidden');
     return this;
   },
 
   deletePet: function(event) {
     event.preventDefault();
-    alert("clicked me!");
-    this.model.destroy();
+    if (confirm("Are you sure you would like to delete your pet? This action cannot be undone")) {
+      this.model.destroy();
+      alert("Pet deleted ");
+    }
     Backbone.history.navigate("#", { trigger: true });
   },
-  
+
   submit: function (event) {
     var view = this;
     event.preventDefault();
@@ -69,4 +77,3 @@ RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
     });
   }
 });
-

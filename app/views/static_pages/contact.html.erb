@@ -1,11 +1,11 @@
 <div class="jumbotron contact-us">
-  <h1 class="">Contact Us</h1>
-  <br>
+  <h1>Contact Us</h1>
  <h4>Please fill out this form if you have any questions.</h4>
- <br>
+
 
 <div class="contact-row row">
-  <div class="col-xs-5" id="contact-column1">
+  <div class="col-xs-5 col-xs-offset-1 contact-column1">
+    <br>
     <br>
     <p>Hours of operation: Monday-Friday 9am-5pm</p>
     <p>Phone: 1-800-rent-a-pet</p>
@@ -13,7 +13,7 @@
     <p>Fax: 100-000-000</p>
   </div>
 
-  <div class="col-xs-5" id="contact-column2">
+  <div class="col-xs-5 contact-column">
     <form>
       <div class="form-group" id="full-name-input">
         <label class="control-label" for="inputSuccess1">Full Name</label>
@@ -34,3 +34,10 @@
 
 </div>
 </div>
+
+
+<script>
+$('#contactSubmitButton').on('click', function() {
+  alert("Thank you!");
+});
+</script>

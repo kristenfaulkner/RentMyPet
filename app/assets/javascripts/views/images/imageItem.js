@@ -1,22 +1,22 @@
 RentMyKitty.Views.ImageItem = Backbone.CompositeView.extend({
   template: JST["images/index_item"],
   className: 'show-page-image-box',
-  // tagName: 'img',
-  // className: "show-page-image",
-  
+
   initialize: function () {
   },
-  
+
   events: {
-    "click button#delete-image" : "deleteImage"
+    "click button.delete-image" : "deleteImage"
   },
-  
+
   deleteImage: function(event) {
     event.preventDefault();
-    this.model.destroy();
-    alert("image deleted");
+    if (confirm("Are you sure you would like to delete this image? This action cannot be undone")) {
+      this.model.destroy();
+      alert("Image deleted ");
+    }
   },
-  
+
   render: function () {
     var view = this;
     var renderedContent = view.template({

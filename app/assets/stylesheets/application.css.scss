@@ -57,6 +57,8 @@ h1 {
 
 
 h4 {
+  margin: 25px auto;
+  width: 50%;
   text-align: center;
 }
 
@@ -135,8 +137,15 @@ hr {
   margin-top: 0;
 }
 
+.about-us {
+  text-align: center;
+  margin: 25px auto;
+  width: 50%
+}
+
 .contact-row {
-  margin-left: 10%;
+  margin: 50px auto;
+  padding: 0px;
 }
 
 .contact-us {
@@ -152,10 +161,6 @@ hr {
   font-size: x-large;
 }
 
-.meet-the-team {
-  height: 50px;
-  margin-top: 80px;
-}
 
 .about-us-text {
   position: absolute;
@@ -166,9 +171,19 @@ hr {
 
 .meet-the-team {
   display: block;
+    height: 50px;
+    margin-bottom: 50px;
 }
 
+.feature-photo {
+  max-height: 350px;
+  width: auto;
+  margin-bottom: 25px
+}
 
+.feature-photo img {
+  max-height: 275px;
+}
 
 /////////////////////////////////////////  Sign In & Sign Up /////////////////////////////////////////
 .sign-in, .sign-up {
@@ -233,6 +248,7 @@ hr {
 #back-to-index {
   position: absolute;
   left: 10%;
+  top: 10%;
 }
 
 #approve-request, #deny-request {
@@ -309,6 +325,7 @@ hr {
 }
 /////////////////////////////////////////  Edit Pet Page /////////////////////////////////////////
 
+
 #edit-form.my-class {
   display: inline-block;
 }
@@ -317,31 +334,45 @@ hr {
 
   width: 500px;
   border: thin light gray;
-  margin: 20px auto;
+  margin: auto auto;
   padding: 30px;
   font-size: large;
 }
 
-
+// .inline {
+//   display: inline-block;
+// }
 .edit-form-inputs {
-            height: 30px;
+            height: 35px;
             border: 2px solid #cdcdcd;
             border-color: rgba(0,0,0,.14);
-            font-size: 14px;
-            height: 30px;
+            font-size: medium;
             -moz-border-radius: 10px;
             border-radius: 10px;
             border:solid 1px gray;
             padding:10px;
-            margin: 5px;
-            display: block;
             width: 300px;
+            position: absolute;
+            left: 45%;
+}
+
+.form-group {
+  margin: 20px auto;
+}
+
+#add-image {
+position: absolute;
+left: 39%;
+top: 93%;
+margin: 10px auto;
+
 }
 
 #edit-pet-button {
   position: absolute;
-  left: 35%;
-  margin-top: 10px;
+  left: 52%;
+  top: 93%;
+  margin: 10px auto;
 }
 
 #edit-pet-bio {
@@ -550,12 +581,6 @@ input[type=checkbox] {
 /////////////////////////////////////////  Unknown /////////////////////////////////////////
 
 
-h4 {
-  position: absolute;
-  left: 25%;
-  right: 20%;
-  width: 50%;
-}
 
 h3 {
   text-align: center;
@@ -571,12 +596,6 @@ h2 {
   #main {
     width: 90%;
   }
-
-
-.feature-photo {
-  max-height: 150px;
-  width: auto;
-}
 
 .show-page-photo {
   height: 300px;

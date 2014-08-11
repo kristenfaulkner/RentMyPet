@@ -3,4 +3,5 @@
 
   json.images @images do |image|
     json.image_url image.image_url
+    json.id image.id
   end
