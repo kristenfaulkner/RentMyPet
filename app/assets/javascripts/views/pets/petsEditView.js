@@ -3,19 +3,20 @@ RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
 
   initialize: function() {
     this.listenTo(this.model, "sync", this.render);
-    var photos = new RentMyKitty.Views.ImagesIndex({
-      collection: this.model.images(),
-      model: this.model
-    });
-    this.addSubview(".edit-images", photos);
-    var view = this
+    // var photos = new RentMyKitty.Views.ImagesIndex({
+    //   collection: this.model.images(),
+    //   model: this.model
+    // });
+    // this.addSubview(".edit-images", photos);
+    // var view = this
   },
 
   events: {
     "submit form.edit-pet-form": "submit",
     "click button#delete-pet" : "deletePet",
-    "click button#add-image": "addImage",
-    "click delete-image" : "deleteImage"
+    "click button#add-image": "addImage"
+    // ,
+    // "click delete-image" : "deleteImage"
   },
 
   addImage: function(){
@@ -39,12 +40,12 @@ RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
     });
   },
 
-  deleteImage: function(event) {
-    event.preventDefault();
-    alert("wow!");
-    debugger
-    $(event.currentTarget).append($('<button id="delete-image" class = "btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>'));
-  },
+  // deleteImage: function(event) {
+  //   event.preventDefault();
+  //   alert("wow!");
+  //   debugger
+  //   $(event.currentTarget).append($('<button id="delete-image" class = "btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>'));
+  // },
 
   render: function () {
     var renderedContent = this.template({ pet: this.model});
