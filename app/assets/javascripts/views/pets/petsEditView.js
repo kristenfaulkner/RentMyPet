@@ -13,8 +13,9 @@ RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
   events: {
     "submit form.edit-pet-form": "submit",
     "click button#delete-pet" : "deletePet",
-    "click button#add-image": "addImage",
-    "click delete-image" : "deleteImage"
+    "click button#add-image": "addImage"
+    // ,
+    // "click delete-image" : "deleteImage"
   },
 
   addImage: function(){
@@ -38,18 +39,18 @@ RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
     });
   },
 
-  deleteImage: function(event) {
-    event.preventDefault();
-    alert("wow!");
-    debugger
-    $(event.currentTarget).append($('<button id="delete-image" class = "btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>'));
-  },
+  // deleteImage: function(event) {
+  //   event.preventDefault();
+  //   alert("wow!");
+  //   debugger
+  //   $(event.currentTarget).append($('<button id="delete-image" class = "btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>'));
+  // },
 
   render: function () {
     var renderedContent = this.template({ pet: this.model});
     this.$el.html(renderedContent);
     this.attachSubviews();
-    this.$('.delete-image').removeClass('hidden');
+    // this.$('.delete-image').removeClass('hidden');
     return this;
   },
 
