@@ -4,16 +4,19 @@
      &lt&ltBack to <%=pet.escape('name')%>'s profile
    </a>
 
+
  <div id="edit-form">
    <form role="form" class="edit-pet-form">
 
      <label for="edit-pet-name">Name: </label>
+
      <input type="text"
             name="pet[name]"
             class="edit-form-inputs"
             id="edit-pet-name"
             placeholder="name"
             value = <%= pet.escape('name') %>>
+			<br>
      <label for="edit-pet-animal">Animal Type: </label>
      <select name="pet[animal]"
              id="edit-pet-animal"
