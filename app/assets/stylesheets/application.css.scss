@@ -325,7 +325,9 @@ hr {
 }
 /////////////////////////////////////////  Edit Pet Page /////////////////////////////////////////
 
-
+.input-group {
+	height: 50px;
+}
 #edit-form.my-class {
   display: inline-block;
 }
@@ -337,13 +339,19 @@ hr {
   margin: auto auto;
   padding: 30px;
   font-size: large;
+  padding: 50px;
+  padding-top: 10px;
 }
 
-// .inline {
-//   display: inline-block;
-// }
+#delete-pet {
+  position: absolute;
+  left: 48%;
+  top: 93%;
+  margin: 10px auto;
+}
+
 .edit-form-inputs {
-            height: 35px;
+            height: 30px;
             border: 2px solid #cdcdcd;
             border-color: rgba(0,0,0,.14);
             font-size: medium;
@@ -351,9 +359,9 @@ hr {
             border-radius: 10px;
             border:solid 1px gray;
             padding:10px;
-            width: 300px;
+            width: 200px;
             position: absolute;
-            left: 45%;
+            left: 44%;
 }
 
 .form-group {
@@ -362,7 +370,7 @@ hr {
 
 #add-image {
 position: absolute;
-left: 39%;
+left: 38%;
 top: 93%;
 margin: 10px auto;
 
@@ -370,15 +378,15 @@ margin: 10px auto;
 
 #edit-pet-button {
   position: absolute;
-  left: 52%;
+  left: 55%;
   top: 93%;
   margin: 10px auto;
 }
 
 #edit-pet-bio {
   vertical-align: top;
-  width: 400px;
-  height: 200px;
+  width: 320px;
+  height: 150px;
 }
 
 .edit-images {
