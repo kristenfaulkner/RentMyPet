@@ -8,7 +8,10 @@ RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
     //   model: this.model
     // });
     // this.addSubview(".edit-images", photos);
+<<<<<<< HEAD
     // var view = this
+=======
+>>>>>>> c8a760a02e83db7408a44c1bbfbb629ef9e1fd45
   },
 
   events: {
@@ -51,7 +54,7 @@ RentMyKitty.Views.PetsEditView = Backbone.CompositeView.extend({
     var renderedContent = this.template({ pet: this.model});
     this.$el.html(renderedContent);
     this.attachSubviews();
-    this.$('.delete-image').removeClass('hidden');
+    // this.$('.delete-image').removeClass('hidden');
     return this;
   },
 
